@@ -430,7 +430,7 @@ $('#collapseMap').on('shown.bs.collapse', function(e){
 					marker = new google.maps.Marker({
 						position: new google.maps.LatLng(item.location_latitude, item.location_longitude),
 						map: mapObject,
-						icon: 'img/pins/' + key + '.png',
+						icon: 'assets/img/pins/' + key + '.png',
 					});
 
 					if ('undefined' === typeof markers[key])

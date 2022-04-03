@@ -18,7 +18,7 @@
 				name: 'Arc de Triomphe',
 				location_latitude: 48.873792, 
 				location_longitude: 2.295028,
-				map_image_url: 'img/thumb_map_1.jpg',
+				map_image_url: '/assets/img/thumb_map_1.jpg',
 				name_point: 'Arc de Triomphe',
 				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
 				get_directions_start_address: '',
@@ -29,7 +29,7 @@
 				name: 'Pantheon',
 				location_latitude: 48.846222, 
 				location_longitude: 2.346414,
-				map_image_url: 'img/thumb_map_1.jpg',
+				map_image_url: '/assets/img/thumb_map_1.jpg',
 				name_point: 'Pantheon',
 				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
 				get_directions_start_address: '',
@@ -42,7 +42,7 @@
 				name: 'Open Bus',
 				location_latitude: 48.865633, 
 				location_longitude: 2.321236,
-				map_image_url: 'img/thumb_map_1.jpg',
+				map_image_url: '/assets/img/thumb_map_1.jpg',
 				name_point: 'Open Bus',
 				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
 				get_directions_start_address: '',
@@ -53,7 +53,7 @@
 				name: 'Senna River Tour',
 				location_latitude: 48.854183,
 				location_longitude: 2.354808,
-				map_image_url: 'img/thumb_map_1.jpg',
+				map_image_url: '/assets/img/thumb_map_1.jpg',
 				name_point: 'Senna River Tour',
 				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
 				get_directions_start_address: '',
@@ -66,7 +66,7 @@
 				name: 'Louvre',
 				location_latitude: 48.863893, 
 				location_longitude: 2.342348,
-				map_image_url: 'img/thumb_map_1.jpg',
+				map_image_url: '/assets/img/thumb_map_1.jpg',
 				name_point: 'Louvre',
 				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
 				get_directions_start_address: '',
@@ -77,7 +77,7 @@
 				name: 'Pompidou ',
 				location_latitude: 48.860642,
 				location_longitude: 2.352245,
-				map_image_url: 'img/thumb_map_1.jpg',
+				map_image_url: '/assets/img/thumb_map_1.jpg',
 				name_point: 'Pompidou',
 				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
 				get_directions_start_address: '',
@@ -90,7 +90,7 @@
 				name: 'Tour Eiffel',
 				location_latitude: 48.858370, 
 				location_longitude: 2.294481,
-				map_image_url: 'img/thumb_map_1.jpg',
+				map_image_url: '/assets/img/thumb_map_1.jpg',
 				name_point: 'Tour Eiffel',
 				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
 				url_point: 'single_tour.html'
@@ -99,7 +99,7 @@
 				name: 'Montparnasse',
 				location_latitude: 48.837273,
 				location_longitude: 2.335387,
-				map_image_url: 'img/thumb_map_1.jpg',
+				map_image_url: '/assets/img/thumb_map_1.jpg',
 				name_point: 'Montparnasse',
 				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
 				get_directions_start_address: '',
@@ -112,7 +112,7 @@
 				name: 'Beaubourg',
 				location_latitude: 48.860819, 
 				location_longitude: 2.354507,
-				map_image_url: 'img/thumb_map_1.jpg',
+				map_image_url: '/assets/img/thumb_map_1.jpg',
 				name_point: 'Beaubourg',
 				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
 				get_directions_start_address: '',
@@ -123,7 +123,7 @@
 				name: 'St. Germain des Prés',
 				location_latitude: 48.853798,
 				location_longitude: 2.333328,
-				map_image_url: 'img/thumb_map_1.jpg',
+				map_image_url: '/assets/img/thumb_map_1.jpg',
 				name_point: 'St. Germain des Prés',
 				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
 				get_directions_start_address: '',
@@ -136,7 +136,7 @@
 				name: 'Trocadero',
 				location_latitude: 48.862880, 
 				location_longitude: 2.287205,
-				map_image_url: 'img/thumb_map_1.jpg',
+				map_image_url: '/assets/img/thumb_map_1.jpg',
 				name_point: 'Trocadero',
 				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
 				get_directions_start_address: '',
@@ -160,7 +160,7 @@
 				name: 'Notre Dame',
 				location_latitude: 48.852729, 
 				location_longitude: 2.350564,
-				map_image_url: 'img/thumb_map_1.jpg',
+				map_image_url: '/assets/img/thumb_map_1.jpg',
 				name_point: 'Notre Dame',
 				description_point: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
 				get_directions_start_address: '',
@@ -185,7 +185,7 @@
 
 			var mapOptions = {
 				zoom: 14,
-				center: new google.maps.LatLng(48.865633, 2.321236),
+				center: new google.maps.LatLng(8.954232145105257, 125.53326418527058),
 				mapTypeId: google.maps.MapTypeId.ROADMAP,
 
 				mapTypeControl: false,
@@ -485,6 +485,13 @@
       getInfoBox(item).open(mapObject, this);
       mapObject.setCenter(new google.maps.LatLng(item.location_latitude, item.location_longitude));
      }));
+
+	 google.maps.event.addListener(mapObject, 'click', function(event) {
+		marker = new google.maps.Marker({position: event.latLng, map: mapObject});
+
+		$('#map_lan').val(event.latLng.lat());
+		$('#map_long').val(event.latLng.lng());
+	});
 					
 	});
 	
