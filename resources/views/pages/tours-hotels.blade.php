@@ -116,7 +116,7 @@
         <div class="col-lg-3">
             <h3>Reviews</h3>
             @guest()
-                <a href="/register" class="btn_1 add_bottom_30">Login to add review</a>
+                <a href="/login" class="btn_1 add_bottom_30">Login to add review</a>
             @endguest
             @auth
                 <a href="#" class="btn_1 add_bottom_30" data-toggle="modal" data-target="#myReview">Leave a review</a>
