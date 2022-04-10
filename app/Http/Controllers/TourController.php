@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Tour;
 use App\Models\Unit;
 use App\Models\User;
+use App\Models\Review;
 use Auth;
 
 class TourController extends Controller
@@ -48,7 +49,12 @@ class TourController extends Controller
             ->latest()
             ->get();
 
-        return view('pages.tours-hotels', compact('tour', 'units'));
+        $tour_id = $tour->id;
+        $unit_id = '';
+        
+        $reviews = Review::with('user')->where('tour_id', $tour_id)->latest()->get();
+
+        return view('pages.tours-hotels', compact('tour', 'units', 'tour_id', 'unit_id', 'reviews'));
     }
 
     public function create()

@@ -157,6 +157,34 @@
         </aside>
     </div>
     <!--End row -->
+
+    <hr>
+
+    <div class="row">
+        <div class="col-lg-3">
+            <h3>Reviews</h3>
+            @guest()
+                <a href="/register" class="btn_1 add_bottom_30">Login to add review</a>
+            @endguest
+            @auth
+                <a href="#" class="btn_1 add_bottom_30" data-toggle="modal" data-target="#myReview">Leave a review</a>
+            @endauth
+        </div>
+        @foreach($reviews as $review)
+            <div class="col-lg-12">
+                <div class="review_strip_single">
+                    <small>{{ $review->created_at }}</small>
+                    <h4>{{ $review->user->firstname ?? '' }} {{ $review->user->lastname ?? '' }}</h4>
+                    <p>
+                        {{ $review->message }}
+                    </p>
+                    <div class="rating">
+                        {{ $review->rate }}
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
 </div>
 <!--End container -->
 

@@ -108,6 +108,44 @@
 		<!--form -->
 	</div>
 
+	<div class="modal fade" id="myReview" tabindex="-1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myReviewLabel">Write your review</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<div class="modal-body">
+					<form method="post" action="{{ route('user.review') }}">
+						@csrf
+						<input type="hidden" name="tour_id" value="{{ $tour_id ?? '' }}">
+						<input type="hidden" name="unit_id" value="{{ $unit_id ?? '' }}">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>Rate</label>
+									<select class="form-control" name="rate" required>
+										<option value="">Please review</option>
+										<option value="Low">Low</option>
+										<option value="Sufficient">Sufficient</option>
+										<option value="Good">Good</option>
+										<option value="Excellent">Excellent</option>
+										<option value="Superb">Super</option>
+										<option value="Not rated">I don't know</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<textarea name="message" id="review_text" class="form-control" style="height:100px" placeholder="Write your review" required></textarea>
+						</div>
+						<button type="submit" class="btn_1">Submit</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
     <script src="{{ asset('assets/js/jquery-2.2.4.min.js') }}"></script>
     <script src="{{ asset('assets/js/common_scripts_min.js') }}"></script>
     <script src="{{ asset('assets/js/functions.js') }}"></script>

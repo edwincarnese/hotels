@@ -3,6 +3,7 @@
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HotelController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\TourController;
 use App\Http\Controllers\UnitController;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,7 @@ Route::get('hotels', [HotelController::class, 'index'])->name('hotels.index');
 Route::get('hotels-unit/{id}', [HotelController::class, 'show'])->name('hotels.unit.show');
 Route::post('book-hotel/{id}', [BookingController::class, 'show'])->name('booking.hotel.show');
 Route::post('book-hotel', [BookingController::class, 'book'])->name('booking.hotel.book');
+Route::post('user-review', [ReviewController::class, 'store'])->name('user.review');
 
 Route::group(['middleware' => ['auth']], function() {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');

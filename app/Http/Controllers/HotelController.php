@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Unit;
+use App\Models\Review;
 
 class HotelController extends Controller
 {
@@ -36,6 +37,11 @@ class HotelController extends Controller
             ->where('id', $id)
             ->where('is_approved', 1)->get();
 
-        return view('pages.hotels-unit', compact('unit', 'units'));
+        $tour_id = '';
+        $unit_id = $unit->id;
+
+        $reviews = Review::with('user')->where('unit_id', $unit_id)->latest()->get();
+
+        return view('pages.hotels-unit', compact('unit', 'units', 'tour_id', 'unit_id', 'reviews'));
     }
 }
