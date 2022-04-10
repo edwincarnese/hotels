@@ -16,6 +16,7 @@ class HotelController extends Controller
             ->when($search, function($q) use($search) {
                 $q->where('name', 'LIKE', '%'.$search.'%');
             })
+            ->where('is_approved', 1)
             ->latest()
             ->get();
 
@@ -27,8 +28,14 @@ class HotelController extends Controller
         $unit = Unit::query()
             ->with('user')
             ->where('id', $id)
+            ->where('is_approved', 1)
             ->firstOrFail();
 
-        return view('pages.hotels-unit', compact('unit'));
+        $units = Unit::query()
+            ->with('user')
+            ->where('id', $id)
+            ->where('is_approved', 1)->get();
+
+        return view('pages.hotels-unit', compact('unit', 'units'));
     }
 }

@@ -30,7 +30,7 @@
                 <a class="cmn-toggle-switch cmn-toggle-switch__htx open_close" href="javascript:void(0);"><span>Menu mobile</span></a>
                 <div class="main-menu">
                     <div id="header_menu">
-                        <img src="img/logo_sticky.png" width="160" height="34" alt="City tours" data-retina="true">
+                        <img src="{{ asset('assets/img/logo_sticky.png') }}" width="160" height="34" alt="City tours" data-retina="true">
                     </div>
                     <a href="#" class="open_close" id="close_in"><i class="icon_set_1_icon-77"></i></a>
                     <ul>
@@ -38,9 +38,12 @@
                             <a href="/">Home</a>
                         </li>
                         <li class="submenu">
-                            <a href="/hotels">Hotels</a>
+                            <a href="/tours">Tours</a>
                         </li>
                         <li class="submenu">
+                            <a href="/hotels">Hotels</a>
+                        </li>
+                        {{-- <li class="submenu">
                             <a href="#">About</a>
                         </li>
                         <li class="submenu">
@@ -48,7 +51,7 @@
                         </li>
                         <li class="submenu">
                             <a href="#">Contact</a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div><!-- End main-menu -->
                 <ul id="top_tools">

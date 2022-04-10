@@ -28,12 +28,32 @@
                     <li><strong>Capacity</strong>{{ $unit->capacity }}</li>
                     <li><strong>Bedroom</strong>{{ $unit->bedroom }}</li>
                     <li><strong>Bathroom</strong>{{ $unit->bathroom }}</li>
+                    <li><strong>Status</strong>
+                        @if($unit->is_approved)
+                        Approved
+                    @else
+                        Pending
+                    @endif
+                    </li>
                 </ul>
             </div>
             <div class="col-lg-2 col-md-2">
+                @if($unit->is_approved)
+                    <div class="booking_buttons">
+                        <a href="{{ route('hotels.unit.show', $unit->id) }}" target="_blank" class="btn_2">View</a>
+                    </div>
+                @endif
+                
                 <div class="booking_buttons">
-                    <a href="#0" class="btn_2">View</a>
-                    {{-- <a href="#0" class="btn_2">View</a> --}}
+                    @if(Auth::user()->role == 1)
+                        @if(!$unit->is_approved)
+                            <form class="mb-1" action="{{ route('dashboard.units.approve', $unit->id) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn_2 btn-block">Approve</button>
+                            </form>
+                        @endif
+                    @endif
+                    <a href="{{ route('dashboard.units.edit', $unit->id) }}" class="btn_2 btn-block">Edit</a>
                     <form action="{{ route('dashboard.units.destroy', $unit->id) }}" method="POST">
                         @csrf
                         @method('DELETE')

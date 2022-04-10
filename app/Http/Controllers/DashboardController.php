@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Unit;
+use App\Models\Tour;
+use App\Models\Booking;
 use Auth;
 
 class DashboardController extends Controller
@@ -12,9 +14,16 @@ class DashboardController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $units = Unit::where('user_id', $user->id)->latest()->get();
+        $tours = Tour::latest()->get();
+        $bookings = Booking::with('unit')->where('user_id', $user->id)->orWhere('owner_id', $user->id)->latest()->get();
 
-        return view('pages.dashboard.index', compact('units'));
+        if($user->role == 1) {
+            $units = Unit::where('user_id', $user->id)->latest()->get();
+        } else {
+            $units = Unit::where('is_approved', 0)->latest()->get();
+        }
+
+        return view('pages.dashboard.index', compact('units', 'tours', 'bookings'));
     }
 
     public function updateProfile(Request $request)

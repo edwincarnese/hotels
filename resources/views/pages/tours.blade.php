@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="parallax-window" data-parallax="scroll" data-image-src="img/hotels_bg.jpg" data-natural-width="1400" data-natural-height="470">
+<section class="parallax-window" data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" data-natural-width="1400" data-natural-height="470">
     <div class="parallax-content-1">
         <div class="animated fadeInDown">
-            <h1>Discover Our Hotels</h1>
+            <h1>Discover Our Tours</h1>
             <p>Ridiculus sociosqu cursus neque cursus curae ante scelerisque vehicula.</p>
         </div>
     </div>
@@ -105,7 +105,7 @@
                             </li>
                         </ul>
                     </div> --}}
-                    <form method="GET" action="{{ route('hotels.index') }}">
+                    <form method="GET" action="{{ route('tours.index') }}">
                         <div class="filter_type mt-2 mb-2">
                             <input type="text" name="search" class="form-control" placeholder="Search">
                         </div>
@@ -156,7 +156,7 @@
             </div>
             <!--End tools -->
 
-			@foreach($units as $unit)
+			@foreach($tours as $tour)
             <div class="strip_all_tour_list wow fadeIn" data-wow-delay="0.1s">
                 <div class="row">
 					<div class="col-lg-4 col-md-4">
@@ -166,9 +166,9 @@
 							<a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
 						</div> --}}
 						<div class="img_list">
-							<a href="{{ route('hotels.unit.show', $unit->id) }}">
-								@if($unit->main_photo)
-									<img src="{{ asset('storage/'.$unit->main_photo) }}" alt="Image">
+							<a href="{{ route('tours.show', $tour->id) }}">
+								@if($tour->main_photo)
+									<img src="{{ asset('storage/'.$tour->main_photo) }}" alt="Image">
 								@else
 									<img src="{{ asset('assets/img/tourist_guide_pic.jpg') }}">
 								@endif
@@ -183,23 +183,29 @@
 							</div> --}}
 							{{-- <div class="rating"><i class="icon-star voted"></i><i class="icon-star  voted"></i><i class="icon-star  voted"></i><i class="icon-star  voted"></i><i class="icon-star  voted"></i>
 							</div> --}}
-							<h3><strong>{{ $unit->name }}</strong></h3>
-							<p>{{ $unit->description }}</p>
+							<h3><strong>{{ $tour->title }}</strong></h3>
+							<p>{{ $tour->description }}</p>
 							<ul class="add_info">
+								
 								<li>
-									<a href="javascript:void(0);" class="tooltip-1" data-placement="top" title="Free Wifi"><i class="icon_set_1_icon-86"></i></a>
+									<div class="tooltip_styled tooltip-effect-4">
+										<span class="tooltip-item"><i class="icon_set_1_icon-83"></i></span>
+									</div>
 								</li>
 								<li>
-									<a href="javascript:void(0);" class="tooltip-1" data-placement="top" title="Plasma TV with cable channels"><i class="icon_set_2_icon-116"></i></a>
+									<div class="tooltip_styled tooltip-effect-4">
+										<span class="tooltip-item"><i class="icon_set_1_icon-41"></i></span>
+									</div>
 								</li>
 								<li>
-									<a href="javascript:void(0);" class="tooltip-1" data-placement="top" title="Swimming pool"><i class="icon_set_2_icon-110"></i></a>
+									<div class="tooltip_styled tooltip-effect-4">
+										<span class="tooltip-item"><i class="icon_set_1_icon-97"></i></span>
+									</div>
 								</li>
 								<li>
-									<a href="javascript:void(0);" class="tooltip-1" data-placement="top" title="Fitness Center"><i class="icon_set_2_icon-117"></i></a>
-								</li>
-								<li>
-									<a href="javascript:void(0);" class="tooltip-1" data-placement="top" title="Restaurant"><i class="icon_set_1_icon-58"></i></a>
+									<div class="tooltip_styled tooltip-effect-4">
+										<span class="tooltip-item"><i class="icon_set_1_icon-27"></i></span>
+									</div>
 								</li>
 							</ul>
 						</div>
@@ -207,10 +213,8 @@
 					<div class="col-lg-2 col-md-2">
 						<div class="price_list">
 							<div>
-								<sup>₱</sup>{{ $unit->price }}
-								<small class="mt-3">{{ $unit->period }}</small>
 								<p>
-									<a href="{{ route('hotels.unit.show', $unit->id) }}" class="btn_1">Details</a>
+									<a href="{{ route('tours.show', $tour->id) }}" class="btn_1">Details</a>
 								</p>
 							</div>
 						</div>
@@ -259,12 +263,9 @@
 
 
 
-
-
-
 <script>
 
-const locationData = {!! $units !!};
+const locationData = {!! $tours !!};
 
 let LocsA = [];
 
@@ -274,15 +275,14 @@ for(let i = 0; i < locationData.length; i++) {
 
     LocsA.push(
         {
-            name: locationData[i]['name'],
+            name: locationData[i]['title'],
             location_latitude: locationData[i]['latitude'],
             location_longitude: locationData[i]['longitude'],
             map_image_url: 'storage/'+locationData[i]['main_photo'],
-            name_point: locationData[i]['name'],
+            name_point: locationData[i]['title'],
             description_point: '',
             get_directions_start_address: '',
-            phone: '+3934245255',
-            url_point: 'hotels-unit/' + locationData[i]['id']
+            url_point: '/tours/' + locationData[i]['id']
         },
     );
 }
@@ -307,7 +307,7 @@ $('#collapseMap').on('shown.bs.collapse', function(e){
 		};
 
 			var mapOptions = {
-				zoom: 8,
+				zoom: 14,
 				center: new google.maps.LatLng(8.9559536672309, 125.52851005253486),
 				mapTypeId: google.maps.MapTypeId.ROADMAP,
 
@@ -321,7 +321,7 @@ $('#collapseMap').on('shown.bs.collapse', function(e){
 					marker = new google.maps.Marker({
 						position: new google.maps.LatLng(item.location_latitude, item.location_longitude),
 						map: mapObject,
-						icon: 'assets/img/pins/' + key + '.png',
+						icon: '/assets/img/pins/' + key + '.png',
 					});
 
 					if ('undefined' === typeof markers[key])
@@ -357,8 +357,6 @@ $('#collapseMap').on('shown.bs.collapse', function(e){
 				'<span>'+ item.description_point +'</span>' +
 				'<div class="marker_tools">' +
 				'<form hidden action="http://maps.google.com/maps" method="get" target="_blank" style="display:inline-block""><input name="saddr" value="'+ item.get_directions_start_address +'" type="hidden"><input type="hidden" name="daddr" value="'+ item.location_latitude +',' +item.location_longitude +'"><button type="submit" value="Get directions" class="btn_infobox_get_directions">Directions</button></form>' +
-					'<a href="tel://'+ item.phone +'" class="btn_infobox_phone">'+ item.phone +'</a>' +
-					'</div>' +
 					'<a href="'+ item.url_point + '" class="btn_infobox">Details</a>' +
 				'</div>',
 				disableAutoPan: false,
@@ -375,19 +373,9 @@ $('#collapseMap').on('shown.bs.collapse', function(e){
 
 		};
 
-    }
-);
+    });
 
 </script>
-
-
-
-
-
-
-
-
-
 
 
 

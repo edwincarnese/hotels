@@ -25,47 +25,59 @@
 </div>
 <!-- End Position -->
 
+@if(Session::has('success'))
+<div>
+    <h3 class="text-center text-success font-weight-bold">{{ Session::get('success') }}</h3>
+</div>
+@endif
+
 <div class="margin_60 container">
     <div id="tabs" class="tabs">
         <nav>
             <ul>
-                <li><a href="#section-1" class="icon-booking"><span>Bookings</span></a>
+                @if(Auth::user()->role != 1)
+                    <li>
+                        <a href="#section-1" class="icon-booking"><span>Bookings</span></a>
+                    </li>
+                @endif
+                <li><a href="#section-2" class="icon-th-list"><span>Tours</span></a>
                 </li>
-                <li><a href="#section-2" class="icon-th-list"><span>Units</span></a>
+                <li><a href="#section-3" class="icon-th-list"><span>Units</span></a>
                 </li>
-                <li><a href="#section-3" class="icon-settings"><span>Settings</span></a>
+                <li><a href="#section-4" class="icon-settings"><span>Settings</span></a>
                 </li>
-                <li><a href="#section-4" class="icon-profile"><span>Profile</span></a>
+                <li><a href="#section-5" class="icon-profile"><span>Profile</span></a>
                 </li>
-                {{-- <li><a href="#section-5" class="icon-wishlist"><span>Wishlist</span></a>
+                {{-- <li><a href="#section-6" class="icon-wishlist"><span>Wishlist</span></a>
                 </li> --}}
             </ul>
         </nav>
         <div class="content">
-
-            <section id="section-1">
-                @include('pages.dashboard._bookings')
-            </section>
-            <!-- End section 1 -->
+            @if(Auth::user()->role != 1)
+                <section id="section-1">
+                    @include('pages.dashboard._bookings')
+                </section>
+                <!-- End section 1 -->
+            @endif
 
             <section id="section-2">
-                @include('pages.dashboard._units')
+                @include('pages.dashboard._tours')
             </section>
             <!-- End section 2 -->
 
             <section id="section-3">
-                @include('pages.dashboard._setting')
+                @include('pages.dashboard._units')
             </section>
             <!-- End section 3 -->
 
             <section id="section-4">
-                @include('pages.dashboard._profile')
+                @include('pages.dashboard._setting')
             </section>
             <!-- End section 4 -->
 
-            {{-- <section id="section-5">
-                @include('pages.dashboard._wishlist')
-            </section> --}}
+            <section id="section-5">
+                @include('pages.dashboard._profile')
+            </section>
             <!-- End section 5 -->
         </div>
         <!-- End content -->
