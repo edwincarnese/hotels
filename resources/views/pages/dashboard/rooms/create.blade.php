@@ -27,7 +27,7 @@
     <div class="margin_60 container">
         <div class="row">
             <div class="col-6">
-                <h4>Edit Unit</h4>
+                <h4>Create Rooms</h4>
             </div>
             <div class="col-6">
                 <a href="{{ route('dashboard.index') }}" class="btn_1 float-right text-white">Cancel</a>
@@ -36,26 +36,24 @@
         <hr>
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="{{ route('dashboard.units.update') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('dashboard.rooms.store') }}" enctype="multipart/form-data">
                     @csrf
-                    @method('PUT')
-                    <input type="hidden" name="id" value="{{ $unit->id }}">
                     <div class="row">
                         <div class="col-md-12">
-                            <h4>Unit info</h4>
+                            <h4>Room info</h4>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Unit name</label>
+                                <label>Room name</label>
                                 <input class="form-control" name="name" type="text" required>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        {{-- <div class="col-md-3">
                             <div class="form-group">
-                                <label>Unit ID</label>
+                                <label>Room ID</label>
                                 <input class="form-control" name="unit_id" type="text" required>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Capacity</label>
@@ -129,23 +127,28 @@
                     </div>
                     <!-- End row -->
 
-                    <hr>
-                    <h4>Tour</h4>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Select tour</label>
-                                <select class="form-control" name="tour_id" required>
-                                    @foreach($tours as $tour)
-                                        <option value="{{ $tour->id }}">{{ $tour->title }}</option>
-                                    @endforeach
-                                </select>
+                    
+                   
+                   {{-- <input type="text" name="tour_id" value="{{ Request::get('tour_id') }}"> --}}
+     
+                    @if($tour_id)
+                    <input type="hidden" name="tour_id" value="{{$tour_id}}">
+                    @else
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Select tour</label>
+                                    <select class="form-control" name="tour_id" required>
+                                        @foreach($tours as $tour)
+                                            <option value="{{ $tour->id }}">{{ $tour->title }}</option>
+                                        @endforeach  
+                                    </select> 
+                                </div>
                             </div>
                         </div>
-                    </div>
-
+                    @endif                   
                     <hr>
-                    <h4>Unit Photos</h4>
+                    <h4>Room Photos</h4>
                     <div class="form-inline upload_1">
                         <div class="form-group">
                             <input type="file" name="images[]" accept="image/*" multiple>
@@ -155,7 +158,7 @@
                     <hr>
                     <div class="row">
                         <div class="col-md-12">
-                            <h4>Unit description</h4>
+                            <h4>Room description</h4>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
@@ -222,9 +225,9 @@
                         </div>
                     </div>
                     <!-- End row -->
-            
+             {{-- 
                     <hr>
-                    <div class="row">
+                   <div class="row">
                         <div class="col-md-12">
                             <h4>Address</h4>
                         </div>
@@ -240,10 +243,10 @@
                                 <input class="form-control" name="city" value="{{ Auth::user()->city }}" type="text">
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <!-- End row -->
             
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Zip code</label> 
@@ -256,32 +259,33 @@
                                 <input class="form-control" name="country" value="{{ Auth::user()->country }}" type="text">
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
+                    <!-- End row -->
+
+                    {{--
+                         <hr>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>Map</h4>
+                                <div id="map" class="map"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Latitude</label>
+                                    <input class="form-control" name="latitude" id="map_lan" type="text">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Longitude</label>
+                                    <input class="form-control" name="longitude" id="map_long" type="text">
+                                </div>
+                            </div>
+                        </div> --}}
                     <!-- End row -->
 
                     <hr>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h4>Map</h4>
-                            <div id="map" class="map"></div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Latitude</label>
-                                <input class="form-control" name="latitude" id="map_lan" value="{{ $tour->latitude }}" type="text">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Longitude</label>
-                                <input class="form-control" name="longitude" id="map_long" value="{{ $tour->longitude }}" type="text">
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End row -->
-
-                    <hr>
-                    <button type="submit" class="btn-block btn_1 green">endsection Unit</button>
+                    <button type="submit" class="btn-block btn_1 green">Create Room</button>
                 </form>
             </div>
         </div>

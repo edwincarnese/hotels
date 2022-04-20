@@ -18,7 +18,7 @@ class CreateReviewsTable extends Migration
             $table->unsignedBigInteger('unit_id')->nullable();
             $table->unsignedBigInteger('tour_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->string('rate')->nullable();
+            $table->unsignedBigInteger('rate')->change()->nullable();
             $table->longText('message')->nullable();
             $table->timestamps();
         });

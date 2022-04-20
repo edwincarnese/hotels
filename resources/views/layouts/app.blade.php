@@ -123,16 +123,22 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label>Rate</label>
-									<select class="form-control" name="rate" required>
-										<option value="">Please review</option>
+									<label>Rate:</label>	&nbsp;
+									<input type="radio" name="rate" value="5">&nbsp;<label>5&nbsp;<img  style= "width:20px; height:20px;  position: absolute; top:0%;" src="{{ asset('assets/img/star.png') }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+									<input type="radio" name="rate" value="4">&nbsp;<label>4&nbsp;<img  style= "width:20px; height:20px;  position: absolute; top:0%;" src="{{ asset('assets/img/star.png') }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+									<input type="radio" name="rate" value="3">&nbsp;<label>3&nbsp;<img  style= "width:20px; height:20px;  position: absolute; top:0%;" src="{{ asset('assets/img/star.png') }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+									<input type="radio" name="rate" value="2">&nbsp;<label>2&nbsp;<img  style= "width:20px; height:20px;  position: absolute; top:0%;" src="{{ asset('assets/img/star.png') }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+									<input type="radio" name="rate" value="1">&nbsp;<label>1&nbsp;<img  style= "width:20px; height:20px;  position: absolute; top:0%;" src="{{ asset('assets/img/star.png') }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+								
+									{{-- <select class="form-control" name="rate" required>									
+										<option value="">Please review></option>
 										<option value="Low">Low</option>
 										<option value="Sufficient">Sufficient</option>
 										<option value="Good">Good</option>
 										<option value="Excellent">Excellent</option>
 										<option value="Superb">Super</option>
 										<option value="Not rated">I don't know</option>
-									</select>
+									</select> --}}
 								</div>
 							</div>
 						</div>

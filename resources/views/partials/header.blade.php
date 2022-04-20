@@ -23,16 +23,16 @@
     
     <div class="container">
         <div class="row">
-            <div class="col-3">
-                <div id="logo_home">
-                    <h1><a href="/" title="City tours travel template">City Tours travel template</a></h1>
+            <div class="col-3"  >
+                <div id="logo_home" >
+                    <h1 ><a href="/" title="City tours travel template">City Tours travel template</a></h1>
                 </div>
             </div>
             <nav class="col-9">
                 <a class="cmn-toggle-switch cmn-toggle-switch__htx open_close" href="javascript:void(0);"><span>Menu mobile</span></a>
                 <div class="main-menu">
                     <div id="header_menu">
-                        <img src="{{ asset('assets/img/logo_sticky.png') }}" width="160" height="34" alt="City tours" data-retina="true">
+                        <img src="{{ asset('assets/img/group1.png') }}" width="160" height="34" alt="City tours" data-retina="true">
                     </div>
                     <a href="#" class="open_close" id="close_in"><i class="icon_set_1_icon-77"></i></a>
                     <ul>

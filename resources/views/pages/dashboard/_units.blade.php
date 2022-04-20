@@ -3,7 +3,7 @@
         <h4>List of Units</h4>
     </div>
     <div class="col-6">
-        <a href="{{ route('dashboard.units.create') }}" class="btn_1 float-right text-white">Add New Unit</a>
+        <a href="{{ route('dashboard.units.create') }}" class="btn_1 float-right text-white">Add Hotel Unit</a>
     </div>
 </div>
 {{-- <hr> --}}
@@ -24,7 +24,7 @@
             <div class="col-lg-2 col-md-3">
                 <ul class="info_booking">
                     <li><strong>Room Id</strong> {{ $unit->unit_id }}</li>
-                    <li><strong>Availability</strong>{{ $unit->is_availabe == 1 ? 'YES' : 'NO' }}</li>
+                    <li><strong>Availability</strong>{{ $unit->is_available == 1 ? 'YES' : 'NO' }}</li>
                     <li><strong>Capacity</strong>{{ $unit->capacity }}</li>
                     <li><strong>Bedroom</strong>{{ $unit->bedroom }}</li>
                     <li><strong>Bathroom</strong>{{ $unit->bathroom }}</li>
@@ -45,24 +45,43 @@
                 @endif
                 
                 <div class="booking_buttons">
-                    @if(Auth::user()->role == 1)
+                    @if(Auth::user()->role == 1 or Auth::user()->role == 2)
                         @if(!$unit->is_approved)
                             <form class="mb-1" action="{{ route('dashboard.units.approve', $unit->id) }}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn_2 btn-block">Approve</button>
                             </form>
                         @endif
-                    @endif
+
+                        <a href="{{ route('dashboard.units.edit', $unit->id) }}" class="btn_2 btn-block">Edit</a>
+                        <form action="{{ route('dashboard.units.destroy', $unit->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn_3 btn-block">Delete</button>
+                        </form>
+                    @elseif(Auth::user()->role == 3)
+                    @if(Auth::user()->id == $unit->user_id)
+                    
                     <a href="{{ route('dashboard.units.edit', $unit->id) }}" class="btn_2 btn-block">Edit</a>
                     <form action="{{ route('dashboard.units.destroy', $unit->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn_3 btn-block">Delete</button>
                     </form>
+                    @else
+                    @endif
+                    @endif
                 </div>
             </div>
         @endforeach
     </div>
     <!-- End row -->
 </div>
+
+
+
+
+
+
+
 <!-- End strip booking -->

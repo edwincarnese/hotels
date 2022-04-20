@@ -213,6 +213,8 @@
 					<div class="col-lg-2 col-md-2">
 						<div class="price_list">
 							<div>
+                                <sup>₱{{ $tour->price }}</sup>
+                                <small></small>
 								<p>
 									<a href="{{ route('tours.show', $tour->id) }}" class="btn_1">Details</a>
 								</p>

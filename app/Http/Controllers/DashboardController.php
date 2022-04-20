@@ -7,23 +7,55 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Unit;
 use App\Models\Tour;
 use App\Models\Booking;
+use App\Models\Room;
 use Auth;
 
 class DashboardController extends Controller
 {
+    // public function index()
+    // {
+    //     $user = Auth::user();
+    //     $tours = Tour::latest()->get();
+    //     $bookings = Booking::with('unit')->where('user_id', $user->id)->orWhere('owner_id', $user->id)->latest()->get();
+
+    //     if($user->role == 1) {
+    //         $units = Unit::where('user_id', $user->id)->latest()->get();
+    //     }
+
+    //       elseif($user->role == 3) {
+            
+    //         $units = Unit::where('user_id', $user->id)->latest()->get();
+       
+    //     }
+    //     else
+    //     {
+          
+    //         $units = Unit::where('is_approved', 0)->latest()->get();       
+           
+    //     }
+
+    //     return view('pages.dashboard.index', compact('units', 'tours', 'bookings'));
+    // }
+
     public function index()
     {
         $user = Auth::user();
         $tours = Tour::latest()->get();
+        $rooms = Room::all(); 
         $bookings = Booking::with('unit')->where('user_id', $user->id)->orWhere('owner_id', $user->id)->latest()->get();
 
-        if($user->role == 1) {
-            $units = Unit::where('user_id', $user->id)->latest()->get();
-        } else {
-            $units = Unit::where('is_approved', 0)->latest()->get();
+        if($user->role == 1 or $user->role == 2 or $user->role == 3) {
+            $units = Unit::all();
+        }
+        //   elseif($user->role == 3) {            
+        //     $units = Unit::where('user_id', $user->id)->latest()->get();       
+        // }
+        else
+        {          
+            $units = Unit::where('is_approved', 0)->latest()->get();                  
         }
 
-        return view('pages.dashboard.index', compact('units', 'tours', 'bookings'));
+        return view('pages.dashboard.index', compact('units', 'tours', 'bookings','rooms'));
     }
 
     public function updateProfile(Request $request)

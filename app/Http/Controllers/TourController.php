@@ -7,6 +7,7 @@ use App\Models\Tour;
 use App\Models\Unit;
 use App\Models\User;
 use App\Models\Review;
+use App\Models\Room;
 use Auth;
 
 class TourController extends Controller
@@ -36,6 +37,8 @@ class TourController extends Controller
 
     public function show($id)
     {
+        $users = Auth::user();
+
         $tour = Tour::query()
             ->with('user')
             ->where('id', $id)
@@ -49,12 +52,20 @@ class TourController extends Controller
             ->latest()
             ->get();
 
+            $rooms = Room::query()
+            ->where('is_approved', 1)
+            ->where('tour_id',$id)
+            ->get();
+            // dd($rooms);
+
         $tour_id = $tour->id;
         $unit_id = '';
         
         $reviews = Review::with('user')->where('tour_id', $tour_id)->latest()->get();
-
-        return view('pages.tours-hotels', compact('tour', 'units', 'tour_id', 'unit_id', 'reviews'));
+        // $s = $reviews->rate;
+        // dd($s);
+      
+        return view('pages.tours-hotels', compact('tour', 'units', 'tour_id', 'unit_id', 'reviews','rooms'));
     }
 
     public function create()

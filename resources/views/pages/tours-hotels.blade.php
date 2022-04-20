@@ -59,11 +59,20 @@
                     </div>
                     @endforeach
                 </div>
+
+               
                 <div class="sp-thumbnails">
                     @foreach(json_decode($tour->images) as $image)
                         <img class="sp-thumbnail" src="{{ asset('storage/'.$image) }}">
                     @endforeach
                 </div>
+            </div>
+
+            @foreach($reviews as $review)
+          
+            @endforeach
+            <div class="col-lg-3">
+                <h3>Ratings </h3>
             </div>
 
             <hr>
@@ -95,6 +104,7 @@
         </div>
         <!--End  single_tour_desc-->
 
+
         <aside class="col-lg-4">
             <p class="d-none d-xl-block d-lg-block d-xl-none">
                 <a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
@@ -108,9 +118,44 @@
 
         </aside>
     </div>
-    <!--End row -->
 
-    <hr>
+    
+    <!--End row -->
+    <div class="row">
+        @foreach($rooms as $room)
+            <div class="col-lg-4">
+                @if($room->main_photo)
+                    <img src="{{ asset('storage/'.$room->main_photo) }}" class="img-fluid styled profile_pic mt-0">
+                @else
+                    <img src="{{ asset('assets/img/tourist_guide_pic.jpg') }}" class="img-fluid styled profile_pic mt-0">
+                @endif
+                <h4>{{$room->name }} </h4>
+                <p>
+                    <span>₱ {{ $room->price }} / {{ $room->period }}</span>s
+                </p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="list_icons">
+                            {{-- <li><i class="icon_set_1_icon-86"></i> Capcity</li>
+                            <li><i class="icon_set_2_icon-116"></i> Bedroom</li>
+                            <li><i class="icon_set_2_icon-106"></i> Bathroom</li> --}}
+                            <li>{{$room->capacity}}</i> Capcity</li>
+                            <li>{{$room->bedroom}}</i> Bedroom</li>
+                            <li>{{$room->bathroom}}</i> Bathroom</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        @endforeach
+    </div>
+
+
+
+    
+       
+{{-- -------------------------------------------------------------------------------------  --}}
+   
 
     <div class="row">
         <div class="col-lg-3">
@@ -127,12 +172,25 @@
                 <div class="review_strip_single">
                     <small>{{ $review->created_at }}</small>
                     <h4>{{ $review->user->firstname ?? '' }} {{ $review->user->lastname ?? '' }}</h4>
+                    
+                    <div class="rating">                      
+                        @if($review->rate)
+                            {{-- {{$getStar = $review->rate}} --}}
+                            @for($rate = 1; $rate <= $review->rate; $rate++)
+                                <img  style= "width:20px; height:20px;  position: relative; top:0%;" src="{{ asset('assets/img/star.png') }}">
+                       
+                            @endfor
+
+                            @for($rate=$review->rate; $rate<5; $rate++)
+                                <img  style= "width:20px; height:20px;  position: relative; top:0%;" src="{{ asset('assets/img/star2.png') }}">
+                            @endfor
+
+                        @endif
+                      
+                    </div>
                     <p>
                         {{ $review->message }}
                     </p>
-                    <div class="rating">
-                        {{ $review->rate }}
-                    </div>
                 </div>
             </div>
         @endforeach

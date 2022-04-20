@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Unit;
 use App\Models\Tour;
@@ -9,16 +8,28 @@ use Auth;
 
 class UnitController extends Controller
 {
-    public function create()
+    public function create(Request $request)
     {
+        $tour_id = $request->tour;
+      
         $tours = Tour::query()
             ->where('is_approved', 1)
             ->orderBy('title', 'ASC')
             ->where('is_approved', 1)
             ->get();
 
-        return view('pages.dashboard.units.create', compact('tours'));
+        return view('pages.dashboard.units.create', compact('tours','tour_id'));
     }
+    // public function tourUnitCreate()
+    // {
+    //     $tours = Tour::query()
+    //         ->where('is_approved', 1)
+    //         ->orderBy('title', 'ASC')
+    //         ->where('is_approved', 1)
+    //         ->get();
+
+    //     return view('pages.dashboard.units.create', compact('tours'));
+    // }
     
     public function edit($id)
     {

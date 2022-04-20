@@ -6,6 +6,7 @@ use App\Http\Controllers\HotelController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\TourController;
 use App\Http\Controllers\UnitController;
+use App\Http\Controllers\RoomController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,4 +49,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('dashboard/tours/store', [TourController::class, 'store'])->name('dashboard.tours.store');
     Route::post('dashboard/tours/approve/{id}', [TourController::class, 'approve'])->name('dashboard.tours.approve');
     Route::delete('dashboard/tours/{id}', [TourController::class, 'destroy'])->name('dashboard.tours.destroy');
+
+    Route::get('dashboard/rooms/create', [RoomController::class, 'create'])->name('dashboard.rooms.create');
+    Route::post('dashboard/rooms/store', [RoomController::class, 'store'])->name('dashboard.rooms.store');
+    Route::get('dashboard/rooms/edit/{id}', [RoomController::class, 'edit'])->name('dashboard.rooms.edit');
+    Route::put('dashboard/rooms/update', [RoomController::class, 'update'])->name('dashboard.rooms.update');
+    Route::delete('dashboard/rooms/{id}', [RoomController::class, 'destroy'])->name('dashboard.rooms.destroy');
+    Route::get('dashboard/rooms/show/{id}', [RoomController::class, 'index'])->name('dashboard.room.show');
+
 });

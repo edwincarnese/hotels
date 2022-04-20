@@ -27,7 +27,7 @@
     <div class="margin_60 container">
         <div class="row">
             <div class="col-6">
-                <h4>Edit Unit</h4>
+                <h4>Edit Room</h4>
             </div>
             <div class="col-6">
                 <a href="{{ route('dashboard.index') }}" class="btn_1 float-right text-white">Cancel</a>
@@ -36,26 +36,26 @@
         <hr>
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="{{ route('dashboard.units.update') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('dashboard.rooms.update') }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    <input type="hidden" name="id" value="{{ $unit->id }}">
+                    <input type="hidden" name="id" value="{{ $rooms->id }}">
                     <div class="row">
                         <div class="col-md-12">
-                            <h4>Unit info</h4>
+                            <h4>Room info</h4>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Unit name</label>
-                                <input class="form-control" name="name" type="text" required>
+                                <label>Room name</label>
+                                <input class="form-control" name="name" type="text" value="{{$rooms->name}}" required>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        {{-- <div class="col-md-3">
                             <div class="form-group">
                                 <label>Unit ID</label>
                                 <input class="form-control" name="unit_id" type="text" required>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Capacity</label>
@@ -78,11 +78,11 @@
                             <div class="form-group">
                                 <label>Bathroom</label>
                                 <select class="form-control" name="bathroom">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
+                                    <option value="1" @if($rooms->bathroom=="1") @endif selected> 1 </option>
+                                    <option value="2" @if($rooms->bathroom=="2") @endif selected> 2 </option>
+                                    <option value="3" @if($rooms->bathroom=="3") @endif selected> 3 </option>
+                                    <option value="4" @if($rooms->bathroom=="4") @endif selected> 4 </option>
+                                    <option value="5" @if($rooms->bathroom=="5") @endif selected> 5 </option>
                                 </select>
                             </div>
                         </div>
@@ -93,13 +93,13 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Price</label>
-                                <input class="form-control" name="price" type="text">
+                                <input class="form-control" name="price" type="text" value="{{$rooms->price}}">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Period</label>
-                                <select class="form-control" name="period">
+                                <select class="form-control" name="period" value="{{$rooms->period}}">
                                     <option value="Per Night">Per Night</option>
                                     <option value="Per Day">Per Day</option>
                                 </select>
@@ -109,15 +109,15 @@
                             <div class="form-group">
                                 <label>Bedroom</label>
                                 <select class="form-control" name="bedroom">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
+                                    <option value="1" @if($rooms->bedroom=="1") @endif selected> 1 </option>
+                                    <option value="2" @if($rooms->bedroom=="2") @endif selected> 2 </option>
+                                    <option value="3" @if($rooms->bedroom=="3") @endif selected> 3 </option>
+                                    <option value="4" @if($rooms->bedroom=="4") @endif selected> 4 </option>
+                                    <option value="5" @if($rooms->bedroom=="5") @endif selected> 5 </option>
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        {{-- <div class="col-md-3">
                             <div class="form-group">
                                 <label>Availability</label>
                                 <select class="form-control" name="is_available">
@@ -125,11 +125,11 @@
                                     <option value="">Not Available</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <!-- End row -->
 
-                    <hr>
+                    {{-- <hr>
                     <h4>Tour</h4>
                     <div class="row">
                         <div class="col-md-12">
@@ -142,24 +142,24 @@
                                 </select>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <hr>
-                    <h4>Unit Photos</h4>
+                    <h4>Room Photos</h4>
                     <div class="form-inline upload_1">
                         <div class="form-group">
-                            <input type="file" name="images[]" accept="image/*" multiple>
+                            <input type="file" name="images[]" accept="image/*" multiple required>
                         </div>
                     </div>
             
                     <hr>
                     <div class="row">
                         <div class="col-md-12">
-                            <h4>Unit description</h4>
+                            <h4>Room description</h4>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <textarea class="form-control" name="description" rows="5"></textarea>
+                                <textarea class="form-control" name="description" rows="5" value="{{$rooms->description}}"></textarea>
                             </div>
                         </div>
                     </div>
@@ -224,7 +224,7 @@
                     <!-- End row -->
             
                     <hr>
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-md-12">
                             <h4>Address</h4>
                         </div>
@@ -240,10 +240,10 @@
                                 <input class="form-control" name="city" value="{{ Auth::user()->city }}" type="text">
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <!-- End row -->
             
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Zip code</label> 
@@ -256,11 +256,11 @@
                                 <input class="form-control" name="country" value="{{ Auth::user()->country }}" type="text">
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <!-- End row -->
 
                     <hr>
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-md-12">
                             <h4>Map</h4>
                             <div id="map" class="map"></div>
@@ -277,11 +277,11 @@
                                 <input class="form-control" name="longitude" id="map_long" value="{{ $tour->longitude }}" type="text">
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <!-- End row -->
 
                     <hr>
-                    <button type="submit" class="btn-block btn_1 green">endsection Unit</button>
+                    <button type="submit" class="btn-block btn_1 green">Update Room</button>
                 </form>
             </div>
         </div>

@@ -5,6 +5,7 @@
     <div class="col-6">
         <a href="{{ route('dashboard.tours.create') }}" class="btn_1 float-right text-white">Add New Tour</a>
     </div>
+    
 </div>
 {{-- <hr> --}}
 <div class="strip_booking">
@@ -37,6 +38,13 @@
                     <div class="booking_buttons">
                         <a href="{{ route('tours.show', $tour->id) }}" target="_blank" class="btn_2">View</a>
                     </div>
+                    <div class="booking_buttons">
+                        <a href="{{ route('dashboard.units.create', ['tour' => $tour->id]) }}" target="_blank" class="btn_2">Add New Hotel Unit</a>
+                        <br>
+                        <a href="{{ route('dashboard.rooms.create', ['tour' => $tour->id])  }}" target="_blank" class="btn_2"> Add New Room</a>
+                   
+                    </div>
+                 
                 @endif
                 
                 @if(Auth::user()->role == 1)

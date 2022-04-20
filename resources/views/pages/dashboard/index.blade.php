@@ -34,34 +34,40 @@
 <div class="margin_60 container">
     <div id="tabs" class="tabs">
         <nav>
-            <ul>
-                @if(Auth::user()->role != 1)
-                    <li>
-                        <a href="#section-1" class="icon-booking"><span>Bookings</span></a>
-                    </li>
-                @endif
+            <ul>              
+                <li>
+                    <a href="#section-1" class="icon-booking"><span>Bookings</span></a>
+                </li>                
                 <li><a href="#section-2" class="icon-th-list"><span>Tours</span></a>
                 </li>
-                <li><a href="#section-3" class="icon-th-list"><span>Units</span></a>
+                <li><a href="#section-6" class="icon-th-list"><span>Rooms</span></a>
+                </li>
+                <li><a href="#section-3" class="icon-th-list"><span>Hotel Units</span></a>
                 </li>
                 <li><a href="#section-4" class="icon-settings"><span>Settings</span></a>
                 </li>
                 <li><a href="#section-5" class="icon-profile"><span>Profile</span></a>
                 </li>
+              
                 {{-- <li><a href="#section-6" class="icon-wishlist"><span>Wishlist</span></a>
                 </li> --}}
             </ul>
         </nav>
         <div class="content">
-            @if(Auth::user()->role != 1)
+          
                 <section id="section-1">
                     @include('pages.dashboard._bookings')
                 </section>
                 <!-- End section 1 -->
-            @endif
+        
 
             <section id="section-2">
                 @include('pages.dashboard._tours')
+            </section>
+            <!-- End section 2 -->
+
+            <section id="section-6">
+                @include('pages.dashboard._rooms')
             </section>
             <!-- End section 2 -->
 

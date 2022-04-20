@@ -70,8 +70,14 @@
                             </div>
                         </div>
                     </div>
-                    <!-- End row -->
-            
+                    <hr>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Price</label>
+                            <input class="form-control" name="price" type="text">
+                        </div>
+                    </div>
+                    <!-- End row -->            
                     <hr>
                     <div class="row">
                         <div class="col-md-12">

@@ -127,21 +127,26 @@
                     </div>
                     <!-- End row -->
 
-                    <hr>
-                    <h4>Tour</h4>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Select tour</label>
-                                <select class="form-control" name="tour_id" required>
-                                    @foreach($tours as $tour)
-                                        <option value="{{ $tour->id }}">{{ $tour->title }}</option>
-                                    @endforeach
-                                </select>
+                    
+                   
+                   {{-- <input type="text" name="tour_id" value="{{ Request::get('tour_id') }}"> --}}
+     
+                    @if($tour_id)
+                    <input type="hidden" name="tour_id" value="{{$tour_id}}">
+                    @else
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Select tour</label>
+                                    <select class="form-control" name="tour_id" required>
+                                        @foreach($tours as $tour)
+                                            <option value="{{ $tour->id }}">{{ $tour->title }}</option>
+                                        @endforeach  
+                                    </select> 
+                                </div>
                             </div>
                         </div>
-                    </div>
-
+                    @endif                   
                     <hr>
                     <h4>Unit Photos</h4>
                     <div class="form-inline upload_1">

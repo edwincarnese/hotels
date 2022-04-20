@@ -8,40 +8,9 @@
         <a href="/hotels" class="animated fadeInUp button_intro">View Hotels</a> 
         <a href="/tours" class="animated fadeInUp button_intro outline">View Tours</a>
     </div>
-</section>
 
-<div class="container margin_60">
-    <div class="main_title">
-        <h2><span>Featured</span> Hotels</h2>
-        {{-- <p>Quisque at tortor a libero posuere laoreet vitae sed arcu. Curabitur consequat.</p> --}}
-    </div>
-    <div class="row">
-        @foreach($units as $unit)
-            <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.1s">
-                <div class="tour_container">
-                    <div class="ribbon_3 popular"><span>Popular</span></div>
-                    <div class="img_container">
-                        <a href="{{ route('hotels.unit.show', $unit->id) }}">
-                        <img src="{{ asset('storage/'.$unit->main_photo) }}" width="800" height="533" class="img-fluid" alt="Image">
-                        <div class="short_info">
-                            <i class="icon_set_1_icon-44"></i>{{ $unit->name }}<span class="price">{{ $unit->price }}</span>
-                        </div>
-                        </a>
-                    </div>
-                    <div class="tour_title">
-                        <h3><strong>{{ $unit->name }}</strong> Hotel</h3>
-                    </div>
-                </div>
-            </div>
-        @endforeach
-    </div>
     
-    <p class="text-center nopadding" id="view-map">
-        <a href="/hotels" class="btn_1 medium"><i class="icon-eye-7"></i>View all hotels </a>
-    </p>
-</div>
-
-<div id="map" class="map"></div>
+</section>
 
 <div class="container margin_60">
     <div class="main_title">
@@ -73,6 +42,43 @@
         <a href="/tours" class="btn_1 medium"><i class="icon-eye-7"></i>View all tours </a>
     </p>
 </div>
+
+<div id="map" class="map"></div>
+
+
+<Div class="container margin_60">
+    <div class="main_title">
+        <h2><span>Featured</span> Hotels</h2>
+        {{-- <p>Quisque at tortor a libero posuere laoreet vitae sed arcu. Curabitur consequat.</p> --}}
+    </div>
+    <div class="row">
+        @foreach($units as $unit)
+            <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.1s">
+                <div class="tour_container">
+                    <div class="ribbon_3 popular"><span>Popular</span></div>
+                    <div class="img_container">
+                        <a href="{{ route('hotels.unit.show', $unit->id) }}">
+                        <img src="{{ asset('storage/'.$unit->main_photo) }}" width="800" height="533" class="img-fluid" alt="Image">
+                        <div class="short_info">
+                            <i class="icon_set_1_icon-44"></i>{{ $unit->name }}<span class="price">{{ $unit->price }}</span>
+                        </div>
+                        </a>
+                    </div>
+                    <div class="tour_title">
+                        <h3><strong>{{ $unit->name }}</strong> Hotel</h3>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+    
+    <p class="text-center nopadding" id="view-map">
+        <a href="/hotels" class="btn_1 medium"><i class="icon-eye-7"></i>View all hotels </a>
+    </p>
+</div>
+
+
+
 @endsection
 
 @section('js')
