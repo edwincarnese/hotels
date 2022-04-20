@@ -52,7 +52,7 @@ class TourController extends Controller
             ->latest()
             ->get();
 
-            $rooms = Room::query()
+        $rooms = Room::query()
             ->where('is_approved', 1)
             ->where('tour_id',$id)
             ->get();

@@ -6,7 +6,7 @@
                 <a href="tel://004542344599" id="phone">+45 423 445 99</a>
                 <a href="mailto:help@citytours.com" id="email_footer">help@citytours.com</a>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <h3>About</h3>
                 <ul>
                     <li><a href="#">About us</a></li>

@@ -109,6 +109,51 @@
             <p class="d-none d-xl-block d-lg-block d-xl-none">
                 <a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
             </p>
+            
+            <div class="box_style_1 expose">
+                @auth
+                    <form action="" method="POST">
+                        @csrf
+                        <h3 class="inner">Choose Date</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label><i class="icon-calendar-7"></i> Check in</label>
+                                    <input class="date-pick form-control" data-date-format="M d, D" type="text" name="checkin_date">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label><i class="icon-calendar-7"></i> Check out</label>
+                                    <input class="date-pick form-control" data-date-format="M d, D" type="text" name="checkout_date">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Adults</label>
+                                    <div class="numbers-row">
+                                        <input type="text" value="1" id="adults" class="qty2 form-control" name="adult">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Children</label>
+                                    <div class="numbers-row">
+                                        <input type="text" value="0" id="children" class="qty2 form-control" name="children">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn_full">Check now</button>
+                    </form>
+                @else
+                    <a class="btn_full" href="/register">Register to book this hotel</a>
+                @endauth()
+            </div>
             <div class="box_style_4">
                 <i class="icon_set_1_icon-90"></i>
                 <h4><span>Book</span> by phone</h4>
