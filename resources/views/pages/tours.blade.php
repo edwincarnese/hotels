@@ -179,15 +179,33 @@
 					<div class="clearfix visible-xs-block"></div>
 					<div class="col-lg-6 col-md-6">
 						<div class="tour_list_desc">
-							<div class="score">Very Good<span>8.0</span>
-							</div>
-							<div class="rating">
+							{{-- <div class="score"><span>{{ floor($tour->review) }}</span>
+							</div> --}}
+							{{-- <div class="rating">
                                 <i class="icon-star voted"></i>
                                 <i class="icon-star voted"></i>
                                 <i class="icon-star voted"></i>
                                 <i class="icon-star voted"></i>
                                 <i class="icon-star"></i>
-							</div>
+							</div> --}}
+                   
+                            <div class="rating">                      
+                                @if($tour->review)                                   
+                                    @for($rate = 1; $rate <= $tour->review; $rate++)
+                                    <i class="icon-star voted"></i>
+                               
+                                    @endfor
+        
+                                    @for($rate=$tour->review; $rate<5; $rate++)
+                                    <i class="icon-star"></i>
+                                    @endfor
+        
+                                @endif                              
+                            </div>
+                          
+
+
+
 							<h3><strong>{{ $tour->title }}</strong></h3>
 							<p>{{ $tour->description }}</p>
 							<ul class="add_info">

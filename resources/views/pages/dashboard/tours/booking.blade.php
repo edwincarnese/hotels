@@ -53,11 +53,11 @@
 <div class="container margin_60">
     <div class="row">
         <div class="col-lg-8 add_bottom_15">
-            <form action="{{ route('booking.hotel.book') }}" method="POST" class="card-form">
+            <form action="{{ route('booking.tour.store') }}" method="POST" class="card-form">
                 @csrf
                 <input type="hidden" name="payment_method" class="payment-method">
-                <input type="hidden" name="unit_id" value="{{ $unit->id }}">
-                <input type="hidden" name="price" value="{{ $unit->price }}">
+                <input type="hidden" name="tour_id" value="{{ $tour->id }}">
+                <input type="hidden" name="price" value="{{ $tour->price }}">
                 <input type="hidden" name="checkin_date" value="{{ $checkin_date }}">
                 <input type="hidden" name="checkout_date" value="{{ $checkout_date }}">
                 <input type="hidden" name="adult" value="{{ $adult }}">
@@ -151,7 +151,7 @@
                                 Hotel
                             </td>
                             <td class="text-right">
-                                {{ $unit->name }}
+                                {{ $tour->title }}
                             </td>
                         </tr>
                         <tr>
@@ -175,7 +175,7 @@
                                 Total cost
                             </td>
                             <td class="text-right">
-                                {{ $totalprice }}
+                                {{$totalprice }}
                             </td>
                         </tr>
                     </tbody>

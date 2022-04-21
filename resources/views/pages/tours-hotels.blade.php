@@ -13,6 +13,10 @@
                     <span>{{ $tour->address }} {{ $tour->city }}, {{ $tour->zip_code }} {{ $tour->country }}</span>
                 </div>
                 <div class="col-md-4">
+                    <div id="price_single_main" class="hotel">
+                        {{-- {{ $tour->period }}  --}}
+                        <span><sup>₱</sup>{{ $tour->price }}</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -68,11 +72,15 @@
                 </div>
             </div>
 
-            @foreach($reviews as $review)
-          
-            @endforeach
-            <div class="col-lg-3">
-                <h3>Ratings </h3>
+            {{-- @foreach($reviews as $review)          
+            @endforeach --}}
+            <div class="row">
+                <h2>Ratings: &nbsp; </h2>
+                @if($getAverageRate <= 3 )
+                    <h2 style = "color:red;">{{floor($getAverageRate)}}</h2>
+                @else
+                    <h2 style = "color: rgb(212, 226, 7);"> {{floor($getAverageRate)}}</h2>
+                @endif  
             </div>
 
             <hr>
@@ -112,20 +120,20 @@
             
             <div class="box_style_1 expose">
                 @auth
-                    <form action="" method="POST">
+                    <form action="{{route('booking.tour.show',$tour->id)}}" method="POST">
                         @csrf
                         <h3 class="inner">Choose Date</h3>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label><i class="icon-calendar-7"></i> Check in</label>
-                                    <input class="date-pick form-control" data-date-format="M d, D" type="text" name="checkin_date">
+                                    <input class="date-pick form-control" date-local type="text" name="checkin_date">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label><i class="icon-calendar-7"></i> Check out</label>
-                                    <input class="date-pick form-control" data-date-format="M d, D" type="text" name="checkout_date">
+                                    <input class="date-pick form-control" date-local  type="text" name="checkout_date">
                                 </div>
                             </div>
                         </div>
@@ -222,12 +230,12 @@
                         @if($review->rate)
                             {{-- {{$getStar = $review->rate}} --}}
                             @for($rate = 1; $rate <= $review->rate; $rate++)
-                                <img  style= "width:20px; height:20px;  position: relative; top:0%;" src="{{ asset('assets/img/star.png') }}">
+                            <i class="icon-star voted"></i>
                        
                             @endfor
 
                             @for($rate=$review->rate; $rate<5; $rate++)
-                                <img  style= "width:20px; height:20px;  position: relative; top:0%;" src="{{ asset('assets/img/star2.png') }}">
+                            <i class="icon-star"></i>
                             @endfor
 
                         @endif

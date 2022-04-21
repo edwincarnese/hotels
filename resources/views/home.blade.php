@@ -32,6 +32,29 @@
                     </div>
                     <div class="tour_title">
                         <h3><strong>{{ $tour->title }}</strong> Tour</h3>
+                        <div class="rating">   
+                            @if($tour->review)                                                
+                                @for($rate = 1; $rate <= $tour->review; $rate++)
+                                    <i class="icon-star voted"></i>                   
+                                @endfor
+                                @for($rate=$tour->review; $rate<5; $rate++)
+                                    <i class="icon-star"> </i>
+                                @endfor
+                            @endif   
+                         
+                        </div> 
+                    </div>
+                    <div class="rating">                   
+                        {{-- @if($tour->rate)
+                            
+                            @for($rate = 1; $rate <= $tour->rate; $rate++)
+                            <i class="icon-star voted"></i>                       
+                            @endfor
+                            @for($rate=$tour->rate; $rate<5; $rate++)
+                            <i class="icon-star"></i>
+                            @endfor
+
+                        @endif                       --}}
                     </div>
                 </div>
             </div>

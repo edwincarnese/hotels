@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Unit;
 use App\Models\Review;
+use DB;
 
 class HotelController extends Controller
 {
@@ -14,6 +15,11 @@ class HotelController extends Controller
 
         $units = Unit::query()
             ->with('user')
+            ->withCount([
+            'reviews AS review' => function ($query) {
+                $query->select(DB::raw("(SUM(rate) / COUNT(id)) as review"));
+                }
+            ])
             ->when($search, function($q) use($search) {
                 $q->where('name', 'LIKE', '%'.$search.'%');
             })

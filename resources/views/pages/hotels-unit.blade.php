@@ -111,13 +111,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label><i class="icon-calendar-7"></i> Check in</label>
-                                    <input class="date-pick form-control" data-date-format="M d, D" type="text" name="checkin_date">
+                                    <input class="date-pick form-control" date-local type="text" name="checkin_date">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label><i class="icon-calendar-7"></i> Check out</label>
-                                    <input class="date-pick form-control" data-date-format="M d, D" type="text" name="checkout_date">
+                                    <input class="date-pick form-control" date-local type="text" name="checkout_date">
                                 </div>
                             </div>
                         </div>

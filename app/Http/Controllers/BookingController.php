@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Unit;
 use App\Models\Booking;
 use Auth;
+use Carbon\Carbon;
 
 class BookingController extends Controller
 {
@@ -15,6 +16,10 @@ class BookingController extends Controller
     $children = $request->children;
     $checkin_date = $request->checkin_date;
     $checkout_date = $request->checkout_date;
+
+    $from_date = Carbon::parse(date('Y-m-d', strtotime($checkin_date))); 
+    $through_date = Carbon::parse(date('Y-m-d', strtotime($checkout_date))); 
+    $days = $from_date->diffInDays($through_date);
 
     $user = Auth::user();
 
@@ -38,13 +43,16 @@ class BookingController extends Controller
     }
 
     $unit = Unit::where('id', $id)->first();
+    $subtotal = $unit->price;
+    $totalprice = $subtotal * $days;
 
     return view('pages.booking', compact(
       'unit', 
       'adult', 
       'children', 
       'checkin_date', 
-      'checkout_date')
+      'checkout_date',
+      'totalprice')
     )->with($data);
   }
 
@@ -81,7 +89,7 @@ class BookingController extends Controller
       $booking->firstname = $request->firstname;
       $booking->lastname = $request->lastname;
       $booking->phone = $request->phone;
-      $booking->payment = $request->price;
+      $booking->payment = $request->totalprice;
       $booking->adult = $request->adult;
       $booking->children = $request->children;
       $booking->checkin_date = $request->checkin_date;

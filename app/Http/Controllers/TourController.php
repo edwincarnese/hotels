@@ -8,22 +8,134 @@ use App\Models\Unit;
 use App\Models\User;
 use App\Models\Review;
 use App\Models\Room;
+use App\Models\Booking;
 use Auth;
+use DB;
+use Carbon\Carbon;
 
 class TourController extends Controller
 {
+
+    public function book_store(Request $request)
+  {
+    $user = Auth::user();
+    $tour = Tour::where('id', $request->tour_id)->first();
+
+   
+
+    $curl = new \Stripe\HttpClient\CurlClient([CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1]);
+    $curl->setEnableHttp2(false);
+    \Stripe\ApiRequestor::setHttpClient($curl);
+
+    $price = $request->price;
+    $payment_method = $request->payment_method;
+    $save_card = $request->save_card;
+    $not_using_default_card = true;
+  
+    try {
+      $user->createOrGetStripeCustomer();
+      if($not_using_default_card) {
+        if($save_card) {
+          $user->updateDefaultPaymentMethod($payment_method);
+        } else {
+          $user->addPaymentMethod($payment_method);
+        }
+      }
+      $user->charge($price * 100, $payment_method);
+      $user->save();
+
+      $booking = new Booking();
+      $booking->tour_id = $tour->id;
+      $booking->owner_id = $tour->user_id;
+      $booking->user_id = $user->id;
+      $booking->firstname = $request->firstname;
+      $booking->lastname = $request->lastname;
+      $booking->phone = $request->phone;
+      $booking->payment = $request->totalprice;
+      $booking->adult = $request->adult;
+      $booking->children = $request->children;
+      $booking->checkin_date = $request->checkin_date;
+      $booking->checkout_date = $request->checkout_date;
+      $booking->save();
+
+      
+    } 
+    catch (\Exception $exception) {
+      
+    // dd($exception);
+      return back()->with('error', $exception->getMessage());
+    }
+
+    return redirect()->route('dashboard.index')->with('success','You have successfully booked this tour');
+  }
+    public function book(Request $request, $id)
+    {
+      $adult = $request->adult;
+      $children = $request->children;
+      $checkin_date = $request->checkin_date;
+      $checkout_date = $request->checkout_date;
+ 
+      $from_date = Carbon::parse(date('Y-m-d', strtotime($checkin_date))); 
+      $through_date = Carbon::parse(date('Y-m-d', strtotime($checkout_date))); 
+      $days = $from_date->diffInDays($through_date);
+   
+      // dd($shift_difference );
+
+ 
+      $user = Auth::user();
+  
+      $curl = new \Stripe\HttpClient\CurlClient([CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1]);
+      $curl->setEnableHttp2(false);
+      \Stripe\ApiRequestor::setHttpClient($curl);
+  
+      try
+      {
+        $data = [
+          'error' => FALSE,
+          'intent' => $user->createSetupIntent(),
+        ];
+  
+      }
+      catch(\Exception $e)
+      {
+        $data = [
+          'error' => 'Loading Tracking Service, Please check back in 5 minutes...'
+        ];
+      }
+  
+      $tour = Tour::where('id', $id)->first();
+      $subtotal = $tour->price;
+      $totalprice = $subtotal * $days;
+  
+      return view('pages.dashboard.tours.booking', compact(
+        'tour', 
+        'adult', 
+        'children', 
+        'checkin_date', 
+        'checkout_date',
+        'totalprice')
+      )->with($data);
+    }
+
     public function index(Request $request)
     {
         $search = $request->search;
 
         $tours = Tour::query()
             ->with('user')
+            ->withCount([
+              'reviews AS review' => function ($query) {
+                  $query->select(DB::raw("(SUM(rate) / COUNT(id)) as review"));
+                }
+            ])
             ->when($search, function($q) use($search) {
                 $q->where('title', 'title', '%'.$search.'%');
             })
             ->where('is_approved', 1)
             ->latest()
             ->get();
+            
+        
 
         return view('pages.tours', compact('tours'));
     }
@@ -62,10 +174,13 @@ class TourController extends Controller
         $unit_id = '';
         
         $reviews = Review::with('user')->where('tour_id', $tour_id)->latest()->get();
-        // $s = $reviews->rate;
-        // dd($s);
+        
+        $getSum = Review::where('tour_id', $tour_id)->sum('rate');
+        $getCount = Review::where('tour_id', $tour_id)->count('rate');
+        $getAverageRate = $getSum / $getCount;
+       
       
-        return view('pages.tours-hotels', compact('tour', 'units', 'tour_id', 'unit_id', 'reviews','rooms'));
+        return view('pages.tours-hotels', compact('tour', 'units', 'tour_id', 'unit_id', 'reviews','rooms','getAverageRate'));
     }
 
     public function create()
