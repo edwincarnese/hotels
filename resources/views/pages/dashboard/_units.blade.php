@@ -45,7 +45,7 @@
                 @endif
                 
                 <div class="booking_buttons">
-                    @if(Auth::user()->role == 1 or Auth::user()->role == 2)
+                    @if(Auth::user()->role == 1)
                         @if(!$unit->is_approved)
                             <form class="mb-1" action="{{ route('dashboard.units.approve', $unit->id) }}" method="POST">
                                 @csrf
@@ -59,17 +59,13 @@
                             @method('DELETE')
                             <button type="submit" class="btn_3 btn-block">Delete</button>
                         </form>
-                    @elseif(Auth::user()->role == 3)
-                    @if(Auth::user()->id == $unit->user_id)
-                    
-                    <a href="{{ route('dashboard.units.edit', $unit->id) }}" class="btn_2 btn-block">Edit</a>
-                    <form action="{{ route('dashboard.units.destroy', $unit->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn_3 btn-block">Delete</button>
-                    </form>
-                    @else
-                    @endif
+                    @elseif(Auth::user()->id == $unit->user_id)
+                        <a href="{{ route('dashboard.units.edit', $unit->id) }}" class="btn_2 btn-block">Edit</a>
+                        <form action="{{ route('dashboard.units.destroy', $unit->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn_3 btn-block">Delete</button>
+                        </form>
                     @endif
                 </div>
             </div>

@@ -487,6 +487,7 @@
      }));
 
 	 google.maps.event.addListener(mapObject, 'click', function(event) {
+		marker.setMap(null);
 		marker = new google.maps.Marker({position: event.latLng, map: mapObject});
 
 		$('#map_lan').val(event.latLng.lat());

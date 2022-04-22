@@ -81,6 +81,10 @@ class TourController extends Controller
    
       // dd($shift_difference );
 
+      if(!$days) {
+        $days = 1;
+      }
+
  
       $user = Auth::user();
   
@@ -232,6 +236,10 @@ class TourController extends Controller
 
         if($request->amenities) {
             $data['amenities'] = json_encode($request->amenities);
+        }
+
+        if($request->amenities_prices) {
+          $data['amenities_prices'] = json_encode($request->amenities_prices);
         }
 
         if($request->images) {

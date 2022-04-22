@@ -59,18 +59,22 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
             <!-- Map button for tablets/mobiles -->
             <div id="Img_carousel" class="slider-pro">
                 <div class="sp-slides">
-                    @foreach(json_decode($tour->images) as $image)
-                    <div class="sp-slide">
-                        <img class="sp-image" src="{{ asset('storage/'.$image) }}" data-src="{{ asset('storage/'.$image) }}" data-small="{{ asset('storage/'.$image) }}" data-medium="{{ asset('storage/'.$image) }}" data-large="{{ asset('storage/'.$image) }}" data-retina="{{ asset('storage/'.$image) }}">
-                    </div>
-                    @endforeach
+                    @if($tour->images)
+                        @foreach(json_decode($tour->images) as $image)
+                        <div class="sp-slide">
+                            <img class="sp-image" src="{{ asset('storage/'.$image) }}" data-src="{{ asset('storage/'.$image) }}" data-small="{{ asset('storage/'.$image) }}" data-medium="{{ asset('storage/'.$image) }}" data-large="{{ asset('storage/'.$image) }}" data-retina="{{ asset('storage/'.$image) }}">
+                        </div>
+                        @endforeach
+                    @endif
                 </div>
 
                
                 <div class="sp-thumbnails">
-                    @foreach(json_decode($tour->images) as $image)
-                        <img class="sp-thumbnail" src="{{ asset('storage/'.$image) }}">
-                    @endforeach
+                    @if($tour->images)
+                        @foreach(json_decode($tour->images) as $image)
+                            <img class="sp-thumbnail" src="{{ asset('storage/'.$image) }}">
+                        @endforeach
+                    @endif
                 </div>
             </div>
 
@@ -97,15 +101,20 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
                     </p>
                     <h4>Amenities</h4>
                     <div class="row">
-                        <div class="col-md-6">
-                            @if($tour->amenities)
-                                <ul class="list_ok">
-                                    @foreach(json_decode($tour->amenities) as $amenity)
-                                        <li>{{ $amenity }}</li>
-                                    @endforeach
-                                </ul>
-                            @endif
-                        </div>
+                        @if($tour->amenities && $tour->amenities_prices)
+                            @php 
+                                $amenities = json_decode($tour->amenities); 
+                                $amenities_prices = json_decode($tour->amenities_prices); 
+                            @endphp
+                            @for($i = 0; $i < count($amenities); $i++)
+                                <div class="col-md-6">
+                                    <h4>Name: {{ $amenities[$i] }}</h4>
+                                </div>
+                                <div class="col-md-6">
+                                    <h4>Price: {{ $amenities_prices[$i] }}</h4>
+                                </div>
+                            @endfor
+                        @endif
                     </div>
                     <!-- End row  -->
                 </div>

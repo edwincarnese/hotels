@@ -3,7 +3,7 @@
     <div id="top_line">
         <div class="container">
             <div class="row">
-                <div class="col-6"><i class="icon-phone"></i><strong>0045 043204434</strong></div>
+                <div class="col-6"><i class="icon-phone"></i><strong>+63 905 123 4567</strong></div>
                 <div class="col-6">
                     <ul id="top_links">
                         @guest()

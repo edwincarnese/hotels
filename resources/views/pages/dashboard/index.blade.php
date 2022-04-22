@@ -56,12 +56,9 @@ data-parallax="scroll" data-image-src="img/admin_top.jpg" data-natural-width="14
             </ul>
         </nav>
         <div class="content">
-          
-                <section id="section-1">
-                    @include('pages.dashboard._bookings')
-                </section>
-                <!-- End section 1 -->
-        
+            <section id="section-1">
+                @include('pages.dashboard._bookings')
+            </section>
 
             <section id="section-2">
                 @include('pages.dashboard._tours')

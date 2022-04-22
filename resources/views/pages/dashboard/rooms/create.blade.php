@@ -42,7 +42,7 @@
                         <div class="col-md-12">
                             <h4>Room info</h4>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>Room name</label>
                                 <input class="form-control" name="name" type="text" required>
@@ -120,7 +120,7 @@
                                 <label>Availability</label>
                                 <select class="form-control" name="is_available">
                                     <option value="1">Available</option>
-                                    <option value="">Not Available</option>
+                                    <option value="0">Not Available</option>
                                 </select>
                             </div>
                         </div>

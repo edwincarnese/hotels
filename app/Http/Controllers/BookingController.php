@@ -21,6 +21,10 @@ class BookingController extends Controller
     $through_date = Carbon::parse(date('Y-m-d', strtotime($checkout_date))); 
     $days = $from_date->diffInDays($through_date);
 
+    if(!$days) {
+      $days = 1;
+    }
+
     $user = Auth::user();
 
     $curl = new \Stripe\HttpClient\CurlClient([CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1]);

@@ -44,7 +44,6 @@
                         <a href="{{ route('dashboard.rooms.create', ['tour' => $tour->id])  }}" target="_blank" class="btn_2"> Add New Room</a>
                    
                     </div>
-                 
                 @endif
                 
                 @if(Auth::user()->role == 1)
@@ -55,6 +54,15 @@
                                 <button type="submit" class="btn_2 btn-block">Approve</button>
                             </form>
                         @endif
+                        <a href="{{ route('dashboard.tours.edit', $tour->id) }}" class="btn_2 btn-block">Edit</a>
+                        <form action="{{ route('dashboard.tours.destroy', $tour->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn_3 btn-block">Delete</button>
+                        </form>
+                    </div>
+                @elseif(Auth::user()->id == $tour->user_id)
+                    <div class="booking_buttons">
                         <a href="{{ route('dashboard.tours.edit', $tour->id) }}" class="btn_2 btn-block">Edit</a>
                         <form action="{{ route('dashboard.tours.destroy', $tour->id) }}" method="POST">
                             @csrf

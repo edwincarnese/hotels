@@ -44,14 +44,19 @@
                         <div class="col-md-12">
                             <h4>Tour info</h4>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>Title</label>
                                 <input class="form-control" name="title" type="text" required>
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Price</label>
+                                <input class="form-control" name="price" type="text">
+                            </div>
+                        </div>
                     </div>
-                    <!-- End row -->
             
                     <hr>
                     <h4>Tour Photos</h4>
@@ -73,42 +78,15 @@
                         </div>
                     </div>
                     <hr>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label>Price</label>
-                            <input class="form-control" name="price" type="text">
-                        </div>
-                    </div>
-                    <!-- End row -->            
-                    <hr>
                     <div class="row">
                         <div class="col-md-12">
                             <h4>Amenities</h4>
                         </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <ul class="other-features">
-                                    <li>
-                                        <input type="checkbox" id="tour_guide" name="amenities[]" value="Tour guide">
-                                        <label for="tour_guide">Tour guide</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="audio_guide" name="amenities[]" value="Audio guide">
-                                        <label for="audio_guide">Audio guide</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="pet_allowed" name="amenities[]" value="Pet allowed">
-                                        <label for="pet_allowed">Pet allowed</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="accessbility" name="amenities[]" value="Accessbility">
-                                        <label for="accessbility">Accessbility</label>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
                     </div>
-                    <!-- End row -->
+
+                    <div class="other-features row">
+                    </div>
+                    <button type="button" onclick="addAmenities()">Add Amenities</button>
             
                     <hr>
                     <div class="row">
@@ -121,44 +99,19 @@
                                 <input class="form-control" name="address" value="{{ Auth::user()->address }}" type="text">
                             </div>
                         </div>
-                        {{-- <div class="col-md-6">
-                            <div class="form-group">
-                                <label>City/Town</label>
-                                <input class="form-control" name="city" value="{{ Auth::user()->city }}" type="text">
-                            </div>
-                        </div> --}}
                     </div>
-                    <!-- End row -->
-            
-                    {{-- <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Zip code</label> 
-                                <input class="form-control" name="zip_code" value="{{ Auth::user()->zip_code }}" type="text">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Country</label>
-                                <input class="form-control" name="country" value="{{ Auth::user()->country }}" type="text">
-                            </div>
-                        </div>
-                    </div> --}}
-                    <!-- End row -->
-
-                    <hr>
                     <div class="row">
                         <div class="col-md-12">
                             <h4>Map</h4>
                             <div id="map" class="map"></div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 mt-2">
                             <div class="form-group">
                                 <label>Latitude</label>
                                 <input class="form-control" name="latitude" id="map_lan" type="text">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 mt-2">
                             <div class="form-group">
                                 <label>Longitude</label>
                                 <input class="form-control" name="longitude" id="map_long" type="text">
@@ -189,5 +142,22 @@
     $('.wishlist_close_admin').on('click', function (c) {
         $(this).parent().parent().parent().fadeOut('slow', function (c) {});
     });
+</script>
+<script>
+    function addAmenities()
+    {
+        $(".other-features").append(`<div class="col-md-6">
+            <div class="form-group">
+                <label>Name</label>
+                <input class="form-control" name="amenities[]" type="text" required>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Price</label>
+                <input class="form-control" name="amenities_prices[]" type="text" required>
+            </div>
+        </div>`);
+    }
 </script>
 @endsection

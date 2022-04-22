@@ -38,14 +38,14 @@
                 </ul>
             </div>
             <div class="col-lg-2 col-md-2">
-                @if($room->is_approved and $room->is_available)  
+                {{-- @if($room->is_approved and $room->is_available)  
                     <div class="booking_buttons">
-                        <a href="{{ route('dashboard.room.show', $room->id) }}" target="_blank" class="btn_2">View</a>
+                        <a href="{{ route('dashboard.room.show', $room->id) }}" target="_blank" class="btn_2">http://127.0.0.1:8000/</a>
                     </div>
-                @endif
+                @endif --}}
                 
                 <div class="booking_buttons">
-                    @if(Auth::user()->role == 1 or Auth::user()->role == 2)
+                    @if(Auth::user()->role == 1)
                         @if(!$room->is_approved)
                             <form class="mb-1" action="{{ route('dashboard.rooms.approve', $room->id) }}" method="POST">
                                 @csrf
@@ -59,17 +59,13 @@
                             @method('DELETE')
                             <button type="submit" class="btn_3 btn-block">Delete</button>
                         </form>
-                    @elseif(Auth::user()->role == 3)
-                    {{-- @if(Auth::user()->id == $unit->user_id) --}}
-                    
-                    <a href="{{ route('dashboard.rooms.edit', $room->id) }}" class="btn_2 btn-block">Edit</a>
-                    <form action="{{ route('dashboard.rooms.destroy', $room->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn_3 btn-block">Delete</button>
-                    </form>
-                    {{-- @else
-                    @endif --}}
+                    @elseif(Auth::user()->id == $room->user_id)
+                        <a href="{{ route('dashboard.rooms.edit', $room->id) }}" class="btn_2 btn-block">Edit</a>
+                        <form action="{{ route('dashboard.rooms.destroy', $room->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn_3 btn-block">Delete</button>
+                        </form>
                     @endif
                 </div>
             </div>

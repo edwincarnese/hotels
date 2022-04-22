@@ -47,30 +47,29 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Unit name</label>
-                                <input class="form-control" name="name" type="text" required>
+                                <input class="form-control" name="name" value="{{ $unit->name }}" type="text" required>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Unit ID</label>
-                                <input class="form-control" name="unit_id" type="text" required>
+                                <input class="form-control" name="unit_id" value="{{ $unit->unit_id }}" type="text">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Capacity</label>
                                 <select class="form-control" name="capacity">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
+                                    <option value="1" @if($unit->bathroom == 1) selected @endif>1</option>
+                                    <option value="2" @if($unit->bathroom == 2) selected @endif>2</option>
+                                    <option value="3" @if($unit->bathroom == 3) selected @endif>3</option>
+                                    <option value="4" @if($unit->bathroom == 4) selected @endif>4</option>
+                                    <option value="5" @if($unit->bathroom == 5) selected @endif>5</option>
+                                    <option value="6" @if($unit->bathroom == 6) selected @endif>6</option>
+                                    <option value="7" @if($unit->bathroom == 7) selected @endif>7</option>
+                                    <option value="8" @if($unit->bathroom == 8) selected @endif>8</option>
+                                    <option value="9" @if($unit->bathroom == 9) selected @endif>9</option>
+                                    <option value="10" @if($unit->bathroom == 10) selected @endif>10</option>
                                 </select>
                             </div>
                         </div>
@@ -78,11 +77,11 @@
                             <div class="form-group">
                                 <label>Bathroom</label>
                                 <select class="form-control" name="bathroom">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
+                                    <option value="1" @if($unit->bathroom == 1) selected @endif>1</option>
+                                    <option value="2" @if($unit->bathroom == 2) selected @endif>2</option>
+                                    <option value="3" @if($unit->bathroom == 3) selected @endif>3</option>
+                                    <option value="4" @if($unit->bathroom == 4) selected @endif>4</option>
+                                    <option value="5" @if($unit->bathroom == 5) selected @endif>5</option>
                                 </select>
                             </div>
                         </div>
@@ -93,15 +92,15 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Price</label>
-                                <input class="form-control" name="price" type="text">
+                                <input class="form-control" name="price" value="{{ $unit->price }}" type="text">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Period</label>
                                 <select class="form-control" name="period">
-                                    <option value="Per Night">Per Night</option>
-                                    <option value="Per Day">Per Day</option>
+                                    <option value="Per Night" @if($unit->period == 'Per Night') selected @endif>Per Night</option>
+                                    <option value="Per Day" @if($unit->period == 'Per Day') selected @endif>Per Day</option>
                                 </select>
                             </div>
                         </div>
@@ -109,11 +108,11 @@
                             <div class="form-group">
                                 <label>Bedroom</label>
                                 <select class="form-control" name="bedroom">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
+                                    <option value="1" @if($unit->bedroom == 1) selected @endif>1</option>
+                                    <option value="2" @if($unit->bedroom == 2) selected @endif>2</option>
+                                    <option value="3" @if($unit->bedroom == 3) selected @endif>3</option>
+                                    <option value="4" @if($unit->bedroom == 4) selected @endif>4</option>
+                                    <option value="5" @if($unit->bedroom == 5) selected @endif>5</option>
                                 </select>
                             </div>
                         </div>
@@ -121,8 +120,8 @@
                             <div class="form-group">
                                 <label>Availability</label>
                                 <select class="form-control" name="is_available">
-                                    <option value="1">Available</option>
-                                    <option value="">Not Available</option>
+                                    <option value="1" @if($unit->is_available == 1) selected @endif>Available</option>
+                                    <option value="0" @if($unit->is_available == 0) selected @endif>Not Available</option>
                                 </select>
                             </div>
                         </div>
@@ -137,7 +136,7 @@
                                 <label>Select tour</label>
                                 <select class="form-control" name="tour_id" required>
                                     @foreach($tours as $tour)
-                                        <option value="{{ $tour->id }}">{{ $tour->title }}</option>
+                                        <option value="{{ $tour->id }}" @if($unit->tour_id == $tour->id) selected @endif>{{ $tour->title }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -159,7 +158,7 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <textarea class="form-control" name="description" rows="5"></textarea>
+                                <textarea class="form-control" name="description" rows="5">{{ $unit->description }}</textarea>
                             </div>
                         </div>
                     </div>
@@ -231,50 +230,26 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Street address</label>
-                                <input class="form-control" name="address" value="{{ Auth::user()->address }}" type="text">
+                                <input class="form-control" name="address" value="{{ $unit->address }}" type="text">
                             </div>
                         </div>
-                        {{-- <div class="col-md-6">
-                            <div class="form-group">
-                                <label>City/Town</label>
-                                <input class="form-control" name="city" value="{{ Auth::user()->city }}" type="text">
-                            </div>
-                        </div> --}}
                     </div>
-                    <!-- End row -->
-            
-                    {{-- <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Zip code</label> 
-                                <input class="form-control" name="zip_code" value="{{ Auth::user()->zip_code }}" type="text">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Country</label>
-                                <input class="form-control" name="country" value="{{ Auth::user()->country }}" type="text">
-                            </div>
-                        </div>
-                    </div> --}}
-                    <!-- End row -->
 
-                    <hr>
                     <div class="row">
                         <div class="col-md-12">
                             <h4>Map</h4>
                             <div id="map" class="map"></div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 mt-2">
                             <div class="form-group">
                                 <label>Latitude</label>
-                                <input class="form-control" name="latitude" id="map_lan" value="{{ $tour->latitude }}" type="text">
+                                <input class="form-control" name="latitude" id="map_lan" value="{{ $unit->latitude }}" type="text">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 mt-2">
                             <div class="form-group">
                                 <label>Longitude</label>
-                                <input class="form-control" name="longitude" id="map_long" value="{{ $tour->longitude }}" type="text">
+                                <input class="form-control" name="longitude" id="map_long" value="{{ $unit->longitude }}" type="text">
                             </div>
                         </div>
                     </div>

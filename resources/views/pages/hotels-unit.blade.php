@@ -59,16 +59,20 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
             <!-- Map button for tablets/mobiles -->
             <div id="Img_carousel" class="slider-pro">
                 <div class="sp-slides">
-                    @foreach(json_decode($unit->images) as $image)
-                    <div class="sp-slide">
-                        <img class="sp-image" src="{{ asset('storage/'.$image) }}" data-src="{{ asset('storage/'.$image) }}" data-small="{{ asset('storage/'.$image) }}" data-medium="{{ asset('storage/'.$image) }}" data-large="{{ asset('storage/'.$image) }}" data-retina="{{ asset('storage/'.$image) }}">
-                    </div>
-                    @endforeach
+                    @if($unit->images)
+                        @foreach(json_decode($unit->images) as $image)
+                        <div class="sp-slide">
+                            <img class="sp-image" src="{{ asset('storage/'.$image) }}" data-src="{{ asset('storage/'.$image) }}" data-small="{{ asset('storage/'.$image) }}" data-medium="{{ asset('storage/'.$image) }}" data-large="{{ asset('storage/'.$image) }}" data-retina="{{ asset('storage/'.$image) }}">
+                        </div>
+                        @endforeach
+                    @endif
                 </div>
                 <div class="sp-thumbnails">
-                    @foreach(json_decode($unit->images) as $image)
-                        <img class="sp-thumbnail" src="{{ asset('storage/'.$image) }}">
-                    @endforeach
+                    @if($unit->images)
+                        @foreach(json_decode($unit->images) as $image)
+                            <img class="sp-thumbnail" src="{{ asset('storage/'.$image) }}">
+                        @endforeach
+                    @endif
                 </div>
             </div>
 

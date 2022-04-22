@@ -47,33 +47,26 @@
                         <div class="col-md-12">
                             <h4>Room info</h4>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>Room name</label>
                                 <input class="form-control" name="name" type="text" value="{{$rooms->name}}" required>
                             </div>
                         </div>
-                        {{-- <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Unit ID</label>
-                                <input class="form-control" name="unit_id" type="text" required>
-                            </div>
-                        </div> --}}
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Capacity</label>
                                 <select class="form-control" name="capacity">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
+                                    <option value="1" @if($unit->bathroom == 1) selected @endif>1</option>
+                                    <option value="2" @if($unit->bathroom == 2) selected @endif>2</option>
+                                    <option value="3" @if($unit->bathroom == 3) selected @endif>3</option>
+                                    <option value="4" @if($unit->bathroom == 4) selected @endif>4</option>
+                                    <option value="5" @if($unit->bathroom == 5) selected @endif>5</option>
+                                    <option value="6" @if($unit->bathroom == 6) selected @endif>6</option>
+                                    <option value="7" @if($unit->bathroom == 7) selected @endif>7</option>
+                                    <option value="8" @if($unit->bathroom == 8) selected @endif>8</option>
+                                    <option value="9" @if($unit->bathroom == 9) selected @endif>9</option>
+                                    <option value="10" @if($unit->bathroom == 10) selected @endif>10</option>
                                 </select>
                             </div>
                         </div>
@@ -81,11 +74,11 @@
                             <div class="form-group">
                                 <label>Bathroom</label>
                                 <select class="form-control" name="bathroom">
-                                    <option value="1" @if($rooms->bathroom=="1") @endif selected> 1 </option>
-                                    <option value="2" @if($rooms->bathroom=="2") @endif selected> 2 </option>
-                                    <option value="3" @if($rooms->bathroom=="3") @endif selected> 3 </option>
-                                    <option value="4" @if($rooms->bathroom=="4") @endif selected> 4 </option>
-                                    <option value="5" @if($rooms->bathroom=="5") @endif selected> 5 </option>
+                                    <option value="1" @if($unit->bathroom == 1) selected @endif>1</option>
+                                    <option value="2" @if($unit->bathroom == 2) selected @endif>2</option>
+                                    <option value="3" @if($unit->bathroom == 3) selected @endif>3</option>
+                                    <option value="4" @if($unit->bathroom == 4) selected @endif>4</option>
+                                    <option value="5" @if($unit->bathroom == 5) selected @endif>5</option>
                                 </select>
                             </div>
                         </div>
@@ -103,8 +96,8 @@
                             <div class="form-group">
                                 <label>Period</label>
                                 <select class="form-control" name="period" value="{{$rooms->period}}">
-                                    <option value="Per Night">Per Night</option>
-                                    <option value="Per Day">Per Day</option>
+                                    <option value="Per Night" @if($unit->period == 'Per Night') selected @endif>Per Night</option>
+                                    <option value="Per Day" @if($unit->period == 'Per Day') selected @endif>Per Day</option>
                                 </select>
                             </div>
                         </div>
@@ -120,33 +113,16 @@
                                 </select>
                             </div>
                         </div>
-                        {{-- <div class="col-md-3">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label>Availability</label>
                                 <select class="form-control" name="is_available">
-                                    <option value="1">Available</option>
-                                    <option value="">Not Available</option>
-                                </select>
-                            </div>
-                        </div> --}}
-                    </div>
-                    <!-- End row -->
-
-                    {{-- <hr>
-                    <h4>Tour</h4>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Select tour</label>
-                                <select class="form-control" name="tour_id" required>
-                                    @foreach($tours as $tour)
-                                        <option value="{{ $tour->id }}">{{ $tour->title }}</option>
-                                    @endforeach
+                                    <option value="1" @if($rooms->is_available == 1) @endif selected>Available</option>
+                                    <option value="0" @if($rooms->is_available == 0) @endif selected>Not Available</option>
                                 </select>
                             </div>
                         </div>
-                    </div> --}}
-
+                    </div>
                     <hr>
                     <h4>Room Photos</h4>
                     <div class="form-inline upload_1">
@@ -162,7 +138,7 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <textarea class="form-control" name="description" rows="5" value="{{$rooms->description}}"></textarea>
+                                <textarea class="form-control" name="description" rows="5">{{$rooms->description}}</textarea>
                             </div>
                         </div>
                     </div>
@@ -225,64 +201,6 @@
                         </div>
                     </div>
                     <!-- End row -->
-            
-                    <hr>
-                    {{-- <div class="row">
-                        <div class="col-md-12">
-                            <h4>Address</h4>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Street address</label>
-                                <input class="form-control" name="address" value="{{ Auth::user()->address }}" type="text">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>City/Town</label>
-                                <input class="form-control" name="city" value="{{ Auth::user()->city }}" type="text">
-                            </div>
-                        </div>
-                    </div> --}}
-                    <!-- End row -->
-            
-                    {{-- <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Zip code</label> 
-                                <input class="form-control" name="zip_code" value="{{ Auth::user()->zip_code }}" type="text">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Country</label>
-                                <input class="form-control" name="country" value="{{ Auth::user()->country }}" type="text">
-                            </div>
-                        </div>
-                    </div> --}}
-                    <!-- End row -->
-
-                    <hr>
-                    {{-- <div class="row">
-                        <div class="col-md-12">
-                            <h4>Map</h4>
-                            <div id="map" class="map"></div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Latitude</label>
-                                <input class="form-control" name="latitude" id="map_lan" value="{{ $tour->latitude }}" type="text">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Longitude</label>
-                                <input class="form-control" name="longitude" id="map_long" value="{{ $tour->longitude }}" type="text">
-                            </div>
-                        </div>
-                    </div> --}}
-                    <!-- End row -->
-
                     <hr>
                     <button type="submit" class="btn-block btn_1 green">Update Room</button>
                 </form>
