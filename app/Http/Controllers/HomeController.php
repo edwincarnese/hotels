@@ -26,8 +26,24 @@ class HomeController extends Controller
             ->latest()
             ->get();
 
+
+
+            $units = Unit::query()
+            ->with('user')
+            ->withCount([
+            'reviews AS review' => function ($query) {
+                $query->select(DB::raw("(SUM(rate) / COUNT(id)) as review"));
+                }
+            ])
+            ->when($search, function($q) use($search) {
+                $q->where('name', 'LIKE', '%'.$search.'%');
+            })
+            ->where('is_approved', 1)
+            ->latest()
+            ->get();
+
             
-        $units = Unit::where('is_approved', 1)->latest()->get();
+        // $units = Unit::where('is_approved', 1)->latest()->get();
         // $tours = Tour::where('is_approved', 1)->latest()->get();
 
         return view('home', compact('units', 'tours'));

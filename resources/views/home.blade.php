@@ -89,6 +89,17 @@
                     </div>
                     <div class="tour_title">
                         <h3><strong>{{ $unit->name }}</strong> Hotel</h3>
+                        <div class="rating">   
+                            @if($unit->review)                                                
+                                @for($rate = 1; $rate <= $tour->review; $rate++)
+                                    <i class="icon-star voted"></i>                   
+                                @endfor
+                                @for($rate=$tour->review; $rate<5; $rate++)
+                                    <i class="icon-star"> </i>
+                                @endfor
+                            @endif   
+                         
+                        </div> 
                     </div>
                 </div>
             </div>

@@ -74,14 +74,14 @@
 
             {{-- @foreach($reviews as $review)          
             @endforeach --}}
-            <div class="row">
+            {{-- <div class="row">
                 <h2>Ratings: &nbsp; </h2>
                 @if($getAverageRate <= 3 )
                     <h2 style = "color:red;">{{floor($getAverageRate)}}</h2>
                 @else
                     <h2 style = "color: rgb(212, 226, 7);"> {{floor($getAverageRate)}}</h2>
                 @endif  
-            </div>
+            </div> --}}
 
             <hr>
 
@@ -230,10 +230,8 @@
                         @if($review->rate)
                             {{-- {{$getStar = $review->rate}} --}}
                             @for($rate = 1; $rate <= $review->rate; $rate++)
-                            <i class="icon-star voted"></i>
-                       
+                            <i class="icon-star voted"></i>                       
                             @endfor
-
                             @for($rate=$review->rate; $rate<5; $rate++)
                             <i class="icon-star"></i>
                             @endfor

@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="parallax-window" data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" data-natural-width="1400" data-natural-height="470">
+<section class="parallax-window" 
+style="background-image: url({{ asset('assets/img/units-bg.jpg') }});"
+data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" data-natural-width="1400" data-natural-height="470">
     <div class="parallax-content-1">
     </div>
     <div class="parallax-content-2">
@@ -74,6 +76,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <h3>Description</h3>
+                    
                 </div>
                 <div class="col-lg-9">
                     <p>
@@ -175,12 +178,24 @@
                 <div class="review_strip_single">
                     <small>{{ $review->created_at }}</small>
                     <h4>{{ $review->user->firstname ?? '' }} {{ $review->user->lastname ?? '' }}</h4>
+                    
+                    <div class="rating">                      
+                        @if($review->rate)
+                            {{-- {{$getStar = $review->rate}} --}}
+                            @for($rate = 1; $rate <= $review->rate; $rate++)
+                            <i class="icon-star voted"></i>                       
+                            @endfor
+                            @for($rate=$review->rate; $rate<5; $rate++)
+                            <i class="icon-star"></i>
+                            @endfor
+
+                        @endif
+                      
+                    </div>
                     <p>
                         {{ $review->message }}
                     </p>
-                    <div class="rating">
-                        {{ $review->rate }}
-                    </div>
+              
                 </div>
             </div>
         @endforeach

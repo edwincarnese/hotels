@@ -120,7 +120,7 @@ class TourController extends Controller
     public function index(Request $request)
     {
         $search = $request->search;
-
+        // dd($search);
         $tours = Tour::query()
             ->with('user')
             ->withCount([
@@ -129,15 +129,15 @@ class TourController extends Controller
                 }
             ])
             ->when($search, function($q) use($search) {
-                $q->where('title', 'title', '%'.$search.'%');
+                $q->where('title', 'LIKE', '%'.$search.'%');
             })
             ->where('is_approved', 1)
             ->latest()
             ->get();
-            
-        
-
+          
         return view('pages.tours', compact('tours'));
+        
+        
     }
 
     public function edit($id)
@@ -175,12 +175,17 @@ class TourController extends Controller
         
         $reviews = Review::with('user')->where('tour_id', $tour_id)->latest()->get();
         
-        $getSum = Review::where('tour_id', $tour_id)->sum('rate');
-        $getCount = Review::where('tour_id', $tour_id)->count('rate');
-        $getAverageRate = $getSum / $getCount;
-       
+        // $getSum = Review::where('tour_id', $tour_id)->sum('rate');
+        // $getCount = Review::where('tour_id', $tour_id)->count('rate');
+        // $getAverageRate = $getSum / $getCount;
+        $tour_ratings= Tour::query()
+        ->withCount([
+          'reviews AS review' => function ($query) {
+              $query->select(DB::raw("(SUM(rate) / COUNT(id)) as review"));
+              }
+          ])->latest()->get();
       
-        return view('pages.tours-hotels', compact('tour', 'units', 'tour_id', 'unit_id', 'reviews','rooms','getAverageRate'));
+        return view('pages.tours-hotels', compact('tour', 'units', 'tour_id', 'unit_id', 'reviews','rooms','tour_ratings'));
     }
 
     public function create()

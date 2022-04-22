@@ -6,7 +6,9 @@
 @endsection
 
 @section('content')
-<section class="parallax-window" data-parallax="scroll" data-image-src="img/admin_top.jpg" data-natural-width="1400" data-natural-height="470">
+
+<section class="parallax-window"   style="background-image: url({{ asset('assets/img/tour_bg.jpg') }});"
+data-parallax="scroll" data-image-src="img/admin_top.jpg" data-natural-width="1400" data-natural-height="470">
     <div class="parallax-content-1">
         <div class="animated fadeInDown">
             <h1>Hello {{ Auth::user()->firstname }}!</h1>

@@ -109,22 +109,22 @@
                         <div class="col-md-12">
                             <h4>Address</h4>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label>Street address</label>
                                 <input class="form-control" name="address" value="{{ $tour->address }}" type="text">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        {{-- <div class="col-md-6">
                             <div class="form-group">
                                 <label>City/Town</label>
                                 <input class="form-control" name="city" value="{{ $tour->city }}" type="text">
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <!-- End row -->
             
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Zip code</label> 
@@ -137,7 +137,8 @@
                                 <input class="form-control" name="country" value="{{ $tour->country }}" type="text">
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
+                    
                     <!-- End row -->
 
                     <hr>

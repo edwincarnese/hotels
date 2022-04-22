@@ -6,7 +6,9 @@
 @endsection
 
 @section('content')
-    <section class="parallax-window" data-parallax="scroll" data-image-src="img/admin_top.jpg" data-natural-width="1400" data-natural-height="470">
+
+    <section class="parallax-window"   style="background-image: url({{ asset('assets/img/tour_bg.jpg') }});"
+     data-parallax="scroll" data-image-src="img/admin_top.jpg" data-natural-width="1400" data-natural-height="470">
         <div class="parallax-content-1">
             <div class="animated fadeInDown">
                 <h1>Hello {{ Auth::user()->firstname }}!</h1>
@@ -113,22 +115,22 @@
                         <div class="col-md-12">
                             <h4>Address</h4>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label>Street address</label>
                                 <input class="form-control" name="address" value="{{ Auth::user()->address }}" type="text">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        {{-- <div class="col-md-6">
                             <div class="form-group">
                                 <label>City/Town</label>
                                 <input class="form-control" name="city" value="{{ Auth::user()->city }}" type="text">
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <!-- End row -->
             
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Zip code</label> 
@@ -141,7 +143,7 @@
                                 <input class="form-control" name="country" value="{{ Auth::user()->country }}" type="text">
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <!-- End row -->
 
                     <hr>

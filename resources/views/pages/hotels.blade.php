@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="parallax-window" data-parallax="scroll" data-image-src="img/hotels_bg.jpg" data-natural-width="1400" data-natural-height="470">
+<section class="parallax-window"  style="background-image: url({{ asset('assets/img/hotels_bg.jpg') }});"
+ data-parallax="scroll" 
+data-image-src="img/hotels_bg.jpg" data-natural-width="1400" data-natural-height="470">
     <div class="parallax-content-1">
         <div class="animated fadeInDown">
             <h1>Discover Our Hotels</h1>
