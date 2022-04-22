@@ -184,7 +184,7 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
     </div>
 
     
-    <!--End row -->
+    <h1>List of Rooms</h1>
     <div class="row">
         @foreach($rooms as $room)
             <div class="col-lg-4">
