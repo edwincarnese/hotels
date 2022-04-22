@@ -3,17 +3,16 @@
         <div class="row">
             <div class="col-md-6">
                 <h3>Need help?</h3>
-                <a href="tel://004542344599" id="phone">+45 423 445 99</a>
-                <a href="mailto:help@citytours.com" id="email_footer">help@citytours.com</a>
+                <a href="tel://004542344599" id="phone">+63 905 123 4567</a>
+                <a href="mailto:help@caragatours.com" id="email_footer">help@caragatours.com</a>
             </div>
             <div class="col-md-6">
-                <h3>About</h3>
+                <h3>Pages</h3>
                 <ul>
                     {{-- <li><a href="#">About us</a></li> --}}
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Login</a></li>
-                    <li><a href="#">Register</a></li>
-                     <li><a href="#">Terms and condition</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/tours">Tours</a></li>
+                    <li><a href="/hotels">Hotels</a></li>
                 </ul>
             </div>
             {{-- <div class="col-md-3">
