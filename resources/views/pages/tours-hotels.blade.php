@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="parallax-window" data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" data-natural-width="1400" data-natural-height="470">
+<section class="parallax-window" 
+style="background-image: url({{ asset('storage/'.$tour->main_photo) }}); background-repeat: no-repeat; background-position: center;"
+data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" data-natural-width="1400" data-natural-height="470">
     <div class="parallax-content-1">
     </div>
     <div class="parallax-content-2">
