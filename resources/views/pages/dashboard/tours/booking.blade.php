@@ -5,7 +5,9 @@
 <input type="hidden" id="is-intent" value="{{ $intent->client_secret }}">
 @endif
 
-<section id="hero_2">
+<section id="hero_2"
+style="background-image: url({{ asset('storage/'.$tour->main_photo) }}); background-repeat: no-repeat; background-position: center;"
+>
     <div class="intro_title">
         <h1>Place your order</h1>
         <div class="bs-wizard row">
