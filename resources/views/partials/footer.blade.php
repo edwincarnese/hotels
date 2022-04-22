@@ -9,7 +9,7 @@
             <div class="col-md-6">
                 <h3>About</h3>
                 <ul>
-                    <li><a href="#">About us</a></li>
+                    {{-- <li><a href="#">About us</a></li> --}}
                     <li><a href="#">FAQ</a></li>
                     <li><a href="#">Login</a></li>
                     <li><a href="#">Register</a></li>

@@ -35,15 +35,15 @@
                         <img src="{{ asset('assets/img/group1.png') }}" width="160" height="34" alt="City tours" data-retina="true">
                     </div>
                     <a href="#" class="open_close" id="close_in"><i class="icon_set_1_icon-77"></i></a>
-                    <ul>
-                        <li class="submenu">
-                            <a href="/">Home</a>
+                    <ul style="margin-top: 10px;">
+                        <li class="submenu font-weight-bold">
+                            <a href="/" style="font-size: 35px;">Home</a>
                         </li>
-                        <li class="submenu">
-                            <a href="/tours">Tours</a>
+                        <li class="submenu font-weight-bold">
+                            <a href="/tours" style="font-size: 35px;">Tours</a>
                         </li>
-                        <li class="submenu">
-                            <a href="/hotels">Hotels</a>
+                        <li class="submenu font-weight-bold">
+                            <a href="/hotels" style="font-size: 35px;">Hotels</a>
                         </li>
                         {{-- <li class="submenu">
                             <a href="#">About</a>
@@ -57,9 +57,9 @@
                     </ul>
                 </div><!-- End main-menu -->
                 <ul id="top_tools">
-                    <li>
+                    {{-- <li>
                         <a href="javascript:void(0);" class="search-overlay-menu-btn"><i class="icon_search"></i></a>
-                    </li>
+                    </li> --}}
                     {{-- <li>
                         <div class="dropdown dropdown-cart">
                             <a href="#" data-toggle="dropdown" class="cart_bt"><i class="icon_bag_alt"></i><strong>3</strong></a>
