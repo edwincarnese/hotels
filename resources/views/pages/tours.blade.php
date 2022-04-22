@@ -134,7 +134,7 @@
 
         <div class="col-lg-9">
 
-            <div id="tools">
+            {{-- <div id="tools">
                 <div class="row">
                     <div class="col-md-3 col-sm-4 col-6">
                         <div class="styled-select-filters">
@@ -159,7 +159,7 @@
                         <a href="#" class="bt_filters"><i class=" icon-list"></i></a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <!--End tools -->
 
 			@foreach($tours as $tour)
