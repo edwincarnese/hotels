@@ -69,7 +69,7 @@ class BookingController extends Controller
     $curl->setEnableHttp2(false);
     \Stripe\ApiRequestor::setHttpClient($curl);
 
-    $price = $request->price;
+    $price = $request->totalprice;
     $payment_method = $request->payment_method;
     $save_card = $request->save_card;
     $not_using_default_card = true;

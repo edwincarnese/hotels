@@ -3,7 +3,7 @@
 @section('content')
 <section id="hero">
     <div class="intro_title">
-        <h3 class="animated fadeInDown">Affordable Hotels</h3>
+        <h3 class="animated fadeInDown">CARAGA'S MOST VISITED TOURIST SPOTS</h3>
         <p class="animated fadeInDown">City Hotels / Hotel Guides</p>
         <a href="/hotels" class="animated fadeInUp button_intro">View Hotels</a> 
         <a href="/tours" class="animated fadeInUp button_intro outline">View Tours</a>
