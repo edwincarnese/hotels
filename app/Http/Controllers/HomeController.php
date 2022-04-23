@@ -24,6 +24,7 @@ class HomeController extends Controller
             })
             ->where('is_approved', 1)
             ->latest()
+            ->take(6)
             ->get();
 
 
@@ -40,6 +41,7 @@ class HomeController extends Controller
             })
             ->where('is_approved', 1)
             ->latest()
+            ->take(6)
             ->get();
 
             
