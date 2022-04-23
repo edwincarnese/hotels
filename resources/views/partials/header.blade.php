@@ -3,7 +3,7 @@
     <div id="top_line">
         <div class="container">
             <div class="row">
-                <div class="col-6"><i class="icon-phone"></i><strong>+63 905 123 4567</strong></div>
+                <div class="col-6"><i class="icon-phone"></i><strong>+63 936 127 2791</strong></div>
                 <div class="col-6">
                     <ul id="top_links">
                         @guest()
@@ -25,7 +25,7 @@
         <div class="row">
             <div class="col-3"  >
                 <div id="logo_home" >
-                    <h1 ><a href="/" title="City tours travel template">City Tours travel template</a></h1>
+                    <h1 ><a href="{{ route('home') }}" title="City tours travel template">City Tours travel template</a></h1>
                 </div>
             </div>
             <nav class="col-9">
@@ -37,13 +37,13 @@
                     <a href="#" class="open_close" id="close_in"><i class="icon_set_1_icon-77"></i></a>
                     <ul style="margin-top: 10px;">
                         <li class="submenu font-weight-bold">
-                            <a href="/" style="font-size: 35px;">Home</a>
+                            <a href="{{ route('home') }}" style="font-size: 35px;">Home</a>
                         </li>
                         <li class="submenu font-weight-bold">
-                            <a href="/tours" style="font-size: 35px;">Tours</a>
+                            <a href="{{ route('tours.index') }}" style="font-size: 35px;">Tours</a>
                         </li>
                         <li class="submenu font-weight-bold">
-                            <a href="/hotels" style="font-size: 35px;">Hotels</a>
+                            <a href="{{ route('hotels.index') }}" style="font-size: 35px;">Hotels</a>
                         </li>
                         {{-- <li class="submenu">
                             <a href="#">About</a>

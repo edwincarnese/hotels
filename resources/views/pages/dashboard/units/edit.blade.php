@@ -240,16 +240,16 @@
                             <h4>Map</h4>
                             <div id="map" class="map"></div>
                         </div>
-                        <div class="col-md-6 mt-2">
+                        <div class="col-md-6 mt-2" style="display: none">
                             <div class="form-group">
                                 <label>Latitude</label>
-                                <input class="form-control" name="latitude" id="map_lan" value="{{ $unit->latitude }}" type="text">
+                                <input class="form-control" name="latitude" id="map_lan" value="{{ $unit->latitude }}" type="hidden">
                             </div>
                         </div>
-                        <div class="col-md-6 mt-2">
+                        <div class="col-md-6 mt-2" style="display: none">
                             <div class="form-group">
                                 <label>Longitude</label>
-                                <input class="form-control" name="longitude" id="map_long" value="{{ $unit->longitude }}" type="text">
+                                <input class="form-control" name="longitude" id="map_long" value="{{ $unit->longitude }}" type="hidden">
                             </div>
                         </div>
                     </div>
