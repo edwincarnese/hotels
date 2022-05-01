@@ -37,6 +37,7 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
 
 <div class="collapse" id="collapseMap">
     <div id="map" class="map"></div>
+    <button type="button" onclick="findMe()" class="btn_1 medium btn-block">Near Me</button>
 </div>
 <!-- End Map -->
 
@@ -172,7 +173,7 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
         <div class="col-lg-3">
             <h3>Reviews</h3>
             @guest()
-                <a href="/login" class="btn_1 add_bottom_30">Login to add review</a>
+                <a href="#sign-in-dialog" class="access_link btn_1 add_bottom_30">Login to add review</a>
             @endguest
             @auth
                 <a href="#" class="btn_1 add_bottom_30" data-toggle="modal" data-target="#myReview">Leave a review</a>
@@ -211,10 +212,11 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
 <div id="overlay"></div>
 <!-- Mask on input focus -->
 
+<input type="hidden" id="pages-home" value="{{ route('hotels.unit.show', $unit->id) }}">
 @endsection
 
 @section('js')
-<script src="http://maps.googleapis.com/maps/api/js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdL0VXZGBWl1JRKpNRPcHmuzxGyk-DH5g&libraries=places"></script>
 {{-- <script type="text/javascript" src="{{ asset('assets/js/map_hotels.js') }}"></script> --}}
 
 <!-- Date and time pickers -->
@@ -266,124 +268,11 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
 </script>
 
 <script>
+    const urlEndpoint = '/hotels-unit/';
     const locationData = {!! $units !!};
-    
-    let LocsA = [];
-    let lat = 8.9559536672309;
-    let lng = 125.52851005253486;
-    
-    for(let i = 0; i < locationData.length; i++) {
-        const propertyAddress = locationData[i]['address'];
-        const propertyImage = '/storage/'+locationData[i]['main_photo'];
-
-        lat = locationData[i]['latitude'];
-        lng = locationData[i]['longitude'];
-    
-        LocsA.push(
-            {
-                name: locationData[i]['name'],
-                location_latitude: locationData[i]['latitude'],
-                location_longitude: locationData[i]['longitude'],
-                map_image_url: '/storage/'+locationData[i]['main_photo'],
-                name_point: locationData[i]['name'],
-                description_point: '',
-                get_directions_start_address: '',
-                url_point: '/hotels-unit/' + locationData[i]['id']
-            },
-        );
-    }
-    
-    $('#collapseMap').on('shown.bs.collapse', function(e){
-        (function(A) {
-    
-        if (!Array.prototype.forEach)
-            A.forEach = A.forEach || function(action, that) {
-                for (var i = 0, l = this.length; i < l; i++)
-                    if (i in this)
-                        action.call(that, this[i], i, this);
-                };
-    
-            })(Array.prototype);
-    
-            var
-            mapObject,
-            markers = [],
-            markersData = {
-                'Hotels': LocsA
-            };
-    
-                var mapOptions = {
-                    zoom: 8,
-                    center: new google.maps.LatLng(lat, lng),
-                    mapTypeId: google.maps.MapTypeId.ROADMAP,
-    
-                    mapTypeControl: false,
-                    mapTypeControlOptions: {
-                        style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
-                        position: google.maps.ControlPosition.LEFT_CENTER
-                    },
-                };
-                var
-                marker;
-                mapObject = new google.maps.Map(document.getElementById('map'), mapOptions);
-                for (var key in markersData)
-                    markersData[key].forEach(function (item) {
-                        marker = new google.maps.Marker({
-                            position: new google.maps.LatLng(item.location_latitude, item.location_longitude),
-                            map: mapObject,
-                            icon: '/assets/img/pins/' + key + '.png',
-                        });
-    
-                        if ('undefined' === typeof markers[key])
-                            markers[key] = [];
-                        markers[key].push(marker);
-                        google.maps.event.addListener(marker, 'click', (function () {
-            closeInfoBox();
-            getInfoBox(item).open(mapObject, this);
-            mapObject.setCenter(new google.maps.LatLng(item.location_latitude, item.location_longitude));
-            }));
-    
-                        
-                    });
-        
-    
-            function hideAllMarkers () {
-                for (var key in markers)
-                    markers[key].forEach(function (marker) {
-                        marker.setMap(null);
-                    });
-            };
-    
-            function closeInfoBox() {
-                $('div.infoBox').remove();
-            };
-    
-            function getInfoBox(item) {
-                return new InfoBox({
-                    content:
-                    '<div class="marker_info" id="marker_info">' +
-                    '<img src="' + item.map_image_url + '" alt="Image" style="width: 280px; height: 140px;"/>' +
-                    '<h3>'+ item.name_point +'</h3>' +
-                    '<span>'+ item.description_point +'</span>' +
-                    '<div class="marker_tools">' +
-                    '<form hidden action="http://maps.google.com/maps" method="get" target="_blank" style="display:inline-block""><input name="saddr" value="'+ item.get_directions_start_address +'" type="hidden"><input type="hidden" name="daddr" value="'+ item.location_latitude +',' +item.location_longitude +'"><button type="submit" value="Get directions" class="btn_infobox_get_directions">Directions</button></form>' +
-                        '<a href="'+ item.url_point + '" class="btn_infobox">Details</a>' +
-                    '</div>',
-                    disableAutoPan: false,
-                    maxWidth: 0,
-                    pixelOffset: new google.maps.Size(10, 125),
-                    closeBoxMargin: '5px -20px 2px 2px',
-                    closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif",
-                    isHidden: false,
-                    alignBottom: true,
-                    pane: 'floatPane',
-                    enableEventPropagation: true
-                });
-            };
-        });
 </script>
 
-<!--Review modal validation -->
 <script type="text/javascript" src="{{ asset('assets/js/infobox.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/app/shared.js') }}"></script>
 <script src="{{ asset('assets/assets/validate.js') }}"></script>
 @endsection

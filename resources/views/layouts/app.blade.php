@@ -157,20 +157,6 @@
     <script src="{{ asset('assets/js/functions.js') }}"></script>
 	
 	{{-- <script src="{{ asset('assets/js/notify_func.js') }}"></script> --}}
-
-	
-	<script>
-		if (navigator.geolocation) {
-			navigator.geolocation.watchPosition(showPosition);
-		} else { 
-			console.log("Geolocation is not supported by this browser.");
-		}
-			
-		function showPosition(position) {
-			console.log(position.coords.latitude);
-			console.log(position.coords.longitude);
-		}
-	</script>
 	@yield('js')
 </body>
 

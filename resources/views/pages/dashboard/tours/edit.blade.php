@@ -122,7 +122,8 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Street address</label>
-                                <input class="form-control" name="address" value="{{ $tour->address }}" type="text">
+                                <input class="form-control" name="address" id="address" value="{{ $tour->address }}" type="text">
+                                <button type="button" onclick="searchByAddress()" class="btn btn-block btn-primary mt-2">Search</button>
                             </div>
                         </div>
                     </div>
@@ -156,9 +157,8 @@
 @endsection
 
 @section('js')
-<script src="http://maps.googleapis.com/maps/api/js"></script>
-<script type="text/javascript" src="{{ asset('assets/js/map_home.js') }}"></script>
-<script type="text/javascript" src="{{ asset('assets/js/infobox.js') }}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdL0VXZGBWl1JRKpNRPcHmuzxGyk-DH5g&libraries=places"></script>
+{{-- <script type="text/javascript" src="{{ asset('assets/js/map_home.js') }}"></script> --}}
 
 <!-- Specific scripts -->
 <script src="{{ asset('assets/js/tabs.js') }}"></script>
@@ -188,4 +188,6 @@
         </div>`);
     }
 </script>
+<script type="text/javascript" src="{{ asset('assets/app/searchLocation.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/infobox.js') }}"></script>
 @endsection

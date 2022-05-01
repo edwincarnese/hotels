@@ -10,9 +10,9 @@
                 <h3>Pages</h3>
                 <ul>
                     {{-- <li><a href="#">About us</a></li> --}}
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/tours">Tours</a></li>
-                    <li><a href="/hotels">Hotels</a></li>
+                    <li><a href="{{ route('home') }}">Home</a></li>
+                    <li><a href="{{ route('tours.index') }}">Tours</a></li>
+                    <li><a href="{{ route('hotels.index') }}">Hotels</a></li>
                 </ul>
             </div>
             {{-- <div class="col-md-3">
