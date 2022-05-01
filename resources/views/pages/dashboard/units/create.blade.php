@@ -267,10 +267,6 @@
 @endsection
 
 @section('js')
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdL0VXZGBWl1JRKpNRPcHmuzxGyk-DH5g&libraries=places"></script>
-{{-- <script type="text/javascript" src="{{ asset('assets/js/map_home.js') }}"></script> --}}
-
-<!-- Specific scripts -->
 <script src="{{ asset('assets/js/tabs.js') }}"></script>
 <script>
     new CBPFWTabs(document.getElementById('tabs'));

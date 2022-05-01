@@ -276,9 +276,6 @@ data-image-src="img/hotels_bg.jpg" data-natural-width="1400" data-natural-height
 @endsection
 
 @section('js')
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdL0VXZGBWl1JRKpNRPcHmuzxGyk-DH5g&libraries=places"></script>
-
-{{-- <script type="text/javascript" src="{{ asset('assets/js/map_hotels.js') }}"></script> --}}
 
 
 <script>

@@ -155,6 +155,7 @@
     <script src="{{ asset('assets/js/jquery-2.2.4.min.js') }}"></script>
     <script src="{{ asset('assets/js/common_scripts_min.js') }}"></script>
     <script src="{{ asset('assets/js/functions.js') }}"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAP_API_KEY') }}"></script>
 	
 	{{-- <script src="{{ asset('assets/js/notify_func.js') }}"></script> --}}
 	@yield('js')

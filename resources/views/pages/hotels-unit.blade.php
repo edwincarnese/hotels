@@ -216,8 +216,6 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
 @endsection
 
 @section('js')
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdL0VXZGBWl1JRKpNRPcHmuzxGyk-DH5g&libraries=places"></script>
-{{-- <script type="text/javascript" src="{{ asset('assets/js/map_hotels.js') }}"></script> --}}
 
 <!-- Date and time pickers -->
 <script src="{{ asset('assets/js/jquery.sliderPro.min.js') }}"></script>

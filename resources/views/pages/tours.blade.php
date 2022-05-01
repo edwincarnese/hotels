@@ -290,9 +290,6 @@
 @endsection
 
 @section('js')
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdL0VXZGBWl1JRKpNRPcHmuzxGyk-DH5g&libraries=places"></script>
-{{-- <script type="text/javascript" src="{{ asset('assets/js/map_hotels.js') }}"></script> --}}
-{{-- url_point: '/tours/' + locationData[i]['id'] --}}
 <script>
     const urlEndpoint = '/tours/';
     const locationData = {!! $tours !!};
