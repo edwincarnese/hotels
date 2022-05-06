@@ -167,8 +167,9 @@
             <div class="strip_all_tour_list wow fadeIn" data-wow-delay="0.1s">
                 <div class="row">
 					<div class="col-lg-4 col-md-4">
-						{{-- <div class="ribbon_3"><span>Top rated</span>
-						</div> --}}
+                        @if($tour->is_popular)
+                            <div class="ribbon_3 popular"><span>Popular</span></div>
+                        @endif
 						{{-- <div class="wishlist">
 							<a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
 						</div> --}}
@@ -291,8 +292,9 @@
 
 @section('js')
 <script>
-    const urlEndpoint = '/tours/';
-    const locationData = {!! $tours !!};
+    const urlTourEndpoint = '/tours/';
+    const locationDataTours = {!! $tours !!};
+    const locationDataHotels = null;
 </script>
 
 <script type="text/javascript" src="{{ asset('assets/js/infobox.js') }}"></script>

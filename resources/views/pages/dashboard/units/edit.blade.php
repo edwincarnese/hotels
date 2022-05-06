@@ -27,7 +27,7 @@
     <div class="margin_60 container">
         <div class="row">
             <div class="col-6">
-                <h4>Edit Unit</h4>
+                <h4>Edit Hotel Unit</h4>
             </div>
             <div class="col-6">
                 <a href="{{ route('dashboard.index') }}" class="btn_1 float-right text-white">Cancel</a>
@@ -42,18 +42,18 @@
                     <input type="hidden" name="id" value="{{ $unit->id }}">
                     <div class="row">
                         <div class="col-md-12">
-                            <h4>Unit info</h4>
+                            <h4>Unit Hotel info</h4>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Unit name</label>
+                                <label>Hotel unit name</label>
                                 <input class="form-control" name="name" value="{{ $unit->name }}" type="text" required>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Unit ID</label>
-                                <input class="form-control" name="unit_id" value="{{ $unit->unit_id }}" type="text">
+                                <label>Price</label>
+                                <input class="form-control" name="price" value="{{ $unit->price }}" type="text">
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -89,13 +89,18 @@
                     <!-- End row -->
             
                     <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Price</label>
-                                <input class="form-control" name="price" value="{{ $unit->price }}" type="text">
+                        @if(Auth::user()->role == 1)
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Popular</label>
+                                    <select class="form-control" name="is_popular">
+                                        <option value="0" @if(!$unit->is_popular) selected @endif>No</option>
+                                        <option value="1" @if($unit->is_popular) selected @endif>Yes</option>
+                                    </select> 
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-3">
+                        @endif
+                        <div class="@if(Auth::user()->role == 1) col-md-3 @else col-md-4 @endif">
                             <div class="form-group">
                                 <label>Period</label>
                                 <select class="form-control" name="period">
@@ -104,7 +109,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="@if(Auth::user()->role == 1) col-md-3 @else col-md-4 @endif">
                             <div class="form-group">
                                 <label>Bedroom</label>
                                 <select class="form-control" name="bedroom">
@@ -116,7 +121,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="@if(Auth::user()->role == 1) col-md-3 @else col-md-4 @endif">
                             <div class="form-group">
                                 <label>Availability</label>
                                 <select class="form-control" name="is_available">
@@ -133,7 +138,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>Select tour</label>
+                                <label>Select Tour</label>
                                 <select class="form-control" name="tour_id" required>
                                     @foreach($tours as $tour)
                                         <option value="{{ $tour->id }}" @if($unit->tour_id == $tour->id) selected @endif>{{ $tour->title }}</option>
@@ -257,7 +262,7 @@
                     <!-- End row -->
 
                     <hr>
-                    <button type="submit" class="btn-block btn_1 green">Update Unit</button>
+                    <button type="submit" class="btn-block btn_1 green">Update Hotel Unit</button>
                 </form>
             </div>
         </div>

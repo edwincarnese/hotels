@@ -49,17 +49,37 @@ if(USER_LATITUDE || USER_LONGITUDE) {
     );
 }
 
-for(let i = 0; i < locationData.length; i++) {
-    LocsA.push(
-        {
-            name: locationData[i]['name'] ?? locationData[i]['title'],
-            location_latitude: locationData[i]['latitude'],
-            location_longitude: locationData[i]['longitude'],
-            map_image_url: '/storage/'+locationData[i]['main_photo'],
-            name_point: locationData[i]['name'] ?? locationData[i]['title'],
-            url_point: urlEndpoint + locationData[i]['id']
-        },
-    );
+
+if(locationDataTours) {
+    for(let x = 0; x < locationDataTours.length; x++) {
+        LocsA.push(
+            {
+                name: locationDataTours[x]['title'],
+                location_latitude: locationDataTours[x]['latitude'],
+                location_longitude: locationDataTours[x]['longitude'],
+                map_image_url: '/storage/'+locationDataTours[x]['main_photo'],
+                name_point: locationDataTours[x]['title'],
+                url_point: urlTourEndpoint + locationDataTours[x]['id'],
+                type: 'tour',
+            },
+        );
+    }
+}
+
+if(locationDataHotels) {
+    for(let i = 0; i < locationDataHotels.length; i++) {
+        LocsA.push(
+            {
+                name: locationDataHotels[i]['name'],
+                location_latitude: locationDataHotels[i]['latitude'],
+                location_longitude: locationDataHotels[i]['longitude'],
+                map_image_url: '/storage/'+locationDataHotels[i]['main_photo'],
+                name_point: locationDataHotels[i]['name'],
+                url_point: urlEndpoint + locationDataHotels[i]['id'],
+                type: 'hotel',
+            },
+        );
+    }
 }
 
 (function(A) {
@@ -101,6 +121,9 @@ for(let i = 0; i < locationData.length; i++) {
             let icon = '/assets/img/pins/' + key + '.png';
             if(!item.url_point) {
                 icon = '/assets/img/pins/user-marker.png';
+            }
+            else if(item.type == 'tour') {
+                icon = '/assets/img/pins/Sightseeing.png';
             }
             marker = new google.maps.Marker({
                 position: new google.maps.LatLng(item.location_latitude, item.location_longitude),
@@ -153,9 +176,15 @@ function getInfoBox(item) {
     let map_image_url = '';
 
     if(item.url_point) {
+        let routeButton = '<button onclick="calcRoute('+item.location_latitude+','+item.location_longitude+')" class="btn_infobox btn btn-block" target="_blank">Route Direction</button>';
+
+        if(!USER_LATITUDE && !USER_LONGITUDE) {
+            routeButton = '';
+        }
+
         url_point = '<div class="marker_tools">' +
             '<a href="'+ item.url_point + '" class="btn_infobox btn btn-block" target="_blank">Details</a>' +
-            '<button onclick="calcRoute('+item.location_latitude+','+item.location_longitude+')" class="btn_infobox btn btn-block" target="_blank">Route Direction</button>' +
+            routeButton +
         '</div>';
     }
     if(item.map_image_url) {

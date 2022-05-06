@@ -44,18 +44,29 @@
                         <div class="col-md-12">
                             <h4>Tour info</h4>
                         </div>
-                        <div class="col-md-6">
+                        <div class="@if(Auth::user()->role == 1) col-md-4 @else col-md-6 @endif">
                             <div class="form-group">
                                 <label>Title</label>
                                 <input class="form-control" name="title" type="text" required>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="@if(Auth::user()->role == 1) col-md-4 @else col-md-6 @endif">
                             <div class="form-group">
                                 <label>Price</label>
                                 <input class="form-control" name="price" type="text">
                             </div>
                         </div>
+                        @if(Auth::user()->role == 1)
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Popular</label>
+                                    <select class="form-control" name="is_popular">
+                                        <option value="0">No</option>
+                                        <option value="1">Yes</option>
+                                    </select> 
+                                </div>
+                            </div>
+                        @endif
                     </div>
             
                     <hr>

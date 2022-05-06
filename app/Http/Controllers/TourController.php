@@ -161,6 +161,12 @@ class TourController extends Controller
             ->where('is_approved', 1)
             ->firstOrFail();
 
+        $tours = Tour::query()
+            ->with('user')
+            ->where('id', $id)
+            ->where('is_approved', 1)
+            ->get();
+
         $units = Unit::query()
             ->with('user')
             ->where('is_approved', 1)
@@ -189,7 +195,7 @@ class TourController extends Controller
               }
           ])->latest()->get();
       
-        return view('pages.tours-hotels', compact('tour', 'units', 'tour_id', 'unit_id', 'reviews','rooms','tour_ratings'));
+        return view('pages.tours-hotels', compact('tour', 'tours', 'units', 'tour_id', 'unit_id', 'reviews','rooms','tour_ratings'));
     }
 
     public function create()

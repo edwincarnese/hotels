@@ -29,7 +29,7 @@
     <div class="margin_60 container">
         <div class="row">
             <div class="col-6">
-                <h4>Create Unit</h4>
+                <h4>Create Hotel Unit</h4>
             </div>
             <div class="col-6">
                 <a href="{{ route('dashboard.index') }}" class="btn_1 float-right text-white">Cancel</a>
@@ -42,18 +42,18 @@
                     @csrf
                     <div class="row">
                         <div class="col-md-12">
-                            <h4>Unit info</h4>
+                            <h4>Hotel Unit info</h4>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Unit name</label>
+                                <label>Hotel unit name</label>
                                 <input class="form-control" name="name" type="text" required>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Unit ID</label>
-                                <input class="form-control" name="unit_id" type="text" required>
+                                <label>Price</label>
+                                <input class="form-control" name="price" type="text">
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -90,13 +90,18 @@
                     <!-- End row -->
             
                     <div class="row">
+                        @if(Auth::user()->role == 1)
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Price</label>
-                                <input class="form-control" name="price" type="text">
+                                <label>Popular</label>
+                                <select class="form-control" name="is_popular">
+                                    <option value="0" selected>No</option>
+                                    <option value="1">Yes</option>
+                                </select> 
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        @endif
+                        <div class="@if(Auth::user()->role == 1) col-md-3 @else col-md-4 @endif">
                             <div class="form-group">
                                 <label>Period</label>
                                 <select class="form-control" name="period">
@@ -105,7 +110,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="@if(Auth::user()->role == 1) col-md-3 @else col-md-4 @endif">
                             <div class="form-group">
                                 <label>Bedroom</label>
                                 <select class="form-control" name="bedroom">
@@ -117,7 +122,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="@if(Auth::user()->role == 1) col-md-3 @else col-md-4 @endif">
                             <div class="form-group">
                                 <label>Availability</label>
                                 <select class="form-control" name="is_available">
@@ -132,7 +137,7 @@
                    {{-- <input type="text" name="tour_id" value="{{ Request::get('tour_id') }}"> --}}
      
                     @if($tour_id)
-                    <input type="hidden" name="tour_id" value="{{$tour_id}}">
+                        <input type="hidden" name="tour_id" value="{{$tour_id}}">
                     @else
                         <div class="row">
                             <div class="col-md-12">
@@ -259,7 +264,7 @@
                     </div>
 
                     <hr>
-                    <button type="submit" class="btn-block btn_1 green">Create Unit</button>
+                    <button type="submit" class="btn-block btn_1 green">Create Hotel Unit</button>
                 </form>
             </div>
         </div>

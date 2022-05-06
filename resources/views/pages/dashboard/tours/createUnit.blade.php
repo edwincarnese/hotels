@@ -42,16 +42,10 @@
                         <div class="col-md-12">
                             <h4>Unit info</h4>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>Unit name</label>
                                 <input class="form-control" name="name" type="text" required>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Unit ID</label>
-                                <input class="form-control" name="unit_id" type="text" required>
                             </div>
                         </div>
                         <div class="col-md-3">

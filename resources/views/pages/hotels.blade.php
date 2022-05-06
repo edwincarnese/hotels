@@ -163,8 +163,9 @@ data-image-src="img/hotels_bg.jpg" data-natural-width="1400" data-natural-height
             <div class="strip_all_tour_list wow fadeIn" data-wow-delay="0.1s">
                 <div class="row">
 					<div class="col-lg-4 col-md-4">
-						{{-- <div class="ribbon_3"><span>Top rated</span>
-						</div> --}}
+                        @if($unit->is_popular)
+                            <div class="ribbon_3 popular"><span>Popular</span></div>
+                        @endif
 						{{-- <div class="wishlist">
 							<a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
 						</div> --}}
@@ -280,7 +281,8 @@ data-image-src="img/hotels_bg.jpg" data-natural-width="1400" data-natural-height
 
 <script>
 const urlEndpoint = '/hotels-unit/';
-const locationData = {!! $units !!};
+const locationDataHotels = {!! $units !!};
+const locationDataTours = null;
 </script>
 
 <script type="text/javascript" src="{{ asset('assets/js/infobox.js') }}"></script>

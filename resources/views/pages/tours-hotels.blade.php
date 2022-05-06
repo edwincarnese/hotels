@@ -319,7 +319,9 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
 
 <script>
 const urlEndpoint = '/hotels-unit/';
-const locationData = {!! $units !!};
+const urlTourEndpoint = '/tours/';
+const locationDataHotels = {!! $units !!};
+const locationDataTours = {!! $tours !!};
 </script>
 
 <!--Review modal validation -->

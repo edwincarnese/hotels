@@ -7,7 +7,7 @@
         <p class="animated fadeInDown">City Hotels / Hotel Guides</p>
         <a href="{{ route('hotels.index') }}" class="animated fadeInUp button_intro">View Hotels</a> 
         <a href="{{ route('tours.index') }}" class="animated fadeInUp button_intro outline">View Tours</a>
-        {{-- <a href="/tours" class="animated fadeInUp button_intro">View Tours</a> --}}
+        <a href="{{ route('home', ['popular' => true]) }}" class="animated fadeInUp button_intro">Popular</a>
     </div>
 </section>
 
@@ -19,16 +19,21 @@
     <h1 class="text-center font-weight-bold" style="color: red;">{{ $message }}</h1>
 @enderror
 
+<div class="mb-1 mt-1">
+    <button type="button" onclick="findMe()" class="btn_1 medium btn-block">Near Me</button>
+</div>
+<div id="map" class="map" style="height: 700px;"></div>
+
 <div class="container margin_60">
     <div class="main_title">
-        <h2><span>Featured</span> Tours</h2>
+        <h2><span>Popular</span> Tours</h2>
         {{-- <p>Quisque at tortor a libero posuere laoreet vitae sed arcu. Curabitur consequat.</p> --}}
     </div>
     <div class="row">
         @foreach($featured_tours as $tour)
             <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.1s">
                 <div class="tour_container">
-                    {{-- <div class="ribbon_3 popular"><span>Popular</span></div> --}}
+                    <div class="ribbon_3 popular"><span>Popular</span></div>
                     <div class="img_container">
                         <a href="{{ route('tours.show', $tour->id) }}">
                             <img src="{{ asset('storage/'.$tour->main_photo) }}" width="800" height="533" class="img-fluid" alt="Image">
@@ -73,21 +78,16 @@
     </p>
 </div>
 
-<div id="map" class="map" style="height: 700px;"></div>
-<div>
-    <button type="button" onclick="findMe()" class="btn_1 medium btn-block">Near Me</button>
-</div>
-
 <Div class="container margin_60">
     <div class="main_title">
-        <h2><span>Featured</span> Hotels</h2>
+        <h2><span>Popular</span> Hotels</h2>
         {{-- <p>Quisque at tortor a libero posuere laoreet vitae sed arcu. Curabitur consequat.</p> --}}
     </div>
     <div class="row">
         @foreach($featured_units as $unit)
             <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.1s">
                 <div class="tour_container">
-                    {{-- <div class="ribbon_3 popular"><span>Popular</span></div> --}}
+                    <div class="ribbon_3 popular"><span>Popular</span></div>
                     <div class="img_container">
                         <a href="{{ route('hotels.unit.show', $unit->id) }}">
                         <img src="{{ asset('storage/'.$unit->main_photo) }}" width="800" height="533" class="img-fluid" alt="Image">
@@ -126,7 +126,11 @@
 
 <script>
     const urlEndpoint = '/hotels-unit/';
-    const locationData = {!! $units !!};
+    const urlTourEndpoint = '/tours/';
+
+    const locationDataHotels = {!! $units !!};
+
+    const locationDataTours = {!! $tours !!};
 </script>
 
 <script type="text/javascript" src="{{ asset('assets/js/infobox.js') }}"></script>

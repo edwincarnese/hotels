@@ -46,18 +46,29 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="@if(Auth::user()->role == 1) col-md-4 @else col-md-6 @endif">
                             <div class="form-group">
                                 <label>Title</label>
                                 <input class="form-control" name="title" type="text" value="{{ $tour->title }}" required>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="@if(Auth::user()->role == 1) col-md-4 @else col-md-6 @endif">
                             <div class="form-group">
                                 <label>Price</label>
                                 <input class="form-control" name="price" type="text" value="{{ $tour->price }}">
                             </div>
                         </div>
+                        @if(Auth::user()->role == 1)
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Popular</label>
+                                    <select class="form-control" name="is_popular">
+                                        <option value="0" @if(!$tour->is_popular) selected @endif>No</option>
+                                        <option value="1" @if($tour->is_popular) selected @endif>Yes</option>
+                                    </select> 
+                                </div>
+                            </div>
+                        @endif
                     </div>
                     <!-- End row -->
             

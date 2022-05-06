@@ -35,6 +35,13 @@
                         Pending
                     @endif
                     </li>
+                    <li><strong>Popular</strong>
+                        @if($unit->is_popular)
+                            Yes
+                        @else
+                            No
+                        @endif
+                    </li>
                 </ul>
             </div>
             <div class="col-lg-2 col-md-2">

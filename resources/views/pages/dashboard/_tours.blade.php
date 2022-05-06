@@ -31,6 +31,13 @@
                             Pending
                         @endif
                     </li>
+                    <li><strong>Popular</strong>
+                        @if($tour->is_popular)
+                            Yes
+                        @else
+                            No
+                        @endif
+                    </li>
                 </ul>
             </div>
             <div class="col-lg-2 col-md-2">
