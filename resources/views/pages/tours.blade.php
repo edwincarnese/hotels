@@ -114,7 +114,13 @@
                     </div> --}}
                     <form method="GET" action="{{ route('tours.index') }}">
                         <div class="filter_type mt-2 mb-2">
-                            <input type="text" name="search" class="form-control" placeholder="Search">
+                            <input type="text" name="name" class="form-control" placeholder="Name" value="{{ Request::get('name') }}">
+                        </div>
+                        <div class="filter_type mt-2 mb-2">
+                            <input type="text" name="min_price" class="form-control" placeholder="Min. Price" value="{{ Request::get('min_price') }}">
+                        </div>
+                        <div class="filter_type mt-2 mb-2">
+                            <input type="text" name="max_price" class="form-control" placeholder="Max. Price" value="{{ Request::get('max_price') }}">
                         </div>
                         <div>
                             <button class="btn_1 btn-block">Search</button>

@@ -18,7 +18,7 @@ var
     };
 
     var mapOptions = {
-            zoom: 14,
+            zoom: 7,
             center: new google.maps.LatLng(8.954232145105257, 125.53326418527058),
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             styles: [

@@ -11,7 +11,9 @@ class HotelController extends Controller
 {
     public function index(Request $request)
     {
-        $search = $request->search;
+        $name = $request->name;
+        $min_price = $request->min_price;
+        $max_price = $request->max_price;
 
         $units = Unit::query()
             ->with('user')
@@ -20,8 +22,11 @@ class HotelController extends Controller
                 $query->select(DB::raw("(SUM(rate) / COUNT(id)) as review"));
                 }
             ])
-            ->when($search, function($q) use($search) {
-                $q->where('name', 'LIKE', '%'.$search.'%');
+            ->when($name, function($q) use($name) {
+                $q->where('name', 'LIKE', '%'.$name.'%');
+            })
+            ->when($min_price && $max_price, function($q) use($min_price, $max_price) {
+                $q->whereBetween('price', [(int)$min_price, (int)$max_price]);
             })
             ->where('is_approved', 1)
             ->latest()

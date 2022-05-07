@@ -110,7 +110,13 @@ data-image-src="img/hotels_bg.jpg" data-natural-width="1400" data-natural-height
                     </div> --}}
                     <form method="GET" action="{{ route('hotels.index') }}">
                         <div class="filter_type mt-2 mb-2">
-                            <input type="text" name="search" class="form-control" placeholder="Search">
+                            <input type="text" name="name" class="form-control" placeholder="Name" value="{{ Request::get('name') }}">
+                        </div>
+                        <div class="filter_type mt-2 mb-2">
+                            <input type="text" name="min_price" class="form-control" placeholder="Min. Price" value="{{ Request::get('min_price') }}">
+                        </div>
+                        <div class="filter_type mt-2 mb-2">
+                            <input type="text" name="max_price" class="form-control" placeholder="Max. Price" value="{{ Request::get('max_price') }}">
                         </div>
                         <div>
                             <button class="btn_1 btn-block">Search</button>
@@ -123,7 +129,7 @@ data-image-src="img/hotels_bg.jpg" data-natural-width="1400" data-natural-height
             <div class="box_style_2">
                 <i class="icon_set_1_icon-57"></i>
                 <h4>Need <span>Help?</span></h4>
-                <a href="tel://004542344599" class="phone">+45 423 445 99</a>
+                <a href="tel://639361272791" class="phone">+63 936 127 2791</a>
                 <small>Monday to Friday 9.00am - 7.30pm</small>
             </div>
         </aside>
