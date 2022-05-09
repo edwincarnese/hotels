@@ -156,7 +156,7 @@ style="background-image: url({{ asset('assets/img/tour_bg.jpg') }});"
             <div class="box_style_4">
                 <i class="icon_set_1_icon-90"></i>
                 <h4><span>Book</span> by phone</h4>
-                <a href="tel://004542344599" class="phone">+45 423 445 99</a>
+                <a href="tel://+63 936 127 2791" class="phone">+63 936 127 2791</a>
                 <small>Monday to Friday 9.00am - 7.30pm</small>
             </div>
 
@@ -173,7 +173,9 @@ style="background-image: url({{ asset('assets/img/tour_bg.jpg') }});"
                 <a href="#sign-in-dialog" class="access_link btn_1 add_bottom_30">Login to add review</a>
             @endguest
             @auth
-                <a href="#" class="btn_1 add_bottom_30" data-toggle="modal" data-target="#myReview">Leave a review</a>
+                @if(Auth::user()->id != $room->user_id)
+                    <a href="#" class="btn_1 add_bottom_30" data-toggle="modal" data-target="#myReview">Leave a review</a>
+                @endif
             @endauth
         </div>
         @foreach($reviews as $review)

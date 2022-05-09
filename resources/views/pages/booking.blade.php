@@ -63,9 +63,8 @@ style="background-image: url({{ asset('storage/'.$unit->main_photo) }}); backgro
                 <input type="hidden" name="price" value="{{ $unit->price }}">
                 <input type="hidden" name="checkin_date" value="{{ $checkin_date }}">
                 <input type="hidden" name="checkout_date" value="{{ $checkout_date }}">
-                <input type="hidden" name="adult" value="{{ $adult }}">
                 <input type="hidden" name="totalprice" value="{{ $totalprice }}">
-                <input type="hidden" name="children" value="{{ $children }}">
+                <input type="hidden" name="capacity" value="{{ $unit->capacity }}">
                 <div class="form_title">
                     <h3><strong>1</strong>Your Details</h3>
                 </div>
@@ -135,18 +134,10 @@ style="background-image: url({{ asset('storage/'.$unit->main_photo) }}); backgro
                     <tbody>
                         <tr>
                             <td>
-                                Adults
+                                Capacity
                             </td>
                             <td class="text-right">
-                                {{ $adult }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Children
-                            </td>
-                            <td class="text-right">
-                                {{ $children }}
+                                {{ $unit->capacity }}
                             </td>
                         </tr>
                         <tr>
@@ -187,7 +178,7 @@ style="background-image: url({{ asset('storage/'.$unit->main_photo) }}); backgro
             <div class="box_style_4">
                 <i class="icon_set_1_icon-57"></i>
                 <h4>Need <span>Help?</span></h4>
-                <a href="tel://004542344599" class="phone">+45 423 445 99</a>
+                <a href="tel://+63 936 127 2791" class="phone">+63 936 127 2791</a>
                 <small>Monday to Friday 9.00am - 7.30pm</small>
             </div>
         </aside>

@@ -8,6 +8,7 @@
                     <ul id="top_links">
                         @guest()
                             <li><a href="#sign-in-dialog" id="access_link">Sign in</a></li>
+                            <li><a href="{{ route('register', ['lister' => true]) }}">List Your Property</a></li>
                         @endguest
                         @auth()
                             <li><a href="{{ route('dashboard.index') }}">Dashboard</a></li>

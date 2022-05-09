@@ -4,7 +4,7 @@
     </div>
 </div>
 
-@foreach($bookings as $booking)
+@forelse($bookings as $booking)
     <div class="strip_booking">
         <div class="row">
             <div class="col-lg-2 col-md-2">
@@ -14,8 +14,17 @@
                 </div>
             </div>
             <div class="col-lg-6 col-md-5">
-                <h3 class="hotel_booking">{{ $bookings[0]->unit->name ?? '' }}
-                    <span class="mb-1">{{ $booking->adult }} Adults / {{ $booking->children }} Children</span>
+                <h3 class="hotel_booking">
+                    @if($booking->tour_id)
+                        <a href="{{ route('tours.show', $booking->tour_id) }}" target="_blank">
+                            {{ $booking->tour->title ?? '' }}
+                        </a>
+                    @else
+                        <a href="{{ route('hotels.unit.show', $booking->unit_id) }}" target="_blank">
+                            {{ $booking->unit->name ?? '' }}
+                        </a>
+                    @endif
+                    <span class="mb-1">Capacity: {{ $booking->capacity }} People</span>
                     <span class="mb-1">Details: {{ $booking->firstname }} {{ $booking->lastname }}</span>
                     <span>Contact: {{ $booking->phone }}</span>
                 </h3>
@@ -35,6 +44,7 @@
                 </div>
             </div> --}}
         </div>
-        <!-- End row -->
     </div>
-@endforeach
+@empty
+<h3 class="text-center">You don't have any bookings!</h3>
+@endforelse

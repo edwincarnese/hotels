@@ -73,11 +73,3 @@
     </div>
     <!-- End row -->
 </div>
-
-
-
-
-
-
-
-<!-- End strip booking -->

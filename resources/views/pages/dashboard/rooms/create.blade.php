@@ -224,66 +224,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- End row -->
-             {{-- 
-                    <hr>
-                   <div class="row">
-                        <div class="col-md-12">
-                            <h4>Address</h4>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Street address</label>
-                                <input class="form-control" name="address" value="{{ Auth::user()->address }}" type="text">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>City/Town</label>
-                                <input class="form-control" name="city" value="{{ Auth::user()->city }}" type="text">
-                            </div>
-                        </div>
-                    </div> --}}
-                    <!-- End row -->
-            
-                    {{-- <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Zip code</label> 
-                                <input class="form-control" name="zip_code" value="{{ Auth::user()->zip_code }}" type="text">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Country</label>
-                                <input class="form-control" name="country" value="{{ Auth::user()->country }}" type="text">
-                            </div>
-                        </div>
-                    </div> --}}
-                    <!-- End row -->
-
-                    {{--
-                         <hr>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h4>Map</h4>
-                                <div id="map" class="map"></div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Latitude</label>
-                                    <input class="form-control" name="latitude" id="map_lan" type="text">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Longitude</label>
-                                    <input class="form-control" name="longitude" id="map_long" type="text">
-                                </div>
-                            </div>
-                        </div> --}}
-                    <!-- End row -->
-
                     <hr>
                     <button type="submit" class="btn-block btn_1 green">Create Room</button>
                 </form>

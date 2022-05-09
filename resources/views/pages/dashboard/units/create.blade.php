@@ -44,19 +44,19 @@
                         <div class="col-md-12">
                             <h4>Hotel Unit info</h4>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label>Hotel unit name</label>
                                 <input class="form-control" name="name" type="text" required>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label>Price</label>
                                 <input class="form-control" name="price" type="text">
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <label>Capacity</label>
                                 <select class="form-control" name="capacity">
@@ -74,7 +74,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <label>Bathroom</label>
                                 <select class="form-control" name="bathroom">

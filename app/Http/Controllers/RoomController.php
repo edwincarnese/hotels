@@ -10,9 +10,6 @@ use Auth;
 
 class RoomController extends Controller
 {
-   
-
-
     /**
      * Show the form for creating a new resource.
      *
@@ -107,25 +104,13 @@ class RoomController extends Controller
      */
     public function show($id)
     {
-        $tour = Tour::query()
-            ->with('user')
-            ->where('id', $id)
+        $rooms = Room::query()
             ->where('is_approved', 1)
-            ->firstOrFail();
-
-        $units = Unit::query()
-            ->with('user')
-            ->where('is_approved', 1)
-            ->where('tour_id', $tour->id)
+            ->where('tour_id', $id)
             ->latest()
             ->get();
 
-        $tour_id = $tour->id;
-        $unit_id = '';
-        
-        $reviews = Review::with('user')->where('tour_id', $tour_id)->latest()->get();
-
-        return view('pages.tours-hotels', compact('tour', 'units', 'tour_id', 'unit_id', 'reviews'));
+        return view('pages.dashboard.rooms.show', compact('rooms'));
     }
 
     /**
@@ -136,7 +121,7 @@ class RoomController extends Controller
      */
     public function edit($id)
     {
-        $unit = Unit::find($id);
+        // $unit = Unit::find($id);
         $rooms = Room::find($id);
 
         $tours = Tour::query()
@@ -145,7 +130,7 @@ class RoomController extends Controller
             ->where('is_approved', 1)
             ->get();
         
-        return view('pages.dashboard.rooms.edit', compact('unit', 'tours','rooms'));
+        return view('pages.dashboard.rooms.edit', compact('tours','rooms'));
     }
 
 
@@ -202,9 +187,7 @@ class RoomController extends Controller
 
     public function destroy($id)
     {
-        $user = Auth::user();
-
-        $room = Room::where('id', $id)->where('user_id', $user->id)->firstOrFail()->delete();
+        Room::where('id', $id)->firstOrFail()->delete();
 
         return redirect()->route('dashboard.index')->with('success', 'Your unit has been successfully deleted.');
     }

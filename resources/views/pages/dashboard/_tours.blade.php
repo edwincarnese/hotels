@@ -2,10 +2,11 @@
     <div class="col-6">
         <h4>List of Tours</h4>
     </div>
-    <div class="col-6">
-        <a href="{{ route('dashboard.tours.create') }}" class="btn_1 float-right text-white">Add New Tour</a>
-    </div>
-    
+    @if(Auth::user()->is_approved)
+        <div class="col-6">
+            <a href="{{ route('dashboard.tours.create') }}" class="btn_1 float-right text-white">Add New Tour</a>
+        </div>
+    @endif
 </div>
 {{-- <hr> --}}
 <div class="strip_booking">
@@ -43,13 +44,17 @@
             <div class="col-lg-2 col-md-2">
                 @if($tour->is_approved)
                     <div class="booking_buttons">
-                        <a href="{{ route('tours.show', $tour->id) }}" target="_blank" class="btn_2">View</a>
+                        <a href="{{ route('tours.show', $tour->id) }}" target="_blank" class="btn_2">View Tour</a>
                     </div>
                     <div class="booking_buttons">
                         <a href="{{ route('dashboard.units.create', ['tour' => $tour->id]) }}" target="_blank" class="btn_2">Add New Hotel Unit</a>
-                        <br>
-                        <a href="{{ route('dashboard.rooms.create', ['tour' => $tour->id])  }}" target="_blank" class="btn_2"> Add New Room</a>
-                   
+                        @if(Auth::user()->role == 1 || Auth::user()->id == $tour->user_id)
+                            <br>
+                            <a href="{{ route('dashboard.rooms.create', ['tour' => $tour->id])  }}" target="_blank" class="btn_2"> Add New Room</a>
+                            <div class="booking_buttons">
+                                <a href="{{ route('dashboard.rooms.show', $tour->id) }}" target="_blank" class="btn_2">View Rooms</a>
+                            </div>
+                        @endif
                     </div>
                 @endif
                 

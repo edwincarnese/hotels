@@ -20,6 +20,9 @@ class HomeController extends Controller
             ->when($popular, function($q) {
                 $q->where('is_popular', 1);
             })
+            ->when($search, function($q) use($search) {
+                $q->where('address', 'LIKE', '%' . $search . '%');
+            })
             ->get();
 
         $units = Unit::query()
@@ -31,6 +34,9 @@ class HomeController extends Controller
             ->where('is_approved', 1)
             ->when($popular, function($q) {
                 $q->where('is_popular', 1);
+            })
+            ->when($search, function($q) use($search) {
+                $q->where('address', 'LIKE', '%' . $search . '%');
             })
             ->get();
 

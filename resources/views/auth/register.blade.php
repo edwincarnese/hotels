@@ -31,6 +31,7 @@ data-parallax="scroll" data-image-src="img/hotels_bg.jpg" data-natural-width="14
             <div class="card">
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
+                        <input type="hidden" value="{{ Request::get('lister') ?? 2 }}" name="role">
                         @csrf
                         @error('email')
                             <span class="invalid-feedback" role="alert">

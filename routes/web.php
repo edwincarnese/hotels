@@ -7,6 +7,7 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\TourController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,6 +56,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('dashboard/tours/approve/{id}', [TourController::class, 'approve'])->name('dashboard.tours.approve');
     Route::delete('dashboard/tours/{id}', [TourController::class, 'destroy'])->name('dashboard.tours.destroy');
 
+    Route::get('dashboard/rooms/{id}', [RoomController::class, 'show'])->name('dashboard.rooms.show');
     Route::get('dashboard/rooms/create', [RoomController::class, 'create'])->name('dashboard.rooms.create');
     Route::post('dashboard/rooms/store', [RoomController::class, 'store'])->name('dashboard.rooms.store');
     Route::get('dashboard/rooms/edit/{id}', [RoomController::class, 'edit'])->name('dashboard.rooms.edit');
@@ -62,4 +64,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::delete('dashboard/rooms/{id}', [RoomController::class, 'destroy'])->name('dashboard.rooms.destroy');
     Route::get('dashboard/rooms/show/{id}', [RoomController::class, 'index'])->name('dashboard.room.show');
 
+    Route::delete('dashboard/user-delete/{id}', [DashboardController::class, 'userDelete'])->name('dashboard.user.approval.destroy');
+    Route::post('dashboard/user-approve/{id}', [DashboardController::class, 'userApprove'])->name('dashboard.user.approval.store');
+    
+    Route::get('dashboard/transfer-payment/{id}', [TransactionController::class, 'show'])->name('dashboard.transaction.show');
+    Route::post('dashboard/transfer-payment', [TransactionController::class, 'store'])->name('dashboard.transaction.store');
 });

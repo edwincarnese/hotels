@@ -1,10 +1,12 @@
 <div class="row">
     <div class="col-6">
-        <h4>List of Units</h4>
+        <h4>List of Hotel Units</h4>
     </div>
-    <div class="col-6">
-        <a href="{{ route('dashboard.units.create') }}" class="btn_1 float-right text-white">Add Hotel Unit</a>
-    </div>
+    @if(Auth::user()->is_approved)
+        <div class="col-6">
+            <a href="{{ route('dashboard.units.create') }}" class="btn_1 float-right text-white">Add Hotel Unit</a>
+        </div>
+    @endif
 </div>
 {{-- <hr> --}}
 <div class="strip_booking">
@@ -23,7 +25,6 @@
             </div>
             <div class="col-lg-2 col-md-3">
                 <ul class="info_booking">
-                    <li><strong>Room Id</strong> {{ $unit->unit_id }}</li>
                     <li><strong>Availability</strong>{{ $unit->is_available == 1 ? 'YES' : 'NO' }}</li>
                     <li><strong>Capacity</strong>{{ $unit->capacity }}</li>
                     <li><strong>Bedroom</strong>{{ $unit->bedroom }}</li>

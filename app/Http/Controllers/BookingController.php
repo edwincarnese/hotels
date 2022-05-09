@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Unit;
 use App\Models\Booking;
+use App\Mail\BookingMail;
+use App\Mail\ConfirmationMail;
+use App\Models\User;
+use App\Models\Transaction;
 use Auth;
 use Carbon\Carbon;
 
@@ -64,6 +69,7 @@ class BookingController extends Controller
   {
     $user = Auth::user();
     $unit = Unit::where('id', $request->unit_id)->first();
+    $owner = User::find($unit->user_id);
 
     $curl = new \Stripe\HttpClient\CurlClient([CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1]);
     $curl->setEnableHttp2(false);
@@ -94,11 +100,46 @@ class BookingController extends Controller
       $booking->lastname = $request->lastname;
       $booking->phone = $request->phone;
       $booking->payment = $request->totalprice;
-      $booking->adult = $request->adult;
-      $booking->children = $request->children;
+      $booking->capacity = $request->adult;
       $booking->checkin_date = $request->checkin_date;
       $booking->checkout_date = $request->checkout_date;
       $booking->save();
+
+      $business_tax = $request->totalprice * 0.03;
+
+      $transaction = new Transaction();
+      $transaction->user_id = $unit->user_id;
+      $transaction->tour_id = null;
+      $transaction->unit_id = $unit->id;
+      $transaction->price = $request->totalprice;
+      $transaction->business_tax = $business_tax;
+      $transaction->payment = $request->totalprice - $business_tax;
+      $transaction->save();
+
+      $booking_info = array(
+        'full_name' => Auth::user()->full_name,
+        'email' => Auth::user()->email,
+        'phone' => Auth::user()->phone,
+        'booking_id' => $booking->id,
+        'payment' => $request->totalprice,
+        'checkin_date' => $booking->checkin_date,
+        'checkout_date' => $booking->checkout_date,
+        'property' => $unit->name,
+      );
+
+      $confirmation_info = array(
+        'full_name' => $owner->firstname . ' ' . $owner->lastname,
+        'email' => $owner->email,
+        'phone' => $owner->phone,
+        'booking_id' => $booking->id,
+        'payment' => $request->totalprice,
+        'checkin_date' => $booking->checkin_date,
+        'checkout_date' => $booking->checkout_date,
+        'property' => $unit->name,
+      );
+
+      Mail::to($owner->email)->send(new BookingMail($booking_info));
+      Mail::to($user->email)->send(new ConfirmationMail($confirmation_info));
     } 
     catch (\Exception $exception) {
       return back()->with('error', $exception->getMessage());

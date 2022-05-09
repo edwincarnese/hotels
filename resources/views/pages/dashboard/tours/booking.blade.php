@@ -13,7 +13,7 @@ style="background-image: url({{ asset('storage/'.$tour->main_photo) }}); backgro
         <div class="bs-wizard row">
 
             <div class="col-4 bs-wizard-step complete">
-                <div class="text-center bs-wizard-stepnum">Your hotel</div>
+                <div class="text-center bs-wizard-stepnum">Your Tour</div>
                 <div class="progress">
                     <div class="progress-bar"></div>
                 </div>
@@ -132,25 +132,29 @@ style="background-image: url({{ asset('storage/'.$tour->main_photo) }}); backgro
                 <h3 class="inner">- Summary -</h3>
                 <table class="table table_summary">
                     <tbody>
+                        @if($adult)
+                            <tr>
+                                <td>
+                                    Adults
+                                </td>
+                                <td class="text-right">
+                                    {{ $adult }}
+                                </td>
+                            </tr>
+                        @endif
+                        @if($children)
+                            <tr>
+                                <td>
+                                    Children
+                                </td>
+                                <td class="text-right">
+                                    {{ $children }}
+                                </td>
+                            </tr>
+                        @endif
                         <tr>
                             <td>
-                                Adults
-                            </td>
-                            <td class="text-right">
-                                {{ $adult }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Children
-                            </td>
-                            <td class="text-right">
-                                {{ $children }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Hotel
+                                Tour
                             </td>
                             <td class="text-right">
                                 {{ $tour->title }}
@@ -186,7 +190,7 @@ style="background-image: url({{ asset('storage/'.$tour->main_photo) }}); backgro
             <div class="box_style_4">
                 <i class="icon_set_1_icon-57"></i>
                 <h4>Need <span>Help?</span></h4>
-                <a href="tel://004542344599" class="phone">+45 423 445 99</a>
+                <a href="tel://+63 936 127 2791" class="phone">+63 936 127 2791</a>
                 <small>Monday to Friday 9.00am - 7.30pm</small>
             </div>
         </aside>

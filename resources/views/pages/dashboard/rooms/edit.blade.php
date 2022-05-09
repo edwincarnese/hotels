@@ -57,16 +57,16 @@
                             <div class="form-group">
                                 <label>Capacity</label>
                                 <select class="form-control" name="capacity">
-                                    <option value="1" @if($unit->bathroom == 1) selected @endif>1</option>
-                                    <option value="2" @if($unit->bathroom == 2) selected @endif>2</option>
-                                    <option value="3" @if($unit->bathroom == 3) selected @endif>3</option>
-                                    <option value="4" @if($unit->bathroom == 4) selected @endif>4</option>
-                                    <option value="5" @if($unit->bathroom == 5) selected @endif>5</option>
-                                    <option value="6" @if($unit->bathroom == 6) selected @endif>6</option>
-                                    <option value="7" @if($unit->bathroom == 7) selected @endif>7</option>
-                                    <option value="8" @if($unit->bathroom == 8) selected @endif>8</option>
-                                    <option value="9" @if($unit->bathroom == 9) selected @endif>9</option>
-                                    <option value="10" @if($unit->bathroom == 10) selected @endif>10</option>
+                                    <option value="1" @if($rooms->bathroom == 1) selected @endif>1</option>
+                                    <option value="2" @if($rooms->bathroom == 2) selected @endif>2</option>
+                                    <option value="3" @if($rooms->bathroom == 3) selected @endif>3</option>
+                                    <option value="4" @if($rooms->bathroom == 4) selected @endif>4</option>
+                                    <option value="5" @if($rooms->bathroom == 5) selected @endif>5</option>
+                                    <option value="6" @if($rooms->bathroom == 6) selected @endif>6</option>
+                                    <option value="7" @if($rooms->bathroom == 7) selected @endif>7</option>
+                                    <option value="8" @if($rooms->bathroom == 8) selected @endif>8</option>
+                                    <option value="9" @if($rooms->bathroom == 9) selected @endif>9</option>
+                                    <option value="10" @if($rooms->bathroom == 10) selected @endif>10</option>
                                 </select>
                             </div>
                         </div>
@@ -74,11 +74,11 @@
                             <div class="form-group">
                                 <label>Bathroom</label>
                                 <select class="form-control" name="bathroom">
-                                    <option value="1" @if($unit->bathroom == 1) selected @endif>1</option>
-                                    <option value="2" @if($unit->bathroom == 2) selected @endif>2</option>
-                                    <option value="3" @if($unit->bathroom == 3) selected @endif>3</option>
-                                    <option value="4" @if($unit->bathroom == 4) selected @endif>4</option>
-                                    <option value="5" @if($unit->bathroom == 5) selected @endif>5</option>
+                                    <option value="1" @if($rooms->bathroom == 1) selected @endif>1</option>
+                                    <option value="2" @if($rooms->bathroom == 2) selected @endif>2</option>
+                                    <option value="3" @if($rooms->bathroom == 3) selected @endif>3</option>
+                                    <option value="4" @if($rooms->bathroom == 4) selected @endif>4</option>
+                                    <option value="5" @if($rooms->bathroom == 5) selected @endif>5</option>
                                 </select>
                             </div>
                         </div>
@@ -96,8 +96,8 @@
                             <div class="form-group">
                                 <label>Period</label>
                                 <select class="form-control" name="period" value="{{$rooms->period}}">
-                                    <option value="Per Night" @if($unit->period == 'Per Night') selected @endif>Per Night</option>
-                                    <option value="Per Day" @if($unit->period == 'Per Day') selected @endif>Per Day</option>
+                                    <option value="Per Night" @if($rooms->period == 'Per Night') selected @endif>Per Night</option>
+                                    <option value="Per Day" @if($rooms->period == 'Per Day') selected @endif>Per Day</option>
                                 </select>
                             </div>
                         </div>

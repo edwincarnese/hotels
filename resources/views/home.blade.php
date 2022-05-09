@@ -19,7 +19,14 @@
     <h1 class="text-center font-weight-bold" style="color: red;">{{ $message }}</h1>
 @enderror
 
-<div class="mb-1 mt-1">
+<div class="mb-2 mt-2">
+    <form action="{{ route('home') }}" method="GET">
+        <input type="text" class="form-control mb-2" placeholder="Search by address" name="search" value="{{ Request::get('search') }}">
+        <button type="submit" class="btn_1 medium btn-block">Search</button>
+    </form>
+</div>
+
+<div class="mb-2 mt-2">
     <button type="button" onclick="findMe()" class="btn_1 medium btn-block">Near Me</button>
 </div>
 <div id="map" class="map" style="height: 700px;"></div>
@@ -33,7 +40,7 @@
         @foreach($featured_tours as $tour)
             <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.1s">
                 <div class="tour_container">
-                    <div class="ribbon_3 popular"><span>Popular</span></div>
+                    b
                     <div class="img_container">
                         <a href="{{ route('tours.show', $tour->id) }}">
                             <img src="{{ asset('storage/'.$tour->main_photo) }}" width="800" height="533" class="img-fluid" alt="Image">

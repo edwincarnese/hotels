@@ -107,77 +107,101 @@
     </div>
     <!-- End row -->
 
-    <hr>
-    <div class="row">
-        <div class="col-md-12">
-            <h4>Edit Description</h4>
-        </div>
-        <div class="col-md-12">
-            <div class="form-group">
-                <label>About</label>
-                <textarea class="form-control" name="about" value="{{ Auth::user()->about }}" rows="5"></textarea>
+    @if(Auth::user()->role != 3)
+        <hr>
+        <div class="row">
+            <div class="col-md-12">
+                <h4>Edit Description</h4>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>About</label>
+                    <textarea class="form-control" name="about" value="{{ Auth::user()->about }}" rows="5"></textarea>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- End row -->
 
-    <hr>
-    <div class="row">
-        <div class="col-md-12">
-            <h4>Edit Facilities</h4>
-        </div>
-        <div class="col-md-12">
-            <div class="form-group">
-                <ul class="other-features">
-                    <li>
-                        <input type="checkbox" id="air_condition" name="facilities[]" value="Air Conditioning">
-                        <label for="air_condition">Air Conditioning</label>
-                    </li>
-                    <li>
-                        <input type="checkbox" id="bedding" name="facilities[]" value="Bedding">
-                        <label for="bedding">Bedding</label>
-                    </li>
-                    <li>
-                        <input type="checkbox" id="balcony" name="facilities[]" value="Balcony">
-                        <label for="balcony">Balcony</label>
-                    </li>
-                    <li>
-                        <input type="checkbox" id="cable_tv" name="facilities[]" value="Cable TV">
-                        <label for="cable_tv">Cable TV</label>
-                    </li>
-                    <li>
-                        <input type="checkbox" id="internet" name="facilities[]" value="Internet">
-                        <label for="internet">Internet</label>
-                    </li>
-                    <li>
-                        <input type="checkbox" id="parking" name="facilities[]" value="Parking">
-                        <label for="parking">Parking</label>
-                    </li>
-                    <li>
-                        <input type="checkbox" id="lift" name="facilities[]" value="Lift">
-                        <label for="lift">Lift</label>
-                    </li>
-                    <li>
-                        <input type="checkbox" id="pool" name="facilities[]" value="Pool">
-                        <label for="pool">Pool</label>
-                    </li>
-                    <li>
-                        <input type="checkbox" id="dishwasher" name="facilities[]" value="Dishwasher">
-                        <label for="dishwasher">Dishwasher</label>
-                    </li>
-                    <li>
-                        <input type="checkbox" id="toaster" name="facilities[]" value="Toaster">
-                        <label for="toaster">Toaster</label>
-                    </li>
-                    <li>
-                        <input type="checkbox" id="gym" name="facilities[]" value="Gym">
-                        <label for="gym">Gym</label>
-                    </li>
-                </ul>
+        <hr>
+        <div class="row">
+            <div class="col-md-12">
+                <h4>Edit Facilities</h4>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <ul class="other-features">
+                        <li>
+                            <input type="checkbox" id="air_condition" name="facilities[]" value="Air Conditioning">
+                            <label for="air_condition">Air Conditioning</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="bedding" name="facilities[]" value="Bedding">
+                            <label for="bedding">Bedding</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="balcony" name="facilities[]" value="Balcony">
+                            <label for="balcony">Balcony</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="cable_tv" name="facilities[]" value="Cable TV">
+                            <label for="cable_tv">Cable TV</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="internet" name="facilities[]" value="Internet">
+                            <label for="internet">Internet</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="parking" name="facilities[]" value="Parking">
+                            <label for="parking">Parking</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="lift" name="facilities[]" value="Lift">
+                            <label for="lift">Lift</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="pool" name="facilities[]" value="Pool">
+                            <label for="pool">Pool</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="dishwasher" name="facilities[]" value="Dishwasher">
+                            <label for="dishwasher">Dishwasher</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="toaster" name="facilities[]" value="Toaster">
+                            <label for="toaster">Toaster</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="gym" name="facilities[]" value="Gym">
+                            <label for="gym">Gym</label>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- End row -->
+    @endif
+
+    @if(Auth::user()->role != 3)
+        <h4>Payment Withdrawal</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Gcash</label>
+                    <input class="form-control" type="text" name="gcash" value="{{ Auth::user()->gcash }}">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>PayPal</label>
+                    <input class="form-control" type="text" name="paypal" value="{{ Auth::user()->paypal }}">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Bank</label>
+                    <textarea class="form-control" name="bank" value="{{ Auth::user()->bank }}" rows="5"></textarea>
+                </div>
+            </div>
+        </div>
+    @endif
 
     <hr>
     <h4>Upload profile photo</h4>
@@ -186,6 +210,22 @@
             <input type="file" name="photo" accept="image/*">
         </div>
     </div>
+
+    @if(Auth::user()->role != 3)
+        <h4>Upload Valid ID</h4>
+        <div class="form-inline upload_1">
+            <div class="form-group">
+                <input type="file" name="valid_id" accept="image/*">
+            </div>
+        </div>
+        <h4>Upload Business Permit</h4>
+        <div class="form-inline upload_1">
+            <div class="form-group">
+                <input type="file" name="business_permit" accept="image/*">
+            </div>
+        </div>
+    @endif
+
     <hr>
     <button type="submit" class="btn_1 green">Update Profile</button>
 </form>

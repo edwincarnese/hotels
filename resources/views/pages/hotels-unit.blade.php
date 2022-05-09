@@ -130,25 +130,7 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>Adults</label>
-                                    <div class="numbers-row">
-                                        <input type="text" value="1" id="adults" class="qty2 form-control" name="adult">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>Children</label>
-                                    <div class="numbers-row">
-                                        <input type="text" value="0" id="children" class="qty2 form-control" name="children">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <br>
+                        <h4 class="text-center">Capacity: {{ $unit->capacity }} people</h4>
                         <button type="submit" class="btn_full">Check now</button>
                     </form>
                 @else
@@ -159,7 +141,7 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
             <div class="box_style_4">
                 <i class="icon_set_1_icon-90"></i>
                 <h4><span>Book</span> by phone</h4>
-                <a href="tel://004542344599" class="phone">+45 423 445 99</a>
+                <a href="tel://+63 936 127 2791" class="phone">+63 936 127 2791</a>
                 <small>Monday to Friday 9.00am - 7.30pm</small>
             </div>
 
@@ -176,7 +158,9 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
                 <a href="#sign-in-dialog" class="access_link btn_1 add_bottom_30">Login to add review</a>
             @endguest
             @auth
-                <a href="#" class="btn_1 add_bottom_30" data-toggle="modal" data-target="#myReview">Leave a review</a>
+                @if(Auth::user()->id != $unit->user_id)
+                    <a href="#" class="btn_1 add_bottom_30" data-toggle="modal" data-target="#myReview">Leave a review</a>
+                @endif
             @endauth
         </div>
         @foreach($reviews as $review)

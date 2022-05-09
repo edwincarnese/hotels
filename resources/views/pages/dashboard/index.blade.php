@@ -33,57 +33,77 @@ data-parallax="scroll" data-image-src="img/admin_top.jpg" data-natural-width="14
 </div>
 @endif
 
+@if(!Auth::user()->is_approved)
+<div>
+    <h3 class="text-center text-warning font-weight-bold">
+        Your account is under review by the administrator.
+        <br>
+        To get a higher approval, please update your profile.
+    </h3>
+</div>
+@endif
+
 <div class="margin_60 container">
     <div id="tabs" class="tabs">
         <nav>
-            <ul>              
-                <li>
-                    <a href="#section-1" class="icon-booking"><span>Bookings</span></a>
-                </li>                
-                <li><a href="#section-2" class="icon-th-list"><span>Tours</span></a>
+            <ul>      
+                @if(Auth::user()->role == 1)
+                    <li><a href="#section-1" class="icon-th-list"><span>Transactions</span></a>
+                    </li>  
+                    <li><a href="#section-2" class="icon-th-list"><span>Approval</span></a>
+                    </li>  
+                @endif         
+                <li><a href="#section-3" class="icon-booking"><span>Bookings</span></a>
+                </li>    
+                @if(Auth::user()->role != 3)           
+                    <li><a href="#section-4" class="icon-th-list"><span>Tours</span></a>
+                    </li>
+                    {{-- <li><a href="#section-5" class="icon-th-list"><span>Rooms</span></a>
+                    </li> --}}
+                    <li><a href="#section-6" class="icon-th-list"><span>Hotel Units</span></a>
+                    </li>
+                @endif  
+                <li><a href="#section-7" class="icon-settings"><span>Settings</span></a>
                 </li>
-                <li><a href="#section-6" class="icon-th-list"><span>Rooms</span></a>
+                <li><a href="#section-8" class="icon-profile"><span>Profile</span></a>
                 </li>
-                <li><a href="#section-3" class="icon-th-list"><span>Hotel Units</span></a>
-                </li>
-                <li><a href="#section-4" class="icon-settings"><span>Settings</span></a>
-                </li>
-                <li><a href="#section-5" class="icon-profile"><span>Profile</span></a>
-                </li>
-              
-                {{-- <li><a href="#section-6" class="icon-wishlist"><span>Wishlist</span></a>
-                </li> --}}
             </ul>
         </nav>
         <div class="content">
-            <section id="section-1">
+            @if(Auth::user()->role == 1)
+                <section id="section-1">
+                    @include('pages.dashboard._transactions')
+                </section>
+                <section id="section-2">
+                    @include('pages.dashboard._approval')
+                </section>
+            @endif
+
+            <section id="section-3">
                 @include('pages.dashboard._bookings')
             </section>
 
-            <section id="section-2">
-                @include('pages.dashboard._tours')
-            </section>
-            <!-- End section 2 -->
+            @if(Auth::user()->role != 3)       
+                <section id="section-4">
+                    @include('pages.dashboard._tours')
+                </section>
 
-            <section id="section-6">
-                @include('pages.dashboard._rooms')
-            </section>
-            <!-- End section 2 -->
+                {{-- <section id="section-5">
+                    @include('pages.dashboard._rooms')
+                </section> --}}
 
-            <section id="section-3">
-                @include('pages.dashboard._units')
-            </section>
-            <!-- End section 3 -->
+                <section id="section-6">
+                    @include('pages.dashboard._units')
+                </section>    
+            @endif
 
-            <section id="section-4">
+            <section id="section-7">
                 @include('pages.dashboard._setting')
             </section>
-            <!-- End section 4 -->
 
-            <section id="section-5">
+            <section id="section-8">
                 @include('pages.dashboard._profile')
             </section>
-            <!-- End section 5 -->
         </div>
         <!-- End content -->
     </div>
