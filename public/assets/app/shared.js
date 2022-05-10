@@ -1,10 +1,7 @@
 let LocsA = [];
 
-let originLat = 8.954303347528557;
-let originLong = 125.53336350757372;
-
-// let originLat = 8.951097684123816;
-// let originLong = 125.54126008205894;
+let originLat = 8.951097684123816;
+let originLong = 125.54126008205894;
 
 let USER_LATITUDE = null;
 let USER_LONGITUDE = null;

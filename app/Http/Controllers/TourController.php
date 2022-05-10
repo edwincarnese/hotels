@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Review;
 use App\Models\Room;
 use App\Models\Booking;
+use App\Models\Transaction;
 use App\Mail\BookingMail;
 use App\Mail\ConfirmationMail;
 use Auth;
@@ -70,7 +71,7 @@ class TourController extends Controller
         $transaction->save();
 
         $booking_info = array(
-          'full_name' => Auth::user()->full_name,
+          'full_name' =>  Auth::user()->firstname . ' ' . Auth::user()->lastname,
           'email' => Auth::user()->email,
           'phone' => Auth::user()->phone,
           'booking_id' => $booking->id,
@@ -95,9 +96,7 @@ class TourController extends Controller
         Mail::to($user->email)->send(new ConfirmationMail($confirmation_info));
       } 
       catch (\Exception $exception) {
-        
-      // dd($exception);
-        return back()->with('error', $exception->getMessage());
+        // dd($exception);
       }
 
       return redirect()->route('dashboard.index')->with('success','You have successfully booked this tour');

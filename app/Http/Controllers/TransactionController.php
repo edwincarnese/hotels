@@ -29,7 +29,7 @@ class TransactionController extends Controller
             'full_name' => $user->firstname . ' ' . $user->lastname,
             'email' => $user->email,
             'phone' => $user->phone,
-            'payment' => $transaction->id,
+            'payment' => $transaction->payment,
             'mode_of_payment' => $transaction->mode_of_payment,
         );
 

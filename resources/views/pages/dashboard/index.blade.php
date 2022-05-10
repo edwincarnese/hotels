@@ -33,6 +33,12 @@ data-parallax="scroll" data-image-src="img/admin_top.jpg" data-natural-width="14
 </div>
 @endif
 
+@if(Session::has('error'))
+<div>
+    <h3 class="text-center text-danger font-weight-bold">{{ Session::get('error') }}</h3>
+</div>
+@endif
+
 @if(!Auth::user()->is_approved)
 <div>
     <h3 class="text-center text-warning font-weight-bold">

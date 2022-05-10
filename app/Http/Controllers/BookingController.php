@@ -117,7 +117,7 @@ class BookingController extends Controller
       $transaction->save();
 
       $booking_info = array(
-        'full_name' => Auth::user()->full_name,
+        'full_name' => Auth::user()->firstname . ' ' . Auth::user()->lastname,
         'email' => Auth::user()->email,
         'phone' => Auth::user()->phone,
         'booking_id' => $booking->id,

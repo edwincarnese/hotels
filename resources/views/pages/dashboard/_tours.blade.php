@@ -47,7 +47,9 @@
                         <a href="{{ route('tours.show', $tour->id) }}" target="_blank" class="btn_2">View Tour</a>
                     </div>
                     <div class="booking_buttons">
-                        <a href="{{ route('dashboard.units.create', ['tour' => $tour->id]) }}" target="_blank" class="btn_2">Add New Hotel Unit</a>
+                        @if(Auth::user()->is_approved)
+                            <a href="{{ route('dashboard.units.create', ['tour' => $tour->id]) }}" target="_blank" class="btn_2">Add New Hotel Unit</a>
+                        @endif
                         @if(Auth::user()->role == 1 || Auth::user()->id == $tour->user_id)
                             <br>
                             <a href="{{ route('dashboard.rooms.create', ['tour' => $tour->id])  }}" target="_blank" class="btn_2"> Add New Room</a>

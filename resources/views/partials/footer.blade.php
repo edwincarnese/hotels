@@ -4,7 +4,7 @@
             <div class="col-md-6">
                 <h3>Need help?</h3>
                 <a href="tel://004542344599" id="phone">+63 936 127 2791</a>
-                <a href="mailto:help@caragatours.com" id="email_footer">help@caragatours.com</a>
+                <a href="mailto:tourscaraga@gmail.com" id="email_footer">tourscaraga@gmail.com</a>
             </div>
             <div class="col-md-6">
                 <h3>Pages</h3>

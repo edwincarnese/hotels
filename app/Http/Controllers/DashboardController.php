@@ -78,11 +78,11 @@ class DashboardController extends Controller
             return redirect()->back()->with('error','Your current password is incorrect.');
         }
 
-        if($request->new_password != $request->new_confirm_password) {
+        if($request->password != $request->new_confirm_password) {
             return redirect()->back()->with('error','Your passwords do not match.');
         }
    
-        $user->update(['password'=> Hash::make($request->new_password)]);
+        $user->update(['password'=> Hash::make($request->password)]);
 
         return redirect()->back()->with('success', 'Your password has been successfully updated.');
     }

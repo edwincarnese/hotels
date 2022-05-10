@@ -115,7 +115,7 @@ class UnitController extends Controller
     {
         $user = Auth::user();
 
-        $unit = Unit::where('id', $id)->where('user_id', $user->id)->firstOrFail()->delete();
+        $unit = Unit::where('id', $id)->firstOrFail()->delete();
 
         return redirect()->route('dashboard.index')->with('success', 'Your unit has been successfully deleted.');
     }

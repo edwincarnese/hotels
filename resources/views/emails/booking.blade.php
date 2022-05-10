@@ -11,7 +11,7 @@
 
 <strong>Payment:</strong> {{ $data['payment'] }}
 
-<strong>Owner Name:</strong> {{ $data['full_name'] }}
+<strong>Client Name:</strong> {{ $data['full_name'] }}
 
 <strong>Email:</strong> {{ $data['email'] }}
 
