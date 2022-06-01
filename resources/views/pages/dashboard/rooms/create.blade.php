@@ -38,13 +38,12 @@
             <div class="card-body">
                 <form method="POST" action="{{ route('dashboard.rooms.store') }}" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="unit_id" value="{{$unit_id}}">
+                    
                     <div class="row">
-                        <div class="col-md-12">
-                            <h4>Room info</h4>
-                        </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Room name</label>
+                                <label>Name</label>
                                 <input class="form-control" name="name" type="text" required>
                             </div>
                         </div>
@@ -85,7 +84,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- End row -->
             
                     <div class="row">
                         <div class="col-md-3">
@@ -125,30 +123,10 @@
                             </div>
                         </div>
                     </div>
-                    <!-- End row -->
 
-                    
-                   
-                   {{-- <input type="text" name="tour_id" value="{{ Request::get('tour_id') }}"> --}}
-     
-                    @if($tour_id)
-                    <input type="hidden" name="tour_id" value="{{$tour_id}}">
-                    @else
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Select tour</label>
-                                    <select class="form-control" name="tour_id" required>
-                                        @foreach($tours as $tour)
-                                            <option value="{{ $tour->id }}">{{ $tour->title }}</option>
-                                        @endforeach  
-                                    </select> 
-                                </div>
-                            </div>
-                        </div>
-                    @endif                   
+                                 
                     <hr>
-                    <h4>Room Photos</h4>
+                    <h4>Photos</h4>
                     <div class="form-inline upload_1">
                         <div class="form-group">
                             <input type="file" name="images[]" accept="image/*" multiple>
@@ -158,7 +136,7 @@
                     <hr>
                     <div class="row">
                         <div class="col-md-12">
-                            <h4>Room description</h4>
+                            <h4>Description</h4>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
@@ -233,11 +211,6 @@
 @endsection
 
 @section('js')
-<script src="http://maps.googleapis.com/maps/api/js"></script>
-<script type="text/javascript" src="{{ asset('assets/js/map_home.js') }}"></script>
-<script type="text/javascript" src="{{ asset('assets/js/infobox.js') }}"></script>
-
-<!-- Specific scripts -->
 <script src="{{ asset('assets/js/tabs.js') }}"></script>
 <script>
     new CBPFWTabs(document.getElementById('tabs'));

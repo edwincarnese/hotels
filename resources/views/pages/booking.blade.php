@@ -6,7 +6,7 @@
 @endif
 
 <section id="hero_2"
-style="background-image: url({{ asset('storage/'.$unit->main_photo) }}); background-repeat: no-repeat; background-position: center;"
+style="background-image: url({{ asset('storage/'.$room->main_photo) }}); background-repeat: no-repeat; background-position: center;"
 
 >
     <div class="intro_title">
@@ -14,7 +14,7 @@ style="background-image: url({{ asset('storage/'.$unit->main_photo) }}); backgro
         <div class="bs-wizard row">
 
             <div class="col-4 bs-wizard-step complete">
-                <div class="text-center bs-wizard-stepnum">Your hotel</div>
+                <div class="text-center bs-wizard-stepnum">Your hotel room</div>
                 <div class="progress">
                     <div class="progress-bar"></div>
                 </div>
@@ -59,12 +59,12 @@ style="background-image: url({{ asset('storage/'.$unit->main_photo) }}); backgro
             <form action="{{ route('booking.hotel.book') }}" method="POST" class="card-form">
                 @csrf
                 <input type="hidden" name="payment_method" class="payment-method">
-                <input type="hidden" name="unit_id" value="{{ $unit->id }}">
-                <input type="hidden" name="price" value="{{ $unit->price }}">
+                <input type="hidden" name="room_id" value="{{ $room->id }}">
+                <input type="hidden" name="price" value="{{ $room->price }}">
                 <input type="hidden" name="checkin_date" value="{{ $checkin_date }}">
                 <input type="hidden" name="checkout_date" value="{{ $checkout_date }}">
                 <input type="hidden" name="totalprice" value="{{ $totalprice }}">
-                <input type="hidden" name="capacity" value="{{ $unit->capacity }}">
+                <input type="hidden" name="capacity" value="{{ $room->capacity }}">
                 <div class="form_title">
                     <h3><strong>1</strong>Your Details</h3>
                 </div>
@@ -93,37 +93,50 @@ style="background-image: url({{ asset('storage/'.$unit->main_photo) }}); backgro
                     </div>
                 </div>
 
-                <div class="form_title">
-                    <h3><strong>2</strong>Payment Information</h3>
-                </div>
-                <div class="step">
-                    <div class="form row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input class="StripeElement mb-3 form-control" id="card_holder_name" name="card_holder_name" placeholder="Card holder name">
+                @if($unit->enable_online_payment)
+                    <div class="form_title">
+                        <h3><strong>2</strong>Payment Information</h3>
+                    </div>
+                    <div class="step">
+                        <div class="form row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input class="StripeElement mb-3 form-control" id="card_holder_name" name="card_holder_name" placeholder="Card holder name">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <div id="card-element" class="form-control"></div>
-                                <div id="card-errors" role="alert"></div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div id="card-element" class="form-control"></div>
+                                    <div id="card-errors" role="alert"></div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <img src="{{ asset('assets/img/cards.png') }}" width="207" height="43" alt="Cards" class="cards">
+                            <div class="col-md-6">
+                                <img src="{{ asset('assets/img/cards.png') }}" width="207" height="43" alt="Cards" class="cards">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!--End step -->
 
-                <div id="policy">
-                    <h4>No cancellation policy</h4>
-                    <div class="form-group">
-                        <label>
-                        <input type="checkbox" required name="policy_terms" id="policy_terms"> I accept terms and conditions and general policy.</label>
+                    <div id="policy">
+                        <h4>No cancellation policy</h4>
+                        <div class="form-group">
+                            <label>
+                            <input type="checkbox" required name="policy_terms" id="policy_terms"> I accept terms and conditions and general policy.</label>
+                        </div>
+                        <button type="submit" class="btn_1 green medium pay">Book now</button>
                     </div>
-                    <button type="submit" class="btn_1 green medium pay">Book now</button>
-                </div>
+                @else
+                    <div class="form_title">
+                        <h3><strong>2</strong>Payment Information</h3>
+                    </div>
+                    <div id="policy">
+                        <h4>No Credit Card Needed - Pay At The Hotel</h4>
+                        <div class="form-group">
+                            <label>
+                            <input type="checkbox" required name="policy_terms" id="policy_terms"> I accept terms and conditions and general policy.</label>
+                        </div>
+                        <button type="submit" class="btn_1 green medium pay">Reserve now</button>
+                    </div>
+                @endif
             </form>
         </div>
 
@@ -134,18 +147,18 @@ style="background-image: url({{ asset('storage/'.$unit->main_photo) }}); backgro
                     <tbody>
                         <tr>
                             <td>
-                                Capacity
+                                Guest
                             </td>
                             <td class="text-right">
-                                {{ $unit->capacity }}
+                                {{ $room->capacity }}
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                Hotel
+                                Hotel Room
                             </td>
                             <td class="text-right">
-                                {{ $unit->name }}
+                                {{ $room->name }}
                             </td>
                         </tr>
                         <tr>
@@ -169,7 +182,7 @@ style="background-image: url({{ asset('storage/'.$unit->main_photo) }}); backgro
                                 Total cost
                             </td>
                             <td class="text-right">
-                                {{ $totalprice }}
+                                {{ number_format($totalprice, 0) }}
                             </td>
                         </tr>
                     </tbody>

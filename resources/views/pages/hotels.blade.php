@@ -236,9 +236,10 @@ data-image-src="img/hotels_bg.jpg" data-natural-width="1400" data-natural-height
 					<div class="col-lg-2 col-md-2">
 						<div class="price_list">
 							<div>
-								<sup>₱</sup>{{ $unit->price }}
-								<small class="mt-3">{{ $unit->period }}</small>
-								<p>
+                                <small>From</small>
+								<sup>₱</sup>{{ number_format($unit->price, 0) }}
+								{{-- <small class="mt-3">{{ $unit->period }}</small> --}}
+								<p class="mt-3">
 									<a href="{{ route('hotels.unit.show', $unit->id) }}" class="btn_1">Details</a>
 								</p>
 							</div>

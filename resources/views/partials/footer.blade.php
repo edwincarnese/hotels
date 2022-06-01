@@ -11,7 +11,7 @@
                 <ul>
                     {{-- <li><a href="#">About us</a></li> --}}
                     <li><a href="{{ route('home') }}">Home</a></li>
-                    <li><a href="{{ route('tours.index') }}">Tours</a></li>
+                    <li><a href="{{ route('tours.index') }}">Tourist Spots</a></li>
                     <li><a href="{{ route('hotels.index') }}">Hotels</a></li>
                 </ul>
             </div>

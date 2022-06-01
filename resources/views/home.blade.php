@@ -6,7 +6,7 @@
         <h3 class="animated fadeInDown">CARAGA TOURS</h3>
         <p class="animated fadeInDown">City Hotels / Hotel Guides</p>
         <a href="{{ route('hotels.index') }}" class="animated fadeInUp button_intro">View Hotels</a> 
-        <a href="{{ route('tours.index') }}" class="animated fadeInUp button_intro outline">View Tours</a>
+        <a href="{{ route('tours.index') }}" class="animated fadeInUp button_intro outline">View Tourist Spots</a>
         <a href="{{ route('home', ['popular' => true]) }}" class="animated fadeInUp button_intro">Popular</a>
     </div>
 </section>
@@ -19,28 +19,31 @@
     <h1 class="text-center font-weight-bold" style="color: red;">{{ $message }}</h1>
 @enderror
 
-<div class="mb-2 mt-2">
-    <form action="{{ route('home') }}" method="GET">
-        <input type="text" class="form-control mb-2" placeholder="Search by address" name="search" value="{{ Request::get('search') }}">
-        <button type="submit" class="btn_1 medium btn-block">Search</button>
-    </form>
+<div class="row mb-3 mt-3">
+    <div class="col-md-6">
+        <form action="{{ route('home') }}" method="GET" id="formSearch">
+            <input type="text" class="form-control" placeholder="Search by address" name="search" value="{{ Request::get('search') }}">
+        </form>
+    </div>
+    <div class="col-md-3">
+        <button type="submit" class="btn_1 medium btn-block" form="formSearch">Search</button>
+    </div>
+    <div class="col-md-3">
+        <button type="button" onclick="findMe()" class="btn_1 medium btn-block">Near Me</button>
+    </div>
 </div>
 
-<div class="mb-2 mt-2">
-    <button type="button" onclick="findMe()" class="btn_1 medium btn-block">Near Me</button>
-</div>
 <div id="map" class="map" style="height: 700px;"></div>
 
 <div class="container margin_60">
     <div class="main_title">
-        <h2><span>Popular</span> Tours</h2>
+        <h2><span>Popular</span> Tourist Spots</h2>
         {{-- <p>Quisque at tortor a libero posuere laoreet vitae sed arcu. Curabitur consequat.</p> --}}
     </div>
     <div class="row">
         @foreach($featured_tours as $tour)
             <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.1s">
                 <div class="tour_container">
-                    b
                     <div class="img_container">
                         <a href="{{ route('tours.show', $tour->id) }}">
                             <img src="{{ asset('storage/'.$tour->main_photo) }}" width="800" height="533" class="img-fluid" alt="Image">
@@ -81,7 +84,7 @@
     </div>
     
     <p class="text-center nopadding" id="view-map">
-        <a href="/tours" class="btn_1 medium"><i class="icon-eye-7"></i>View all tours </a>
+        <a href="/tours" class="btn_1 medium"><i class="icon-eye-7"></i>View all tourist spots</a>
     </p>
 </div>
 
@@ -114,7 +117,6 @@
                                     <i class="icon-star"> </i>
                                 @endfor
                             @endif   
-                         
                         </div> 
                     </div>
                 </div>

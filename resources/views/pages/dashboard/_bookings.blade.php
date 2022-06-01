@@ -24,7 +24,7 @@
                             {{ $booking->unit->name ?? '' }}
                         </a>
                     @endif
-                    <span class="mb-1">Capacity: {{ $booking->capacity }} People</span>
+                    <span class="mb-1">Guest: {{ $booking->capacity }}</span>
                     <span class="mb-1">Details: {{ $booking->firstname }} {{ $booking->lastname }}</span>
                     <span>Contact: {{ $booking->phone }}</span>
                 </h3>
@@ -35,6 +35,18 @@
                     <li><strong>Booking id</strong>000{{ $booking->id }}</li>
                     <li><strong>Check in</strong>{{ $booking->checkin_date }}</li>
                     <li><strong>Check out</strong>{{ $booking->checkout_date }}</li>
+                    @if($booking->is_paid)
+                        <li><strong>Payment</strong>Yes - Online Payment</li>
+                    @else
+                        <li><strong>Payment</strong>No - Pay at the Hotel</li>
+                        <div class="booking_buttons">
+                            <form action="{{ route('booking.paid') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="booking_id" value="{{ $booking->id }}">
+                                <button type="submit" class="btn_2 btn-block">Mark This Booking As Paid</button>
+                            </form>
+                        </div>
+                    @endif
                 </ul>
             </div>
             {{-- <div class="col-lg-2 col-md-2">

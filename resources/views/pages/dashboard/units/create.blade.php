@@ -41,22 +41,49 @@
                 <form method="POST" action="{{ route('dashboard.units.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
-                        <div class="col-md-12">
-                            <h4>Hotel Unit info</h4>
-                        </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
-                                <label>Hotel unit name</label>
+                                <label>Name</label>
                                 <input class="form-control" name="name" type="text" required>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label>Price</label>
                                 <input class="form-control" name="price" type="text">
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="@if(Auth::user()->role == 1) col-md-2 @else col-md-3 @endif">
+                            <div class="form-group">
+                                <label>Availability</label>
+                                <select class="form-control" name="is_available">
+                                    <option value="1">Available</option>
+                                    <option value="0">Not Available</option>
+                                </select>
+                            </div>
+                        </div>
+                        @if(Auth::user()->role == 1)
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Popular</label>
+                                    <select class="form-control" name="is_popular">
+                                        <option value="0">No</option>
+                                        <option value="1">Yes</option>
+                                    </select> 
+                                </div>
+                            </div>
+                        @endif
+                        <div class="@if(Auth::user()->role == 1) col-md-2 @else col-md-3 @endif">
+                            <div class="form-group">
+                                <label>Mode of Payment</label>
+                                <select class="form-control" name="is_available">
+                                    <option value="1">Pay Online</option>
+                                    <option value="0">Pay Hotel</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        {{-- <div class="col-md-2">
                             <div class="form-group">
                                 <label>Capacity</label>
                                 <select class="form-control" name="capacity">
@@ -85,22 +112,11 @@
                                     <option value="5">5</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <!-- End row -->
             
-                    <div class="row">
-                        @if(Auth::user()->role == 1)
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Popular</label>
-                                <select class="form-control" name="is_popular">
-                                    <option value="0" selected>No</option>
-                                    <option value="1">Yes</option>
-                                </select> 
-                            </div>
-                        </div>
-                        @endif
+                    {{-- <div class="row">
                         <div class="@if(Auth::user()->role == 1) col-md-3 @else col-md-4 @endif">
                             <div class="form-group">
                                 <label>Period</label>
@@ -122,21 +138,11 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="@if(Auth::user()->role == 1) col-md-3 @else col-md-4 @endif">
-                            <div class="form-group">
-                                <label>Availability</label>
-                                <select class="form-control" name="is_available">
-                                    <option value="1">Available</option>
-                                    <option value="">Not Available</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+                    </div> --}}
                     
-                   
                    {{-- <input type="text" name="tour_id" value="{{ Request::get('tour_id') }}"> --}}
      
-                    @if($tour_id)
+                    {{-- @if($tour_id)
                         <input type="hidden" name="tour_id" value="{{$tour_id}}">
                     @else
                         <div class="row">
@@ -151,9 +157,9 @@
                                 </div>
                             </div>
                         </div>
-                    @endif                   
+                    @endif                    --}}
                     <hr>
-                    <h4>Unit Photos</h4>
+                    <h4>Photos</h4>
                     <div class="form-inline upload_1">
                         <div class="form-group">
                             <input type="file" name="images[]" accept="image/*" multiple>
@@ -163,7 +169,7 @@
                     <hr>
                     <div class="row">
                         <div class="col-md-12">
-                            <h4>Unit description</h4>
+                            <h4>Description</h4>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">

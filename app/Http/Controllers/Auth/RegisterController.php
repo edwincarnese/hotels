@@ -65,7 +65,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $role = 3;
+        $role = 2;
         if($data['role'] == 1) {
             $role = 3;
         }

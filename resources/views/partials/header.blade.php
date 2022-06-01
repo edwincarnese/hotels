@@ -41,7 +41,7 @@
                             <a href="{{ route('home') }}" style="font-size: 35px;">Home</a>
                         </li>
                         <li class="submenu font-weight-bold">
-                            <a href="{{ route('tours.index') }}" style="font-size: 35px;">Tours</a>
+                            <a href="{{ route('tours.index') }}" style="font-size: 35px;">Tourist Spots</a>
                         </li>
                         <li class="submenu font-weight-bold">
                             <a href="{{ route('hotels.index') }}" style="font-size: 35px;">Hotels</a>
@@ -58,9 +58,9 @@
                     </ul>
                 </div><!-- End main-menu -->
                 <ul id="top_tools">
-                    {{-- <li>
+                    <li>
                         <a href="javascript:void(0);" class="search-overlay-menu-btn"><i class="icon_search"></i></a>
-                    </li> --}}
+                    </li>
                     {{-- <li>
                         <div class="dropdown dropdown-cart">
                             <a href="#" data-toggle="dropdown" class="cart_bt"><i class="icon_bag_alt"></i><strong>3</strong></a>

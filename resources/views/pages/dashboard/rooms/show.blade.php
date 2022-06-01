@@ -75,12 +75,12 @@
                                 
                                 <div class="booking_buttons">
                                     @if(Auth::user()->role == 1)
-                                        @if(!$room->is_approved)
+                                        {{-- @if(!$room->is_approved)
                                             <form class="mb-1" action="{{ route('dashboard.rooms.approve', $room->id) }}" method="POST">
                                                 @csrf
                                                 <button type="submit" class="btn_2 btn-block">Approve</button>
                                             </form>
-                                        @endif
+                                        @endif --}}
                 
                                         <a href="{{ route('dashboard.rooms.edit', $room->id) }}" class="btn_2 btn-block">Edit</a>
                                         <form action="{{ route('dashboard.rooms.destroy', $room->id) }}" method="POST">

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Unit;
 use App\Models\Booking;
+use App\Models\Room;
 use App\Mail\BookingMail;
 use App\Mail\ConfirmationMail;
 use App\Models\User;
@@ -17,8 +18,6 @@ class BookingController extends Controller
 {
   public function show(Request $request, $id)
   {
-    $adult = $request->adult;
-    $children = $request->children;
     $checkin_date = $request->checkin_date;
     $checkout_date = $request->checkout_date;
 
@@ -51,80 +50,129 @@ class BookingController extends Controller
       ];
     }
 
-    $unit = Unit::where('id', $id)->first();
-    $subtotal = $unit->price;
+    $room = Room::where('id', $id)->first();
+    $subtotal = $room->price;
     $totalprice = $subtotal * $days;
 
+    $unit = Unit::where('id', $room->unit_id)->first();
+
     return view('pages.booking', compact(
-      'unit', 
-      'adult', 
-      'children', 
+      'room', 
       'checkin_date', 
       'checkout_date',
-      'totalprice')
-    )->with($data);
+      'totalprice',
+      'unit'
+    ))->with($data);
   }
 
   public function book(Request $request)
   {
     $user = Auth::user();
-    $unit = Unit::where('id', $request->unit_id)->first();
-    $owner = User::find($unit->user_id);
+    $room = Room::where('id', $request->room_id)->first();
+    $owner = User::find($room->user_id);
 
-    $curl = new \Stripe\HttpClient\CurlClient([CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1]);
-    $curl->setEnableHttp2(false);
-    \Stripe\ApiRequestor::setHttpClient($curl);
+    $unit = Unit::where('id', $room->unit_id)->first();
 
-    $price = $request->totalprice;
-    $payment_method = $request->payment_method;
-    $save_card = $request->save_card;
-    $not_using_default_card = true;
+    if($unit->enable_online_payment) {
+      $curl = new \Stripe\HttpClient\CurlClient([CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1]);
+      $curl->setEnableHttp2(false);
+      \Stripe\ApiRequestor::setHttpClient($curl);
 
-    try {
-      $user->createOrGetStripeCustomer();
-      if($not_using_default_card) {
-        if($save_card) {
-          $user->updateDefaultPaymentMethod($payment_method);
-        } else {
-          $user->addPaymentMethod($payment_method);
+      $price = $request->totalprice;
+      $payment_method = $request->payment_method;
+      $save_card = $request->save_card;
+      $not_using_default_card = true;
+
+      try {
+        $user->createOrGetStripeCustomer();
+        if($not_using_default_card) {
+          if($save_card) {
+            $user->updateDefaultPaymentMethod($payment_method);
+          } else {
+            $user->addPaymentMethod($payment_method);
+          }
         }
-      }
-      $user->charge($price * 100, $payment_method);
-      $user->save();
+        $user->charge($price * 100, $payment_method);
+        $user->save();
 
+        $booking = new Booking();
+        $booking->unit_id = $room->id;
+        $booking->owner_id = $room->user_id;
+        $booking->user_id = $user->id;
+        $booking->firstname = $request->firstname;
+        $booking->lastname = $request->lastname;
+        $booking->phone = $request->phone;
+        $booking->payment = $request->totalprice;
+        $booking->capacity = $room->capacity;
+        $booking->checkin_date = $request->checkin_date;
+        $booking->checkout_date = $request->checkout_date;
+        $booking->save();
+
+        $business_tax = $request->totalprice * 0.03;
+
+        $transaction = new Transaction();
+        $transaction->user_id = $room->user_id;
+        $transaction->tour_id = null;
+        $transaction->unit_id = null;
+        $transaction->room_id = $room->id;
+        $transaction->price = $request->totalprice;
+        $transaction->business_tax = $business_tax;
+        $transaction->payment = $request->totalprice - $business_tax;
+        $transaction->save();
+
+        $booking_info = array(
+          'full_name' => $request->firstname . ' ' . $request->lastname,
+          'email' => Auth::user()->email,
+          'phone' => $request->phone,
+          'booking_id' => $booking->id,
+          'payment' => $request->totalprice,
+          'checkin_date' => $booking->checkin_date,
+          'checkout_date' => $booking->checkout_date,
+          'property' => $room->name,
+        );
+
+        $confirmation_info = array(
+          'full_name' => $owner->firstname . ' ' . $owner->lastname,
+          'email' => $owner->email,
+          'phone' => $owner->phone,
+          'booking_id' => $booking->id,
+          'payment' => $request->totalprice,
+          'checkin_date' => $booking->checkin_date,
+          'checkout_date' => $booking->checkout_date,
+          'property' => $room->name,
+        );
+
+        Mail::to($owner->email)->send(new BookingMail($booking_info));
+        Mail::to($user->email)->send(new ConfirmationMail($confirmation_info));
+      } 
+      catch (\Exception $exception) {
+        dd($exception);
+      }
+    }
+    else {
       $booking = new Booking();
-      $booking->unit_id = $unit->id;
-      $booking->owner_id = $unit->user_id;
+      $booking->unit_id = $room->id;
+      $booking->owner_id = $room->user_id;
       $booking->user_id = $user->id;
       $booking->firstname = $request->firstname;
       $booking->lastname = $request->lastname;
       $booking->phone = $request->phone;
       $booking->payment = $request->totalprice;
-      $booking->capacity = $request->adult;
+      $booking->capacity = $room->capacity;
       $booking->checkin_date = $request->checkin_date;
       $booking->checkout_date = $request->checkout_date;
+      $booking->is_paid = 0;
       $booking->save();
 
-      $business_tax = $request->totalprice * 0.03;
-
-      $transaction = new Transaction();
-      $transaction->user_id = $unit->user_id;
-      $transaction->tour_id = null;
-      $transaction->unit_id = $unit->id;
-      $transaction->price = $request->totalprice;
-      $transaction->business_tax = $business_tax;
-      $transaction->payment = $request->totalprice - $business_tax;
-      $transaction->save();
-
       $booking_info = array(
-        'full_name' => Auth::user()->firstname . ' ' . Auth::user()->lastname,
+        'full_name' => $request->firstname . ' ' . $request->lastname,
         'email' => Auth::user()->email,
-        'phone' => Auth::user()->phone,
+        'phone' => $request->phone,
         'booking_id' => $booking->id,
         'payment' => $request->totalprice,
         'checkin_date' => $booking->checkin_date,
         'checkout_date' => $booking->checkout_date,
-        'property' => $unit->name,
+        'property' => $room->name,
       );
 
       $confirmation_info = array(
@@ -135,16 +183,23 @@ class BookingController extends Controller
         'payment' => $request->totalprice,
         'checkin_date' => $booking->checkin_date,
         'checkout_date' => $booking->checkout_date,
-        'property' => $unit->name,
+        'property' => $room->name,
       );
 
       Mail::to($owner->email)->send(new BookingMail($booking_info));
       Mail::to($user->email)->send(new ConfirmationMail($confirmation_info));
-    } 
-    catch (\Exception $exception) {
-      return back()->with('error', $exception->getMessage());
     }
 
     return redirect()->route('dashboard.index')->with('success','You have successfully booked this property');
+  }
+
+  public function bookingPaid(Request $request)
+  {
+    $booking = Booking::where('id', $request->booking_id)->first();
+
+    $booking->is_paid = 1;
+    $booking->save();
+
+    return redirect()->route('dashboard.index')->with('success','You have successfully marked this booking as paid');
   }
 }

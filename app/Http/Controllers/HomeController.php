@@ -21,7 +21,7 @@ class HomeController extends Controller
                 $q->where('is_popular', 1);
             })
             ->when($search, function($q) use($search) {
-                $q->where('address', 'LIKE', '%' . $search . '%');
+                $q->where('address', 'LIKE', '%' . $search . '%')->orWhere('title', 'LIKE', '%' . $search . '%');
             })
             ->get();
 
@@ -36,7 +36,7 @@ class HomeController extends Controller
                 $q->where('is_popular', 1);
             })
             ->when($search, function($q) use($search) {
-                $q->where('address', 'LIKE', '%' . $search . '%');
+                $q->where('address', 'LIKE', '%' . $search . '%')->orWhere('name', 'LIKE', '%' . $search . '%');;
             })
             ->get();
 

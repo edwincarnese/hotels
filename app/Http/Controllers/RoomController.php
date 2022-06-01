@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Unit;
-use App\Models\Tour;
 use App\Models\Room;
 use App\Models\Review;
 use Auth;
@@ -17,15 +16,14 @@ class RoomController extends Controller
      */    
     public function create(Request $request)
     {
-        $tour_id = $request->tour;
-        // dd($tour_id);
+        $unit_id = $request->unit;
       
-        $tours = Tour::query()
+        $units = Unit::query()
             ->where('is_approved', 1)
-            ->orderBy('title', 'ASC')
-            ->where('is_approved', 1)
+            ->where('id', $unit_id)
             ->get();
-        return view('pages.dashboard.rooms.create', compact('tours','tour_id'));
+
+        return view('pages.dashboard.rooms.create', compact('units', 'unit_id'));
     }
 
     /**
@@ -60,13 +58,15 @@ class RoomController extends Controller
             $data['images'] = json_encode($uploaded_images);
         }
 
-        if($user->role == 1) {
-            $data['is_approved'] = 1;
-        }
+        // if($user->role == 1) {
+        //     $data['is_approved'] = 1;
+        // }
+
+        $data['is_approved'] = 1;
 
         $user->rooms()->create($data);
 
-        return redirect()->route('dashboard.index')->with('success', 'Your Rooms has been successfully created.');
+        return redirect()->route('dashboard.index')->with('success', 'Your Room has been successfully created.');
    
     }
      /**
@@ -76,7 +76,6 @@ class RoomController extends Controller
      */
     public function index($id)
     {
-       
         $room = Room::query()
             ->with('user')
             ->where('id', $id)
@@ -92,7 +91,6 @@ class RoomController extends Controller
         $room_id = $room->id;
       
         $reviews = Review::with('user')->where('tour_id', $room_id)->latest()->get();
-        // return view('pages.hotels-room', compact('unit', 'units', 'tour_id', 'unit_id', 'reviews'));
         return view('pages.hotels-room', compact('room', 'rooms','tour_id', 'room_id','reviews'));
     }
 
@@ -105,8 +103,8 @@ class RoomController extends Controller
     public function show($id)
     {
         $rooms = Room::query()
-            ->where('is_approved', 1)
-            ->where('tour_id', $id)
+            // ->where('is_approved', 1)
+            ->where('unit_id', $id)
             ->latest()
             ->get();
 
@@ -121,20 +119,10 @@ class RoomController extends Controller
      */
     public function edit($id)
     {
-        // $unit = Unit::find($id);
         $rooms = Room::find($id);
 
-        $tours = Tour::query()
-            ->where('is_approved', 1)
-            ->orderBy('title', 'ASC')
-            ->where('is_approved', 1)
-            ->get();
-        
-        return view('pages.dashboard.rooms.edit', compact('tours','rooms'));
+        return view('pages.dashboard.rooms.edit', compact('rooms'));
     }
-
-
-    
 
     public function update(Request $request)
     {

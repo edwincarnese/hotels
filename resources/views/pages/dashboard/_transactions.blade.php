@@ -19,8 +19,12 @@
                         <a href="{{ route('tours.show', $transaction->tour_id) }}" target="_blank">
                             {{ $transaction->tour->title ?? '' }}
                         </a>
-                    @else
+                    @elseif($transaction->unit_id)
                         <a href="{{ route('hotels.unit.show', $transaction->unit_id) }}" target="_blank">
+                            {{ $transaction->unit->name ?? '' }}
+                        </a>
+                    @else
+                        <a href="{{ route('hotels.unit.show', $transaction->room_id) }}" target="_blank">
                             {{ $transaction->unit->name ?? '' }}
                         </a>
                     @endif

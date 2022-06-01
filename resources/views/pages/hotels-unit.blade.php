@@ -15,11 +15,11 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
                     <h1>{{ $unit->name }}</h1>
                     <span>{{ $unit->address }} {{ $unit->city }}, {{ $unit->zip_code }} {{ $unit->country }}</span>
                 </div>
-                <div class="col-md-4">
+                {{-- <div class="col-md-4">
                     <div id="price_single_main" class="hotel">
                         {{ $unit->period }} <span><sup>₱</sup>{{ $unit->price }}</span>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
@@ -82,7 +82,6 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
             <div class="row">
                 <div class="col-lg-3">
                     <h3>Description</h3>
-                    
                 </div>
                 <div class="col-lg-9">
                     <p>
@@ -111,11 +110,61 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
             <p class="d-none d-xl-block d-lg-block d-xl-none">
                 <a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
             </p>
-            <div class="box_style_1 expose">
-                @auth
-                    <form action="{{ route('booking.hotel.show', $unit->id) }}" method="POST">
+            <div class="box_style_4">
+                <i class="icon_set_1_icon-90"></i>
+                <h4><span>Call</span> by phone</h4>
+                <a href="tel://+63 936 127 2791" class="phone">+63 936 127 2791</a>
+                <small>Monday to Friday 9.00am - 7.30pm</small>
+            </div>
+        </aside>
+    </div>
+    <!--End row -->
+
+    <h3>List of Rooms</h3>
+    <div class="row">
+        @foreach($rooms as $room)
+            <div class="col-lg-4">
+                <div class="box_style_1 expose">
+                    @if($room->main_photo)
+                        <img src="{{ asset('storage/'.$room->main_photo) }}" class="img-fluid styled profile_pic mt-0">
+                    @else
+                        <img src="{{ asset('assets/img/tourist_guide_pic.jpg') }}" class="img-fluid styled profile_pic mt-0">
+                    @endif
+                    <form action="{{ route('booking.hotel.show', $room->id) }}" method="POST">
                         @csrf
-                        <h3 class="inner">Choose Date</h3>
+                        {{-- <h3 class="inner">Choose Date</h3> --}}
+                        <div class="row mt-2">
+                            <div class="col-md-12 text-center">
+                                <h3 class="mt-0 font-weight-bold">{{ $room->name }}</h3>
+                            </div>
+                            <div class="col-md-12 text-center mb-2">
+                                <h3 class="mt-0">₱ {{ number_format($room->price, 0) }} / {{ $room->period }}</h3>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>{{ $room->capacity }} Guest</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>{{ $room->bedroom }} Bedroom</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>{{ $room->bathroom }} Bathroom</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            @if($room->facilities)
+                                @foreach(json_decode($room->facilities) as $facility)
+                                    <div class="col-md-4">
+                                        <span class="text-success font-weight-bold">{{ $facility }}</span>
+                                    </div>
+                                @endforeach
+                            @endif
+                        </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -130,24 +179,17 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
                                 </div>
                             </div>
                         </div>
-                        <h4 class="text-center">Capacity: {{ $unit->capacity }} people</h4>
-                        <button type="submit" class="btn_full">Check now</button>
-                    </form>
-                @else
-                    <a class="btn_full" href="/register">Register to book this hotel</a>
-                @endauth()
+                        @auth
+                            <button type="submit" class="btn_full">Check now</button>
+                        @else
+                            <a class="btn_full" href="/register">Register to book this hotel</a>
+                        @endauth()
+                    </form>   
+                </div>
             </div>
-
-            <div class="box_style_4">
-                <i class="icon_set_1_icon-90"></i>
-                <h4><span>Book</span> by phone</h4>
-                <a href="tel://+63 936 127 2791" class="phone">+63 936 127 2791</a>
-                <small>Monday to Friday 9.00am - 7.30pm</small>
-            </div>
-
-        </aside>
+            <hr>
+        @endforeach
     </div>
-    <!--End row -->
 
     <hr>
 
@@ -171,21 +213,17 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
                     
                     <div class="rating">                      
                         @if($review->rate)
-                            {{-- {{$getStar = $review->rate}} --}}
                             @for($rate = 1; $rate <= $review->rate; $rate++)
-                            <i class="icon-star voted"></i>                       
+                                <i class="icon-star voted"></i>                       
                             @endfor
                             @for($rate=$review->rate; $rate<5; $rate++)
-                            <i class="icon-star"></i>
+                                <i class="icon-star"></i>
                             @endfor
-
                         @endif
-                      
                     </div>
                     <p>
                         {{ $review->message }}
                     </p>
-              
                 </div>
             </div>
         @endforeach

@@ -50,6 +50,14 @@
                     <div class="booking_buttons">
                         <a href="{{ route('hotels.unit.show', $unit->id) }}" target="_blank" class="btn_2">View</a>
                     </div>
+                    <div class="booking_buttons">
+                        @if(Auth::user()->role == 1 || Auth::user()->id == $unit->user_id)
+                            <a href="{{ route('dashboard.rooms.create', ['unit' => $unit->id])  }}" target="_blank" class="btn_2"> Add New Room</a>
+                            <div class="booking_buttons">
+                                <a href="{{ route('dashboard.rooms.show', $unit->id) }}" target="_blank" class="btn_2">View Rooms</a>
+                            </div>
+                        @endif
+                    </div>
                 @endif
                 
                 <div class="booking_buttons">

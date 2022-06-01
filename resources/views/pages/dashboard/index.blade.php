@@ -62,7 +62,7 @@ data-parallax="scroll" data-image-src="img/admin_top.jpg" data-natural-width="14
                 <li><a href="#section-3" class="icon-booking"><span>Bookings</span></a>
                 </li>    
                 @if(Auth::user()->role != 3)           
-                    <li><a href="#section-4" class="icon-th-list"><span>Tours</span></a>
+                    <li><a href="#section-4" class="icon-th-list"><span>Tourist Spots</span></a>
                     </li>
                     {{-- <li><a href="#section-5" class="icon-th-list"><span>Rooms</span></a>
                     </li> --}}

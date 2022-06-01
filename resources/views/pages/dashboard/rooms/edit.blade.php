@@ -44,12 +44,9 @@
                     @method('PUT')
                     <input type="hidden" name="id" value="{{ $rooms->id }}">
                     <div class="row">
-                        <div class="col-md-12">
-                            <h4>Room info</h4>
-                        </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Room name</label>
+                                <label>Name</label>
                                 <input class="form-control" name="name" type="text" value="{{$rooms->name}}" required>
                             </div>
                         </div>
@@ -124,7 +121,7 @@
                         </div>
                     </div>
                     <hr>
-                    <h4>Room Photos</h4>
+                    <h4>Photos</h4>
                     <div class="form-inline upload_1">
                         <div class="form-group">
                             <input type="file" name="images[]" accept="image/*" multiple required>
@@ -134,7 +131,7 @@
                     <hr>
                     <div class="row">
                         <div class="col-md-12">
-                            <h4>Room description</h4>
+                            <h4>Description</h4>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
@@ -210,10 +207,6 @@
 @endsection
 
 @section('js')
-<script src="http://maps.googleapis.com/maps/api/js"></script>
-<script type="text/javascript" src="{{ asset('assets/js/map_home.js') }}"></script>
-<script type="text/javascript" src="{{ asset('assets/js/infobox.js') }}"></script>
-
 <!-- Specific scripts -->
 <script src="{{ asset('assets/js/tabs.js') }}"></script>
 <script>

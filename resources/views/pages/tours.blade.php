@@ -116,12 +116,12 @@
                         <div class="filter_type mt-2 mb-2">
                             <input type="text" name="name" class="form-control" placeholder="Name" value="{{ Request::get('name') }}">
                         </div>
-                        <div class="filter_type mt-2 mb-2">
+                        {{-- <div class="filter_type mt-2 mb-2">
                             <input type="text" name="min_price" class="form-control" placeholder="Min. Price" value="{{ Request::get('min_price') }}">
                         </div>
                         <div class="filter_type mt-2 mb-2">
                             <input type="text" name="max_price" class="form-control" placeholder="Max. Price" value="{{ Request::get('max_price') }}">
-                        </div>
+                        </div> --}}
                         <div>
                             <button class="btn_1 btn-block">Search</button>
                         </div>
@@ -193,37 +193,19 @@
 					<div class="clearfix visible-xs-block"></div>
 					<div class="col-lg-6 col-md-6">
 						<div class="tour_list_desc">
-							{{-- <div class="score"><span>{{ floor($tour->review) }}</span>
-							</div> --}}
-							{{-- <div class="rating">
-                                <i class="icon-star voted"></i>
-                                <i class="icon-star voted"></i>
-                                <i class="icon-star voted"></i>
-                                <i class="icon-star voted"></i>
-                                <i class="icon-star"></i>
-							</div> --}}
-                   
                             <div class="rating">                      
                                 @if($tour->review)                                   
                                     @for($rate = 1; $rate <= $tour->review; $rate++)
-                                    <i class="icon-star voted"></i>
-                               
+                                        <i class="icon-star voted"></i>
                                     @endfor
-        
                                     @for($rate=$tour->review; $rate<5; $rate++)
-                                    <i class="icon-star"></i>
+                                        <i class="icon-star"></i>
                                     @endfor
-        
                                 @endif                              
                             </div>
-                          
-
-
-
 							<h3><strong>{{ $tour->title }}</strong></h3>
 							<p>{{ $tour->description }}</p>
 							<ul class="add_info">
-								
 								<li>
 									<div class="tooltip_styled tooltip-effect-4">
 										<span class="tooltip-item"><i class="icon_set_1_icon-83"></i></span>
@@ -250,8 +232,8 @@
 					<div class="col-lg-2 col-md-2">
 						<div class="price_list">
 							<div>
-                                <sup>₱{{ $tour->price }}</sup>
-                                <small></small>
+                                {{-- <sup>₱{{ $tour->price }}</sup>
+                                <small></small> --}}
 								<p>
 									<a href="{{ route('tours.show', $tour->id) }}" class="btn_1">Details</a>
 								</p>

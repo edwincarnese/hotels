@@ -95,7 +95,7 @@
                                 <select class="form-control" name="mode_of_payment">
                                     <option value="Gcash: {{ $user->gcash }}">Gcash</option>
                                     <option value="PayPal: {{ $user->paypal }}">PayPal</option>
-                                    <option value="Bank {{ $user->bank }}">Yes</option>
+                                    <option value="Bank">Bank</option>
                                 </select>
                             </div>
                         </div>

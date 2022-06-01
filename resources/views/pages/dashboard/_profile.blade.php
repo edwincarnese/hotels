@@ -121,7 +121,7 @@
             </div>
         </div>
 
-        <hr>
+        {{-- <hr>
         <div class="row">
             <div class="col-md-12">
                 <h4>Edit Facilities</h4>
@@ -176,7 +176,7 @@
                     </ul>
                 </div>
             </div>
-        </div>
+        </div> --}}
     @endif
 
     @if(Auth::user()->role != 3)

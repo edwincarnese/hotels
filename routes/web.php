@@ -56,8 +56,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('dashboard/tours/approve/{id}', [TourController::class, 'approve'])->name('dashboard.tours.approve');
     Route::delete('dashboard/tours/{id}', [TourController::class, 'destroy'])->name('dashboard.tours.destroy');
 
-    Route::get('dashboard/rooms/{id}', [RoomController::class, 'show'])->name('dashboard.rooms.show');
     Route::get('dashboard/rooms/create', [RoomController::class, 'create'])->name('dashboard.rooms.create');
+    Route::get('dashboard/rooms/{id}', [RoomController::class, 'show'])->name('dashboard.rooms.show');
     Route::post('dashboard/rooms/store', [RoomController::class, 'store'])->name('dashboard.rooms.store');
     Route::get('dashboard/rooms/edit/{id}', [RoomController::class, 'edit'])->name('dashboard.rooms.edit');
     Route::put('dashboard/rooms/update', [RoomController::class, 'update'])->name('dashboard.rooms.update');
@@ -69,4 +69,6 @@ Route::group(['middleware' => ['auth']], function() {
     
     Route::get('dashboard/transfer-payment/{id}', [TransactionController::class, 'show'])->name('dashboard.transaction.show');
     Route::post('dashboard/transfer-payment', [TransactionController::class, 'store'])->name('dashboard.transaction.store');
+
+    Route::post('dashboard/booking-paid', [BookingController::class, 'bookingPaid'])->name('booking.paid');
 });

@@ -41,22 +41,49 @@
                     @method('PUT')
                     <input type="hidden" name="id" value="{{ $unit->id }}">
                     <div class="row">
-                        <div class="col-md-12">
-                            <h4>Unit Hotel info</h4>
-                        </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
-                                <label>Hotel unit name</label>
+                                <label>Name</label>
                                 <input class="form-control" name="name" value="{{ $unit->name }}" type="text" required>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label>Price</label>
                                 <input class="form-control" name="price" value="{{ $unit->price }}" type="text">
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="@if(Auth::user()->role == 1) col-md-2 @else col-md-3 @endif">
+                            <div class="form-group">
+                                <label>Availability</label>
+                                <select class="form-control" name="is_available">
+                                    <option value="1" @if($unit->is_available == 1) selected @endif>Available</option>
+                                    <option value="0" @if($unit->is_available == 0) selected @endif>Not Available</option>
+                                </select>
+                            </div>
+                        </div>
+                        @if(Auth::user()->role == 1)
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Popular</label>
+                                    <select class="form-control" name="is_popular">
+                                        <option value="0" @if(!$unit->is_popular) selected @endif>No</option>
+                                        <option value="1" @if($unit->is_popular) selected @endif>Yes</option>
+                                    </select> 
+                                </div>
+                            </div>
+                        @endif
+                        <div class="@if(Auth::user()->role == 1) col-md-2 @else col-md-3 @endif">
+                            <div class="form-group">
+                                <label>Mode of Payment</label>
+                                <select class="form-control" name="is_available">
+                                    <option value="1" @if($unit->enable_online_payment == 1) selected @endif>Pay Online</option>
+                                    <option value="0" @if($unit->enable_online_payment == 0) selected @endif>Pay Hotel</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        {{-- <div class="col-md-2">
                             <div class="form-group">
                                 <label>Capacity</label>
                                 <select class="form-control" name="capacity">
@@ -84,22 +111,10 @@
                                     <option value="5" @if($unit->bathroom == 5) selected @endif>5</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
-                    <!-- End row -->
             
-                    <div class="row">
-                        @if(Auth::user()->role == 1)
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Popular</label>
-                                    <select class="form-control" name="is_popular">
-                                        <option value="0" @if(!$unit->is_popular) selected @endif>No</option>
-                                        <option value="1" @if($unit->is_popular) selected @endif>Yes</option>
-                                    </select> 
-                                </div>
-                            </div>
-                        @endif
+                    {{-- <div class="row">
                         <div class="@if(Auth::user()->role == 1) col-md-3 @else col-md-4 @endif">
                             <div class="form-group">
                                 <label>Period</label>
@@ -121,19 +136,9 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="@if(Auth::user()->role == 1) col-md-3 @else col-md-4 @endif">
-                            <div class="form-group">
-                                <label>Availability</label>
-                                <select class="form-control" name="is_available">
-                                    <option value="1" @if($unit->is_available == 1) selected @endif>Available</option>
-                                    <option value="0" @if($unit->is_available == 0) selected @endif>Not Available</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End row -->
+                    </div> --}}
 
-                    <hr>
+                    {{-- <hr>
                     <h4>Tour</h4>
                     <div class="row">
                         <div class="col-md-12">
@@ -146,10 +151,10 @@
                                 </select>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <hr>
-                    <h4>Unit Photos</h4>
+                    <h4>Photos</h4>
                     <div class="form-inline upload_1">
                         <div class="form-group">
                             <input type="file" name="images[]" accept="image/*" multiple>
@@ -159,7 +164,7 @@
                     <hr>
                     <div class="row">
                         <div class="col-md-12">
-                            <h4>Unit description</h4>
+                            <h4>Description</h4>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">

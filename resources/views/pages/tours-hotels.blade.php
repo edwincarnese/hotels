@@ -17,7 +17,7 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
                 <div class="col-md-4">
                     <div id="price_single_main" class="hotel">
                         {{-- {{ $tour->period }}  --}}
-                        <span><sup>₱</sup>{{ $tour->price }}</span>
+                        {{-- <span><sup>₱</sup>{{ $tour->price }}</span> --}}
                     </div>
                 </div>
             </div>
@@ -129,7 +129,7 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
                 <a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
             </p>
             
-            <div class="box_style_1 expose">
+            {{-- <div class="box_style_1 expose">
                 @auth
                     <form action="{{route('booking.tour.show',$tour->id)}}" method="POST">
                         @csrf
@@ -148,34 +148,16 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="row">
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>Adults</label>
-                                    <div class="numbers-row">
-                                        <input type="text" value="1" id="adults" class="qty2 form-control" name="adult">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>Children</label>
-                                    <div class="numbers-row">
-                                        <input type="text" value="0" id="children" class="qty2 form-control" name="children">
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
                         <br>
                         <button type="submit" class="btn_full">Check now</button>
                     </form>
                 @else
                     <a class="btn_full" href="/register">Register to book this hotel</a>
                 @endauth()
-            </div>
+            </div> --}}
             <div class="box_style_4">
                 <i class="icon_set_1_icon-90"></i>
-                <h4><span>Book</span> by phone</h4>
+                <h4><span>Call</span> by phone</h4>
                 <a href="tel://+63 936 127 2791" class="phone">+63 936 127 2791</a>
                 <small>Monday to Friday 9.00am - 7.30pm</small>
             </div>
@@ -184,7 +166,7 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
     </div>
 
     
-    <h1>List of Rooms</h1>
+    {{-- <h1>List of Rooms</h1>
     <div class="row">
         @foreach($rooms as $room)
             <div class="col-lg-4">
@@ -200,9 +182,6 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
                 <div class="row">
                     <div class="col-md-12">
                         <ul class="list_icons">
-                            {{-- <li><i class="icon_set_1_icon-86"></i> Capcity</li>
-                            <li><i class="icon_set_2_icon-116"></i> Bedroom</li>
-                            <li><i class="icon_set_2_icon-106"></i> Bathroom</li> --}}
                             <li>{{$room->capacity}}</i> Capcity</li>
                             <li>{{$room->bedroom}}</i> Bedroom</li>
                             <li>{{$room->bathroom}}</i> Bathroom</li>
@@ -212,14 +191,7 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
             </div>
             <hr>
         @endforeach
-    </div>
-
-
-
-    
-       
-{{-- -------------------------------------------------------------------------------------  --}}
-   
+    </div> --}}
 
     <div class="row">
         <div class="col-lg-3">
