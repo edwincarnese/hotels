@@ -137,6 +137,10 @@ if(locationDataHotels) {
                 mapObject.setCenter(new google.maps.LatLng(item.location_latitude, item.location_longitude));
             }));
 
+            if(autoRoute) {
+                calcRoute(item.location_latitude, item.location_longitude);
+            }
+
             if(!item.url_point) {
                 var circle = new google.maps.Circle({
                     map: mapObject,

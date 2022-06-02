@@ -293,6 +293,7 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
     const urlEndpoint = '/hotels-unit/';
     const locationDataHotels = {!! $units !!};
     const locationDataTours = null;
+    autoRoute = true;
 </script>
 
 <script type="text/javascript" src="{{ asset('assets/js/infobox.js') }}"></script>

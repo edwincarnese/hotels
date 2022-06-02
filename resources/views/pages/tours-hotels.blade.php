@@ -296,6 +296,7 @@ const urlTourEndpoint = '/tours/';
 // const locationDataHotels = {!! $units !!};
 const locationDataHotels = [];
 const locationDataTours = {!! $tours !!};
+autoRoute = true;
 </script>
 
 <!--Review modal validation -->
