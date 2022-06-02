@@ -44,7 +44,7 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
 <div class="container margin_60">
     <div class="row">
         <div class="col-lg-8" id="single_tour_desc">
-            <div id="single_tour_feat">
+            {{-- <div id="single_tour_feat">
                 <ul>
                     <li><i class="icon_set_2_icon-116"></i>Plasma TV</li>
                     <li><i class="icon_set_1_icon-86"></i>Free Wifi</li>
@@ -54,7 +54,7 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
                     <li><i class="icon_set_1_icon-13"></i>Accessibiliy</li>
                     <li><i class="icon_set_1_icon-27"></i>Parking</li>
                 </ul>
-            </div>
+            </div> --}}
             <p class="d-none d-md-block d-block d-lg-none"><a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
             </p>
             <!-- Map button for tablets/mobiles -->
@@ -87,18 +87,18 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
                     <p>
                         {{ $unit->description }}
                     </p>
-                    <h4>Hotel facilities</h4>
-                    <div class="row">
-                        <div class="col-md-6">
-                            @if($unit->facilities)
+                    @if($unit->facilities)
+                        <h4>Hotel facilities</h4>
+                        <div class="row">
+                            <div class="col-md-6">
                                 <ul class="list_ok">
                                     @foreach(json_decode($unit->facilities) as $facility)
                                         <li>{{ $facility }}</li>
                                     @endforeach
                                 </ul>
-                            @endif
+                            </div>
                         </div>
-                    </div>
+                    @endif
                     <!-- End row  -->
                 </div>
                 <!-- End col-md-9  -->
@@ -120,6 +120,7 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
     </div>
     <!--End row -->
 
+    @if(count($rooms) > 0)
     <h3>List of Rooms</h3>
     <div class="row">
         @foreach($rooms as $room)
@@ -190,6 +191,7 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
             <hr>
         @endforeach
     </div>
+    @endif
 
     <hr>
 

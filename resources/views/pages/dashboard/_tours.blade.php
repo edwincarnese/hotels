@@ -4,7 +4,7 @@
     </div>
     @if(Auth::user()->is_approved)
         <div class="col-6">
-            <a href="{{ route('dashboard.tours.create') }}" class="btn_1 float-right text-white">Add New Tour</a>
+            <a href="{{ route('dashboard.tours.create') }}" class="btn_1 float-right text-white">Add New Tourist Spots</a>
         </div>
     @endif
 </div>
@@ -44,7 +44,7 @@
             <div class="col-lg-2 col-md-2">
                 @if($tour->is_approved)
                     <div class="booking_buttons">
-                        <a href="{{ route('tours.show', $tour->id) }}" target="_blank" class="btn_2">View Tour</a>
+                        <a href="{{ route('tours.show', $tour->id) }}" target="_blank" class="btn_2">View Tourist Spots</a>
                     </div>
                     {{-- <div class="booking_buttons">
                         @if(Auth::user()->is_approved)

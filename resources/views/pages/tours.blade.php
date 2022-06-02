@@ -8,7 +8,7 @@
     <div class="parallax-content-1">
         <div class="animated fadeInDown">
             <h1>Discover Our Tours</h1>
-            <p>Ridiculus sociosqu cursus neque cursus curae ante scelerisque vehicula.</p>
+            {{-- <p>Ridiculus sociosqu cursus neque cursus curae ante scelerisque vehicula.</p> --}}
         </div>
     </div>
 </section>
@@ -19,7 +19,7 @@
 <div id="position">
     <div class="container">
         <ul>
-            <li><a href="#">Hotels</a>
+            <li><a href="/tours">Tours</a>
             </li>
         </ul>
     </div>
@@ -204,8 +204,8 @@
                                 @endif                              
                             </div>
 							<h3><strong>{{ $tour->title }}</strong></h3>
-							<p>{{ $tour->description }}</p>
-							<ul class="add_info">
+							<p>Location: {{ $tour->address }}</p>
+							{{-- <ul class="add_info">
 								<li>
 									<div class="tooltip_styled tooltip-effect-4">
 										<span class="tooltip-item"><i class="icon_set_1_icon-83"></i></span>
@@ -226,7 +226,7 @@
 										<span class="tooltip-item"><i class="icon_set_1_icon-27"></i></span>
 									</div>
 								</li>
-							</ul>
+							</ul> --}}
 						</div>
 					</div>
 					<div class="col-lg-2 col-md-2">

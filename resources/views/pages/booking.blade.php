@@ -99,6 +99,15 @@ style="background-image: url({{ asset('storage/'.$room->main_photo) }}); backgro
                     </div>
                     <div class="step">
                         <div class="form row">
+                            <div class="form-group col-md-6">
+                                <button class="btn_1 btn-block green medium pay" type="button" onclick="paymentForm('card')">Pay with Card</button>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <button class="btn_1 btn-block green medium pay" type="button" onclick="paymentForm('gcash')">Pay with Gcash</button>
+                            </div>
+                        </div>
+
+                        <div class="form row" style="display: none" id="pay-via-card">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <input class="StripeElement mb-3 form-control" id="card_holder_name" name="card_holder_name" placeholder="Card holder name">
@@ -110,14 +119,25 @@ style="background-image: url({{ asset('storage/'.$room->main_photo) }}); backgro
                                     <div id="card-errors" role="alert"></div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <img src="{{ asset('assets/img/cards.png') }}" width="207" height="43" alt="Cards" class="cards">
+                            </div>
+                        </div>
+
+                        <div class="form row" style="display: none" id="pay-via-gcash">
+                            <div class="col-sm-12">
+                                <h4 class="text-center font-weight-bold">Send Your Payment Through Gcash: +63 936 127 2791</h4>
+                                <div class="form-group">
+                                    <label>Gcash Reference Number</label>
+                                    <input type="text" name="gcash" id="gcash" class="form-control" placeholder="Gcash Reference Number">
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div id="policy">
+                    <div id="policy" style="display: none">
                         <h4>No cancellation policy</h4>
+                        <input type="text" name="payment_type" id="payment_type" hidden>
                         <div class="form-group">
                             <label>
                             <input type="checkbox" required name="policy_terms" id="policy_terms"> I accept terms and conditions and general policy.</label>
@@ -217,6 +237,27 @@ style="background-image: url({{ asset('storage/'.$room->main_photo) }}); backgro
 
 
 <script>
+
+function paymentForm(type) {
+    $('#policy').show();
+
+    if(type == 'card') {
+        $('#payment_type').val('card');
+        $('#pay-via-card').show();
+        $('#pay-via-gcash').hide();
+
+        $("#card_holder_name").prop('required',true);
+        $("#gcash").prop('required',false);
+    } 
+    else if(type == 'gcash') {
+        $('#payment_type').val('gcash');
+        $('#pay-via-gcash').show();
+        $('#pay-via-card').hide();
+
+        $("#card_holder_name").prop('required',false);
+        $("#gcash").prop('required',true);
+    }
+}
     
 if($('#is-intent').val()) {
     let stripe = Stripe("{{ env('STRIPE_KEY') }}");
@@ -241,36 +282,41 @@ if($('#is-intent').val()) {
     let paymentMethod = null;
 
     $('.card-form').on('submit', function (e) {
-        let existingCard = parseInt($('#existing-card').val());
-        $('button.pay').attr('disabled', true);
-
-        if(existingCard == 1) {
+        if($('#payment_type').val() == 'gcash') {
             return true;
-        } 
-        else {
-            if (paymentMethod) {
-                return true;
-            }
-            stripe.confirmCardSetup(
-                $('#is-intent').val(),
-                {
-                    payment_method: {
-                        card: card,
-                        billing_details: {name: $('#card_holder_name').val()}
-                    }
-                }
-            ).then(function (result) {
-                if (result.error) {
-                    $('#card-errors').text(result.error.message);
-                    $('button.pay').removeAttr('disabled');
-                } else {
-                    paymentMethod = result.setupIntent.payment_method;
-                    $('.payment-method').val(paymentMethod);
-                    $('.card-form').submit();
-                }
-            });
         }
-        return false;
+        else {
+            let existingCard = parseInt($('#existing-card').val());
+            $('button.pay').attr('disabled', true);
+
+            if(existingCard == 1) {
+                return true;
+            } 
+            else {
+                if (paymentMethod) {
+                    return true;
+                }
+                stripe.confirmCardSetup(
+                    $('#is-intent').val(),
+                    {
+                        payment_method: {
+                            card: card,
+                            billing_details: {name: $('#card_holder_name').val()}
+                        }
+                    }
+                ).then(function (result) {
+                    if (result.error) {
+                        $('#card-errors').text(result.error.message);
+                        $('button.pay').removeAttr('disabled');
+                    } else {
+                        paymentMethod = result.setupIntent.payment_method;
+                        $('.payment-method').val(paymentMethod);
+                        $('.card-form').submit();
+                    }
+                });
+            }
+            return false;
+        }
     });
 }
 </script>

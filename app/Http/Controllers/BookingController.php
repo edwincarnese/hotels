@@ -84,19 +84,22 @@ class BookingController extends Controller
       $not_using_default_card = true;
 
       try {
-        $user->createOrGetStripeCustomer();
-        if($not_using_default_card) {
-          if($save_card) {
-            $user->updateDefaultPaymentMethod($payment_method);
-          } else {
-            $user->addPaymentMethod($payment_method);
+        if($request->payment_type == 'card') {
+          $user->createOrGetStripeCustomer();
+          if($not_using_default_card) {
+            if($save_card) {
+              $user->updateDefaultPaymentMethod($payment_method);
+            } else {
+              $user->addPaymentMethod($payment_method);
+            }
           }
+          $user->charge($price * 100, $payment_method);
+          $user->save();
         }
-        $user->charge($price * 100, $payment_method);
-        $user->save();
 
         $booking = new Booking();
-        $booking->unit_id = $room->id;
+        $booking->room_id = $room->id;
+        $booking->unit_id = $room->unit_id;
         $booking->owner_id = $room->user_id;
         $booking->user_id = $user->id;
         $booking->firstname = $request->firstname;
@@ -106,6 +109,9 @@ class BookingController extends Controller
         $booking->capacity = $room->capacity;
         $booking->checkin_date = $request->checkin_date;
         $booking->checkout_date = $request->checkout_date;
+        if($request->payment_type == 'gcash') {
+          $booking->gcash = $request->gcash;
+        }
         $booking->save();
 
         $business_tax = $request->totalprice * 0.03;
@@ -113,11 +119,16 @@ class BookingController extends Controller
         $transaction = new Transaction();
         $transaction->user_id = $room->user_id;
         $transaction->tour_id = null;
-        $transaction->unit_id = null;
+        $transaction->unit_id = $room->unit_id;
         $transaction->room_id = $room->id;
         $transaction->price = $request->totalprice;
         $transaction->business_tax = $business_tax;
         $transaction->payment = $request->totalprice - $business_tax;
+        if($request->payment_type == 'gcash') {
+          $transaction->payment_method = 'Gcash';
+        } else {
+          $transaction->payment_method = 'Credit/Debit Card';
+        }
         $transaction->save();
 
         $booking_info = array(
@@ -146,12 +157,13 @@ class BookingController extends Controller
         Mail::to($user->email)->send(new ConfirmationMail($confirmation_info));
       } 
       catch (\Exception $exception) {
-        dd($exception);
+        // dd($exception);
       }
     }
     else {
       $booking = new Booking();
-      $booking->unit_id = $room->id;
+      $booking->unit_id = $room->unit_id;
+      $booking->room_id = $room->id;
       $booking->owner_id = $room->user_id;
       $booking->user_id = $user->id;
       $booking->firstname = $request->firstname;

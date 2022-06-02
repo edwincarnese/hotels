@@ -15,7 +15,7 @@
             </div>
             <div class="col-lg-6 col-md-5">
                 <h3 class="hotel_booking">
-                    @if($booking->tour_id)
+                    {{-- @if($booking->tour_id)
                         <a href="{{ route('tours.show', $booking->tour_id) }}" target="_blank">
                             {{ $booking->tour->title ?? '' }}
                         </a>
@@ -23,7 +23,10 @@
                         <a href="{{ route('hotels.unit.show', $booking->unit_id) }}" target="_blank">
                             {{ $booking->unit->name ?? '' }}
                         </a>
-                    @endif
+                    @endif --}}
+                    <a href="{{ route('hotels.unit.show', $booking->unit_id) }}" target="_blank">
+                        Hotel Room: {{ $booking->room->name ?? '' }}
+                    </a>
                     <span class="mb-1">Guest: {{ $booking->capacity }}</span>
                     <span class="mb-1">Details: {{ $booking->firstname }} {{ $booking->lastname }}</span>
                     <span>Contact: {{ $booking->phone }}</span>
@@ -37,6 +40,9 @@
                     <li><strong>Check out</strong>{{ $booking->checkout_date }}</li>
                     @if($booking->is_paid)
                         <li><strong>Payment</strong>Yes - Online Payment</li>
+                        @if($booking->gcash)
+                            <li><strong>Gcash Reference Number: </strong>{{ $booking->gcash }}</li>
+                        @endif
                     @else
                         <li><strong>Payment</strong>No - Pay at the Hotel</li>
                         <div class="booking_buttons">

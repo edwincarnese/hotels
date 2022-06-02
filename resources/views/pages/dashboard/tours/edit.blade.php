@@ -160,7 +160,7 @@
                     <!-- End row -->
 
                     <hr>
-                    <button type="submit" class="btn-block btn_1 green">Edit Tour</button>
+                    <button type="submit" class="btn-block btn_1 green">Edit Tourist Spots</button>
                 </form>
             </div>
         </div>

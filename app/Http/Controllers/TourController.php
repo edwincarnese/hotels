@@ -217,16 +217,12 @@ class TourController extends Controller
             ->where('is_approved', 1)
             ->where('tour_id',$id)
             ->get();
-            // dd($rooms);
 
         $tour_id = $tour->id;
         $unit_id = '';
         
         $reviews = Review::with('user')->where('tour_id', $tour_id)->latest()->get();
         
-        // $getSum = Review::where('tour_id', $tour_id)->sum('rate');
-        // $getCount = Review::where('tour_id', $tour_id)->count('rate');
-        // $getAverageRate = $getSum / $getCount;
         $tour_ratings= Tour::query()
         ->withCount([
           'reviews AS review' => function ($query) {

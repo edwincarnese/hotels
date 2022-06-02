@@ -102,7 +102,8 @@
                         <a href="{{ route('hotels.unit.show', $unit->id) }}">
                         <img src="{{ asset('storage/'.$unit->main_photo) }}" width="800" height="533" class="img-fluid" alt="Image">
                         <div class="short_info">
-                            <i class="icon_set_1_icon-44"></i>{{ $unit->name }}<span class="price">{{ $unit->price }}</span>
+                            <i class="icon_set_1_icon-44"></i>{{ $unit->name }}
+                            {{-- <span class="price">{{ $unit->price }}</span> --}}
                         </div>
                         </a>
                     </div>

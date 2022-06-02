@@ -7,7 +7,7 @@ data-image-src="img/hotels_bg.jpg" data-natural-width="1400" data-natural-height
     <div class="parallax-content-1">
         <div class="animated fadeInDown">
             <h1>Discover Our Hotels</h1>
-            <p>Ridiculus sociosqu cursus neque cursus curae ante scelerisque vehicula.</p>
+            {{-- <p>Ridiculus sociosqu cursus neque cursus curae ante scelerisque vehicula.</p> --}}
         </div>
     </div>
 </section>
@@ -15,7 +15,7 @@ data-image-src="img/hotels_bg.jpg" data-natural-width="1400" data-natural-height
 <div id="position">
     <div class="container">
         <ul>
-            <li><a href="#">Hotels</a>
+            <li><a href="/hotels">Hotels</a>
             </li>
         </ul>
     </div>
@@ -213,8 +213,8 @@ data-image-src="img/hotels_bg.jpg" data-natural-width="1400" data-natural-height
                             </div>
 
 							<h3><strong>{{ $unit->name }}</strong></h3>
-							<p>{{ $unit->description }}</p>
-							<ul class="add_info">
+							<p>Location: {{ $unit->address }}</p>
+							{{-- <ul class="add_info">
 								<li>
 									<a href="javascript:void(0);" class="tooltip-1" data-placement="top" title="Free Wifi"><i class="icon_set_1_icon-86"></i></a>
 								</li>
@@ -230,14 +230,14 @@ data-image-src="img/hotels_bg.jpg" data-natural-width="1400" data-natural-height
 								<li>
 									<a href="javascript:void(0);" class="tooltip-1" data-placement="top" title="Restaurant"><i class="icon_set_1_icon-58"></i></a>
 								</li>
-							</ul>
+							</ul> --}}
 						</div>
 					</div>
 					<div class="col-lg-2 col-md-2">
 						<div class="price_list">
 							<div>
-                                <small>From</small>
-								<sup>₱</sup>{{ number_format($unit->price, 0) }}
+                                {{-- <small>From</small>
+								<sup>₱</sup>{{ number_format($unit->price, 0) }} --}}
 								{{-- <small class="mt-3">{{ $unit->period }}</small> --}}
 								<p class="mt-3">
 									<a href="{{ route('hotels.unit.show', $unit->id) }}" class="btn_1">Details</a>

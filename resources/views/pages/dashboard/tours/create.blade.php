@@ -133,7 +133,7 @@
                     <!-- End row -->
 
                     <hr>
-                    <button type="submit" class="btn-block btn_1 green">Create Tour</button>
+                    <button type="submit" class="btn-block btn_1 green">Create Tourist Spots</button>
                 </form>
             </div>
         </div>

@@ -43,7 +43,7 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
 <div class="container margin_60">
     <div class="row">
         <div class="col-lg-8" id="single_tour_desc">
-            <div id="single_tour_feat">
+            {{-- <div id="single_tour_feat">
                 <ul>
                     <li><i class="icon_set_2_icon-116"></i>Plasma TV</li>
                     <li><i class="icon_set_1_icon-86"></i>Free Wifi</li>
@@ -53,7 +53,7 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
                     <li><i class="icon_set_1_icon-13"></i>Accessibiliy</li>
                     <li><i class="icon_set_1_icon-27"></i>Parking</li>
                 </ul>
-            </div>
+            </div> --}}
             <p class="d-none d-md-block d-block d-lg-none"><a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
             </p>
             <!-- Map button for tablets/mobiles -->
@@ -99,9 +99,9 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
                     <p>
                         {{ $tour->description }}
                     </p>
-                    <h4>Amenities</h4>
-                    <div class="row">
-                        @if($tour->amenities && $tour->amenities_prices)
+                    @if($tour->amenities && $tour->amenities_prices)
+                        <h4>Amenities</h4>
+                        <div class="row">
                             @php 
                                 $amenities = json_decode($tour->amenities); 
                                 $amenities_prices = json_decode($tour->amenities_prices); 
@@ -114,9 +114,8 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
                                     <h4>Price: {{ $amenities_prices[$i] }}</h4>
                                 </div>
                             @endfor
-                        @endif
-                    </div>
-                    <!-- End row  -->
+                        </div>
+                    @endif
                 </div>
                 <!-- End col-md-9  -->
             </div>
@@ -294,7 +293,8 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
 <script>
 const urlEndpoint = '/hotels-unit/';
 const urlTourEndpoint = '/tours/';
-const locationDataHotels = {!! $units !!};
+// const locationDataHotels = {!! $units !!};
+const locationDataHotels = [];
 const locationDataTours = {!! $tours !!};
 </script>
 

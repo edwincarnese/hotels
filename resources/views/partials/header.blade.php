@@ -38,10 +38,10 @@
                     <a href="#" class="open_close" id="close_in"><i class="icon_set_1_icon-77"></i></a>
                     <ul style="margin-top: 10px;">
                         <li class="submenu font-weight-bold">
-                            <a href="{{ route('home') }}" style="font-size: 35px;">Home</a>
+                            <a href="{{ route('home') }}" style="font-size: 35px;">Home | </a>
                         </li>
                         <li class="submenu font-weight-bold">
-                            <a href="{{ route('tours.index') }}" style="font-size: 35px;">Tourist Spots</a>
+                            <a href="{{ route('tours.index') }}" style="font-size: 35px;">Tourist Spots | </a>
                         </li>
                         <li class="submenu font-weight-bold">
                             <a href="{{ route('hotels.index') }}" style="font-size: 35px;">Hotels</a>

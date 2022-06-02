@@ -15,7 +15,7 @@
             <div class="col-lg-6 col-md-5">
                 
                 <h3 class="hotel_booking">
-                    @if($transaction->tour_id)
+                    {{-- @if($transaction->tour_id)
                         <a href="{{ route('tours.show', $transaction->tour_id) }}" target="_blank">
                             {{ $transaction->tour->title ?? '' }}
                         </a>
@@ -27,11 +27,15 @@
                         <a href="{{ route('hotels.unit.show', $transaction->room_id) }}" target="_blank">
                             {{ $transaction->unit->name ?? '' }}
                         </a>
-                    @endif
+                    @endif --}}
+                    <a href="{{ route('hotels.unit.show', $transaction->unit_id) }}" target="_blank">
+                        Hotel Room: {{ $transaction->room->name ?? '' }}
+                    </a>
                     <span class="mb-1">Owner: {{ $transaction->user->firstname ?? '' }} {{ $transaction->user->lastname ?? '' }}</span>
                     <span class="mb-1">Price: {{ $transaction->price }}</span>
                     <span class="mb-1">Business Tax: {{ $transaction->business_tax }}</span>
                     <span class="mb-1">Payment: {{ $transaction->payment }}</span>
+                    <span class="mb-1">Payment Method: {{ $transaction->payment_method }}</span>
                 </h3>
             </div>
             <div class="col-lg-4 col-md-3">
