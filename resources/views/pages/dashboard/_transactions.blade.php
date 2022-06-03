@@ -28,9 +28,9 @@
                             {{ $transaction->unit->name ?? '' }}
                         </a>
                     @endif --}}
-                    <a href="{{ route('hotels.unit.show', $transaction->unit_id) }}" target="_blank">
+                    {{-- <a href="{{ route('hotels.unit.show', $transaction->unit_id) }}" target="_blank"> --}}
                         Hotel Room: {{ $transaction->room->name ?? '' }}
-                    </a>
+                    {{-- </a> --}}
                     <span class="mb-1">Owner: {{ $transaction->user->firstname ?? '' }} {{ $transaction->user->lastname ?? '' }}</span>
                     <span class="mb-1">Price: {{ $transaction->price }}</span>
                     <span class="mb-1">Business Tax: {{ $transaction->business_tax }}</span>

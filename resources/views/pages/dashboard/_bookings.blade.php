@@ -24,9 +24,9 @@
                             {{ $booking->unit->name ?? '' }}
                         </a>
                     @endif --}}
-                    <a href="{{ route('hotels.unit.show', $booking->unit_id) }}" target="_blank">
+                    {{-- <a href="{{ route('hotels.unit.show', $booking->unit_id) }}" target="_blank"> --}}
                         Hotel Room: {{ $booking->room->name ?? '' }}
-                    </a>
+                    {{-- </a> --}}
                     <span class="mb-1">Guest: {{ $booking->capacity }}</span>
                     <span class="mb-1">Details: {{ $booking->firstname }} {{ $booking->lastname }}</span>
                     <span>Contact: {{ $booking->phone }}</span>
