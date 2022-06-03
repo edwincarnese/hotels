@@ -33,6 +33,8 @@ data-parallax="scroll" data-image-src="img/hotels_bg.jpg" data-natural-width="14
                     <form method="POST" action="{{ route('register') }}">
                         @if(Request::get('lister') == 1) 
                             <input type="hidden" value="2" name="role">
+                        @else
+                            <input type="hidden" value="3" name="role">
                         @endif
                         
                         @csrf
