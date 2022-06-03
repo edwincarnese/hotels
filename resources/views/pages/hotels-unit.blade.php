@@ -138,9 +138,9 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
     <div class="row">
         @foreach($rooms as $room)
             <div class="col-lg-4">
-                <div class="box_style_1 expose">
+                <div class="box_style_1 expose" style="text-align: center">
                     @if($room->main_photo)
-                        <img src="{{ asset('storage/'.$room->main_photo) }}" class="img-fluid styled profile_pic mt-0">
+                        <img style="max-height: 150px;" src="{{ asset('storage/'.$room->main_photo) }}" class="img-fluid styled profile_pic mt-0">
                     @else
                         <img src="{{ asset('assets/img/tourist_guide_pic.jpg') }}" class="img-fluid styled profile_pic mt-0">
                     @endif

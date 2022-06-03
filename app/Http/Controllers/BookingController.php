@@ -154,8 +154,8 @@ class BookingController extends Controller
           'property' => $room->name,
         );
 
-        // Mail::to($owner->email)->send(new BookingMail($booking_info));
-        // Mail::to($user->email)->send(new ConfirmationMail($confirmation_info));
+        Mail::to($owner->email)->send(new BookingMail($booking_info));
+        Mail::to($user->email)->send(new ConfirmationMail($confirmation_info));
       } 
       catch (\Exception $exception) {
         // dd($exception);
