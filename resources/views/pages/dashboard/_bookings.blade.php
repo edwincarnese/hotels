@@ -44,22 +44,26 @@
                     @else
                         @if($booking->gcash)
                             <li><strong>Gcash Reference Number: </strong>{{ $booking->gcash }}</li>
-                            <div class="booking_buttons">
-                                <form action="{{ route('booking.paid') }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="booking_id" value="{{ $booking->id }}">
-                                    <button type="submit" class="btn_2 btn-block">Mark This Booking As Paid</button>
-                                </form>
-                            </div>
+                            @if(Auth::user()->role == 1 || Auth::user()->id == $booking->owner_id)
+                                <div class="booking_buttons">
+                                    <form action="{{ route('booking.paid') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="booking_id" value="{{ $booking->id }}">
+                                        <button type="submit" class="btn_2 btn-block">Mark This Booking As Paid</button>
+                                    </form>
+                                </div>
+                            @endif
                         @else
                             <li><strong>Payment</strong>No - Pay at the Hotel</li>
-                            <div class="booking_buttons">
-                                <form action="{{ route('booking.paid') }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="booking_id" value="{{ $booking->id }}">
-                                    <button type="submit" class="btn_2 btn-block">Mark This Booking As Paid</button>
-                                </form>
-                            </div>
+                            @if(Auth::user()->role == 1 || Auth::user()->id == $booking->owner_id)
+                                <div class="booking_buttons">
+                                    <form action="{{ route('booking.paid') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="booking_id" value="{{ $booking->id }}">
+                                        <button type="submit" class="btn_2 btn-block">Mark This Booking As Paid</button>
+                                    </form>
+                                </div>
+                            @endif
                         @endif
                     @endif
                 </ul>
