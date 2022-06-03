@@ -306,7 +306,10 @@ const urlTourEndpoint = '/tours/';
 // const locationDataHotels = {!! $units !!};
 const locationDataHotels = [];
 const locationDataTours = {!! $tours !!};
-autoRoute = true;
+
+$('.btn_map').click(function() {
+    pointLocation();
+});
 </script>
 
 <!--Review modal validation -->

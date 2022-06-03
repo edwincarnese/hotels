@@ -50,7 +50,6 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
     <div id="map" class="map"></div>
     <button type="button" onclick="findMe()" class="btn_1 medium btn-block">Near Me</button>
 </div>
-<!-- End Map -->
 
 <div class="container margin_60">
     <div class="row">
@@ -66,7 +65,8 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
                     <li><i class="icon_set_1_icon-27"></i>Parking</li>
                 </ul>
             </div> --}}
-            <p class="d-none d-md-block d-block d-lg-none"><a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
+            <p class="d-none d-md-block d-block d-lg-none">
+                <a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
             </p>
             <!-- Map button for tablets/mobiles -->
             <div id="Img_carousel" class="slider-pro">
@@ -306,7 +306,10 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
     const urlEndpoint = '/hotels-unit/';
     const locationDataHotels = {!! $units !!};
     const locationDataTours = null;
-    autoRoute = true;
+
+    $('.btn_map').click(function() {
+        pointLocation();
+    });
 </script>
 
 <script type="text/javascript" src="{{ asset('assets/js/infobox.js') }}"></script>

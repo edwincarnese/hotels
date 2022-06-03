@@ -6,6 +6,9 @@ let originLong = 125.54126008205894;
 let USER_LATITUDE = null;
 let USER_LONGITUDE = null;
 
+var point_latitude = null;
+var point_longitude = null;
+
 function findMe() {
     if (navigator.geolocation) {
         navigator.geolocation.watchPosition(showPosition);
@@ -24,7 +27,7 @@ function showPosition(position) {
     window.location.href = $('#pages-home').val();
 }
 
-if(getCookie("USER_LATITUDE") || getCookie("USER_LATITUDE")) {
+if(getCookie("USER_LATITUDE") || getCookie("USER_LONGITUDE")) {
     USER_LATITUDE = getCookie("USER_LATITUDE");
     USER_LONGITUDE = getCookie("USER_LONGITUDE");
 } 
@@ -128,6 +131,9 @@ if(locationDataHotels) {
                 icon: icon,
             });
 
+            point_latitude = item.location_latitude;
+            point_longitude = item.location_longitude;
+
             if ('undefined' === typeof markers[key])
                 markers[key] = [];
             markers[key].push(marker);
@@ -136,10 +142,6 @@ if(locationDataHotels) {
                 getInfoBox(item).open(mapObject, this);
                 mapObject.setCenter(new google.maps.LatLng(item.location_latitude, item.location_longitude));
             }));
-
-            if(autoRoute) {
-                calcRoute(item.location_latitude, item.location_longitude);
-            }
 
             if(!item.url_point) {
                 var circle = new google.maps.Circle({
@@ -151,6 +153,11 @@ if(locationDataHotels) {
             }
 });
 
+function pointLocation()
+{
+    calcRoute(point_latitude, point_longitude);
+}
+
 function calcRoute(destinationLat, destinationLong) {
     closeInfoBox();
 
@@ -158,7 +165,8 @@ function calcRoute(destinationLat, destinationLong) {
         origin: new google.maps.LatLng(originLat, originLong),
         destination: new google.maps.LatLng(destinationLat, destinationLong),
         travelMode: google.maps.TravelMode.DRIVING, //WALKING, BYCYCLING, TRANSIT
-        unitSystem: google.maps.UnitSystem.IMPERIAL
+        unitSystem: google.maps.UnitSystem.IMPERIAL,
+        // preserveViewport: true
     }
 
     //pass the request to the route method
