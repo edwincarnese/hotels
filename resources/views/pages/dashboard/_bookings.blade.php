@@ -40,18 +40,27 @@
                     <li><strong>Check out</strong>{{ $booking->checkout_date }}</li>
                     @if($booking->is_paid)
                         <li><strong>Payment</strong>Yes - Online Payment</li>
+                        <li><strong>Gcash Reference Number: </strong>{{ $booking->gcash }}</li>
+                    @else
                         @if($booking->gcash)
                             <li><strong>Gcash Reference Number: </strong>{{ $booking->gcash }}</li>
+                            <div class="booking_buttons">
+                                <form action="{{ route('booking.paid') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="booking_id" value="{{ $booking->id }}">
+                                    <button type="submit" class="btn_2 btn-block">Mark This Booking As Paid</button>
+                                </form>
+                            </div>
+                        @else
+                            <li><strong>Payment</strong>No - Pay at the Hotel</li>
+                            <div class="booking_buttons">
+                                <form action="{{ route('booking.paid') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="booking_id" value="{{ $booking->id }}">
+                                    <button type="submit" class="btn_2 btn-block">Mark This Booking As Paid</button>
+                                </form>
+                            </div>
                         @endif
-                    @else
-                        <li><strong>Payment</strong>No - Pay at the Hotel</li>
-                        <div class="booking_buttons">
-                            <form action="{{ route('booking.paid') }}" method="POST">
-                                @csrf
-                                <input type="hidden" name="booking_id" value="{{ $booking->id }}">
-                                <button type="submit" class="btn_2 btn-block">Mark This Booking As Paid</button>
-                            </form>
-                        </div>
                     @endif
                 </ul>
             </div>

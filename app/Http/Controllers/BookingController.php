@@ -51,6 +51,7 @@ class BookingController extends Controller
     }
 
     $room = Room::where('id', $id)->first();
+    $owner = User::find($room->user_id);
     $subtotal = $room->price;
     $totalprice = $subtotal * $days;
 
@@ -61,7 +62,8 @@ class BookingController extends Controller
       'checkin_date', 
       'checkout_date',
       'totalprice',
-      'unit'
+      'unit',
+      'owner'
     ))->with($data);
   }
 
@@ -111,25 +113,24 @@ class BookingController extends Controller
         $booking->checkout_date = $request->checkout_date;
         if($request->payment_type == 'gcash') {
           $booking->gcash = $request->gcash;
+          $booking->is_paid = 0;
         }
         $booking->save();
 
-        $business_tax = $request->totalprice * 0.03;
-
-        $transaction = new Transaction();
-        $transaction->user_id = $room->user_id;
-        $transaction->tour_id = null;
-        $transaction->unit_id = $room->unit_id;
-        $transaction->room_id = $room->id;
-        $transaction->price = $request->totalprice;
-        $transaction->business_tax = $business_tax;
-        $transaction->payment = $request->totalprice - $business_tax;
-        if($request->payment_type == 'gcash') {
-          $transaction->payment_method = 'Gcash';
-        } else {
+        if($request->payment_type != 'gcash') {
+          $business_tax = $request->totalprice * 0.03;
+  
+          $transaction = new Transaction();
+          $transaction->user_id = $room->user_id;
+          $transaction->tour_id = null;
+          $transaction->unit_id = $room->unit_id;
+          $transaction->room_id = $room->id;
+          $transaction->price = $request->totalprice;
+          $transaction->business_tax = $business_tax;
+          $transaction->payment = $request->totalprice - $business_tax;
           $transaction->payment_method = 'Credit/Debit Card';
+          $transaction->save();
         }
-        $transaction->save();
 
         $booking_info = array(
           'full_name' => $request->firstname . ' ' . $request->lastname,
@@ -153,8 +154,8 @@ class BookingController extends Controller
           'property' => $room->name,
         );
 
-        Mail::to($owner->email)->send(new BookingMail($booking_info));
-        Mail::to($user->email)->send(new ConfirmationMail($confirmation_info));
+        // Mail::to($owner->email)->send(new BookingMail($booking_info));
+        // Mail::to($user->email)->send(new ConfirmationMail($confirmation_info));
       } 
       catch (\Exception $exception) {
         // dd($exception);

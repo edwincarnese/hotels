@@ -126,7 +126,7 @@ style="background-image: url({{ asset('storage/'.$room->main_photo) }}); backgro
 
                         <div class="form row" style="display: none" id="pay-via-gcash">
                             <div class="col-sm-12">
-                                <h4 class="text-center font-weight-bold">Send Your Payment Through Gcash: +63 936 127 2791</h4>
+                                <h4 class="text-center font-weight-bold">Send Your Payment Through Gcash: {{ $owner->gcash }}</h4>
                                 <div class="form-group">
                                     <label>Gcash Reference Number</label>
                                     <input type="text" name="gcash" id="gcash" class="form-control" placeholder="Gcash Reference Number">
