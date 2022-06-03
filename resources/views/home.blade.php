@@ -44,6 +44,7 @@
         @foreach($featured_tours as $tour)
             <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.1s">
                 <div class="tour_container">
+                    <div class="ribbon_3 popular"><span>Popular</span></div>
                     <div class="img_container">
                         <a href="{{ route('tours.show', $tour->id) }}">
                             <img src="{{ asset('storage/'.$tour->main_photo) }}" width="800" height="533" class="img-fluid" alt="Image">
