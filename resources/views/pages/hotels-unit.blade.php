@@ -1,8 +1,14 @@
 @extends('layouts.app')
 
+@section('css')
+<!-- REVOLUTION SLIDER CSS -->
+<link href="{{ asset('assets/rs-plugin/css/settings.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/css/extralayers.css') }}" rel="stylesheet">    
+@endsection
+
 @section('content')
-<section class="parallax-window" 
-{{-- <img src="{{ asset('storage/'.$unit->main_photo) }}" class="img-fluid styled profile_pic mt-0"> --}}
+{{-- <section class="parallax-window" 
+<img src="{{ asset('storage/'.$unit->main_photo) }}" class="img-fluid styled profile_pic mt-0">
 style="background-image: url({{ asset('storage/'.$unit->main_photo) }}); background-repeat: no-repeat; background-position: center;"
 data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" data-natural-width="1400" data-natural-height="470">
     <div class="parallax-content-1">
@@ -11,29 +17,34 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
-                    {{-- <span class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class=" icon-star-empty"></i></span> --}}
+                    <span class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class=" icon-star-empty"></i></span>
                     <h1>{{ $unit->name }}</h1>
                     <span>{{ $unit->address }} {{ $unit->city }}, {{ $unit->zip_code }} {{ $unit->country }}</span>
                 </div>
-                {{-- <div class="col-md-4">
+                <div class="col-md-4">
                     <div id="price_single_main" class="hotel">
                         {{ $unit->period }} <span><sup>₱</sup>{{ $unit->price }}</span>
                     </div>
-                </div> --}}
+                </div>
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 
-<div id="position">
-    <div class="container">
+<div class="tp-banner-container">
+    <div class="tp-banner">
         <ul>
-            <li><a href="#">Holel</a>
-            </li>
+            @if($unit->images)
+                @foreach(json_decode($unit->images) as $image)
+                <li data-transition="fade" data-slotamount="7" data-masterspeed="500" data-saveperformance="on" data-title="Intro Slide">
+                    <img src="{{ asset('storage/'.$image) }}" alt="slidebg1" data-lazyload="{{ asset('storage/'.$image) }}" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
+                </li>
+                @endforeach
+            @endif
         </ul>
+        <div class="tp-bannertimer tp-bottom"></div>
     </div>
 </div>
-<!-- End Position -->
 
 <div class="collapse" id="collapseMap">
     <div id="map" class="map"></div>
@@ -80,6 +91,8 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
             <hr>
 
             <div class="row">
+                <h3 class="col-lg-12 font-weight-bold">{{ $unit->name }}</h3>
+                <h3 class="col-lg-12">Location: {{ $unit->address }}</h3>
                 <div class="col-lg-3">
                     <h3>Description</h3>
                 </div>
@@ -298,5 +311,10 @@ data-parallax="scroll" data-image-src="{{ asset('assets/img/hotels_bg.jpg') }}" 
 
 <script type="text/javascript" src="{{ asset('assets/js/infobox.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/app/shared.js') }}"></script>
-<script src="{{ asset('assets/assets/validate.js') }}"></script>
+<script src="{{ asset('assets/validate.js') }}"></script>
+
+<!-- SLIDER REVOLUTION 4.x SCRIPTS  -->
+<script src="{{ asset('assets/rs-plugin/js/jquery.themepunch.tools.min.js') }}"></script>
+<script src="{{ asset('assets/rs-plugin/js/jquery.themepunch.revolution.min.js') }}"></script>
+<script src="{{ asset('assets/js/revolution_func.js') }}"></script>
 @endsection
